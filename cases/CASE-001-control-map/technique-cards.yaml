@@ -1,0 +1,157 @@
+# CASE-001 · 技巧卡（L2 萃取層產出）
+# schema: schemas/technique-card.schema.yaml
+# ⚠️ evidence_level 全部為 E6（作者自述，我方零實測）。實測回填流程見 CONTRIBUTING.md §實測回填
+
+case_id: CASE-001
+source: cases/CASE-001-control-map/source.md
+extracted_at: "2026-08-27"
+extraction_review:
+  status: SINGLE_MODEL          # 缺口 MH-G2：本案未跑雙模型互審
+  note: >-
+    本案為集群啟動案例，萃取未經第二家供應商模型互審。
+    不一致處因此不可能被發現 —— 這不是「沒有不一致」，是「沒有量測」。
+
+master_thesis: >-
+  新模型解決的是「生成品質」。空間關係、身份一致性、形變連續性這三件事，
+  新模型沒有變得更可控。可控性靠的是把約束畫成一張圖餵進去，
+  不是靠把提示詞寫得更長。
+
+expiry_notice:                  # ★ 作者自己留的到期日，原話
+  quote: "所以這些老方法其實還是有用的，但隨著 AI 的進步，這些終究還是會被淘汰掉。"
+  timecode: "102.66-105.56"
+  implication: >-
+    三條路線的 Kill Criteria 不是我們外加的。任何把這三條路線寫進長期架構的提案，退回。
+
+techniques:
+
+  - id: T-01
+    name: 用深度圖換機位而不換動作
+    control_map: depth
+    problem_solved: >-
+      同一個動作想換一個角度重拍；巨物壓迫／微縮世界這類刻意破壞比例的畫面。
+    route_when: 你要保住的是「空間關係」——前後、機位、構圖、動作姿態。
+    steps:
+      - step: 原圖 → 用提示詞讓 AI 提取深度圖
+        output: 一張灰度深度圖（⚠️ 黑白方向見 gaps CM-G2）
+      - step: 深度圖交給 coding agent，指令原意「根據深度關係，把畫面構建成一個可以移動機位的三維場景」
+        output: 可拖拽觀察的 2.5D 場景
+      - step: 在該場景中移動虛擬攝影機
+        output: 新視角截圖
+      - step: 新視角 ＋ 原始資產（人物／場景／道具參考圖）一起交給生圖模型
+        output: 不同角度、但動作還原的畫面
+    author_claims:
+      - 可 1:1 遷移人物動作（作者稱「上一期講過」的已知用法）
+      - 在此層修改主體比例即可做出巨物壓迫與微縮世界
+    pitfalls:
+      - what: 這是 2.5D 位移網格，不是 3D 重建。側移超過一定角度會露出單張圖裡不存在的資訊。
+        evidence: >-
+          OCR 38s 幀 · Codex 自己的回應原文：「以灰度推斷前後深度，生成位移網格，
+          並加上受限的軌道相機，避免側移過大時暴露單張圖無法還原的區域。」
+      - what: 軌道相機的「受限」不可調大。
+        evidence: 同上。那是物理事實不是保守設定 —— 資訊本來就不在原圖裡。
+    boundary: >-
+      新機位若超過原圖能推斷的範圍（例如要繞到背後），這條路線不成立，
+      改走實拍或多視角生成。
+    evidence_level: E6
+    tools_seen: [Codex (5.6 Sol), GPT Image 2.0, 節點畫布 node_204/207/210]
+    gaps:
+      - CM-G2 深度圖提示詞的黑白方向未定（OCR 兩處互相矛盾），使用前必須實測
+      - 未測「超過幾度會崩」——邊界只有定性沒有定量
+
+  - id: T-02
+    name: 用法線圖換妝不換臉
+    control_map: normal
+    problem_solved: 人物真實性不足、皮膚太假；想換妝容但臉會跑掉。
+    route_when: 你要保住的是「表面結構」——五官位置、衣服褶皺、手勢形狀。
+    steps:
+      - step: 原圖 → 讓 AI 提取人物法線圖
+        output: 法線圖（記錄表面朝向）
+      - step: 讓 AI「按照法線圖重新生成人物角色的紋理」
+        output: 結構鎖定、外觀已替換的人物圖
+    author_claims:                # ⛔ 全部 E6，我方未驗
+      - 皮膚變得更清晰
+      - 五官、衣服褶皺、手勢刻畫「都會更有感覺」
+      - 可在保持面部結構不變的情況下重新更換妝容
+    pitfalls:
+      - what: 效果宣稱完全未經我方驗證，不得轉述為本 skill 的能力。
+        evidence: 影片全程無失敗案例、無對照組、無參數揭露。
+    boundary: >-
+      法線圖鎖的是「這一格裡他的臉朝哪、褶子在哪」，不是「這個人長什麼樣」。
+      跨鏡頭的身份一致性它管不到 —— 那是 LoRA 的職責。
+    evidence_level: E6
+    tools_seen: [NanoBanana 2 (通道 2, 5:9 2K), 節點畫布 node_231/233]
+    why_worth_testing_first: >-
+      法線圖給的是「結構鎖定、外觀可換」的分離軸，這正是 LoRA 做不到的那一半。
+      兩者能否疊用未評估（CM-G4）—— 在實測前不得對外宣稱可以。
+    gaps:
+      - CM-G4 法線圖與 LoRA 能否疊用，未評估
+      - 未取得任何失敗案例，等於不知道它什麼時候會壞
+
+  - id: T-03
+    name: 用動態輪廓圖讓形變過程完全可控
+    control_map: contour
+    problem_solved: 產品一致性；Logo 變產品只做得出溶解特效；產品拆解重組。
+    route_when: 你要保住的是「形狀的連續變化」——A 變成 B 的每一格。
+    failing_approach: >-
+      把「讓 Logo 變成產品」直接寫進提示詞 → AI 通常只會做一個簡單的溶解效果。
+      （使用者八成正在做這件事）
+    steps:
+      - step: Logo 圖 ＋ 產品圖 → 交給 coding agent 分別提取線稿
+        output: 兩張白底線稿
+        prompt_seen: "提取這兩個圖的線稿，背景為白色"
+      - step: 讓它自動生成中間不同階段的輪廓變化
+        output: 形變序列（每一格都是一張輪廓圖）
+      - step: 把輪廓序列交給視頻模型，只讓它補充材質和特效
+        output: 產品在整段形變中保持一致的影片
+    author_claims:
+      - 產品在整段形變中保持一致
+      - 同一手法可做產品拆解後重新組裝（片尾示範 MacBook 拆解圖）
+    pitfalls:
+      - what: 需要 coding agent 有能力產出合理的形變序列，這是整條路線的單點依賴。
+        evidence: 步驟②完全由 agent 自動生成，影片未展示人工修正的介面。
+      - what: 三條路線中成本最高 —— 形變序列每一格都是一次生成呼叫。
+        evidence: 由步驟結構推得（序列長度 × 每格一次）。
+    boundary: >-
+      模型被降級為「決定看起來像什麼」。若你要的變化本身需要創意判斷
+      （而不只是形狀插值），這條路線給不了你。
+    evidence_level: E6
+    tools_seen: [可靈 V3 Omni (首尾幀·專業檔), Seedance 2.0 (多模態)]
+    why_structurally_strongest: >-
+      路線 A、B 是「把約束餵給 AI」；路線 C 是「把過程的每一格先畫出來，
+      再讓 AI 只負責上材質」。一致性問題被解掉，是因為一致性根本沒有交給模型決定。
+    generalizable_rule: >-
+      任何「AI 每次都給我不一樣的結果」的問題，先問一句：
+      這件事有沒有辦法不交給它決定？
+    gaps:
+      - 未測形變序列需要多少格才不會跳動
+      - 未測 coding agent 產不出合理序列時的退路
+
+cross_cutting_disciplines:      # 跨路線通用，來自 14-16s 幀的教程頁
+  - id: D-1
+    rule: 每張圖只負責一件事
+    detail: >-
+      把「一張圖同時負責五件事」拆成「五張圖各負責一件事」，
+      衝突就從模型內部移到人的桌面上 —— 而人的桌面上是可以裁決的。
+  - id: D-2
+    rule: 分鏡九宮格先轉深度圖再送視頻模型
+    detail: 直接送普通九宮格，圖中的顏色、紋理、錯誤五官和噪點都會污染成片。
+  - id: D-3
+    rule: 提示詞必須有「禁止事項」段
+    detail: 控制圖路線的失敗多半不是模型做不到，是它多做了。
+
+gaps:                           # 案級缺口
+  - id: CM-G1
+    what: 三條路線我方零實測
+    disposition: 各跑一次並留痕。這是本案唯一能把 E6 升到 E1 的路。
+  - id: CM-G2
+    what: 深度圖提示詞黑白方向未定（OCR 兩處矛盾）
+    disposition: 隨 CM-G1 一併實測。這是一個位元，但它決定成敗。
+  - id: CM-G3
+    what: 節點式畫布的平台名稱未辨識（僅見 node_NNN 命名）
+    disposition: 待補；不影響方法可用性
+  - id: CM-G4
+    what: 法線圖路線與跨鏡頭一致性（LoRA）的關係未評估
+    disposition: CM-G1 之後
+  - id: CM-G5
+    what: 逐字稿未經人工回看校對；影片檔未留存
+    disposition: 需要時依 source.md §取得方式重跑

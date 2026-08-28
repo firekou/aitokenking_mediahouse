@@ -1,0 +1,111 @@
+# 技巧卡 Schema（L2 萃取層輸出契約）
+# 版本 v1.0 · 2026-08-28
+#
+# 這份 schema 的設計只有一個核心主張：
+#   author_claims 與 pitfalls 必須是兩個欄位。
+# 混寫的後果不是格式難看，是讀的人會把「作者宣稱」當成「保證」，然後拿去跟客戶承諾。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: technique-card
+type: object
+required: [case_id, source, techniques]
+properties:
+  case_id:      { type: string, pattern: "^CASE-[0-9]{3}$" }
+  source:       { type: string, description: "指向 L1 產出的 source.md" }
+  extracted_at: { type: string, format: date }
+
+  extraction_review:
+    type: object
+    description: 雙模型互審狀態。SINGLE_MODEL 不是錯誤，但必須誠實標記。
+    required: [status]
+    properties:
+      status:
+        enum: [DUAL_MODEL_CROSS_VENDOR, SINGLE_MODEL, NOT_REVIEWED]
+        description: >-
+          DUAL_MODEL_CROSS_VENDOR 才算互審 —— 同一家供應商的兩個模型不算，
+          它們共享訓練偏好，會一起漏掉同一件事。
+      disagreements:
+        type: array
+        description: 兩模型不一致處。★ 一律進 gaps，不得由萃取者單方裁決。
+
+  master_thesis:
+    type: string
+    description: 這支影片真正的主張，一段話。抽不出來通常代表它是觀點影片不是技巧影片。
+
+  expiry_notice:
+    type: object
+    description: ★ 作者若自己說了這招會過期，原話抄在這裡。Kill Criteria 因此不是外加的。
+    properties:
+      quote:       { type: string }
+      timecode:    { type: string }
+      implication: { type: string }
+
+  techniques:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [id, name, problem_solved, route_when, steps, boundary, evidence_level, gaps]
+      properties:
+        id:   { type: string, pattern: "^T-[0-9]{2}$" }
+        name: { type: string, description: "動詞開頭" }
+        problem_solved:
+          type: string
+          description: 用「使用者會說的話」寫，不是用作者的話。這是 description 的原料。
+        route_when:
+          type: string
+          description: 什麼情況該選這一招。這是路線判定器的原料。
+        failing_approach:
+          type: string
+          description: 使用者現在八成正在做的錯誤做法。有的話一定要寫 —— 它是最強的共鳴點。
+        steps:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [step, output]
+            properties:
+              step:        { type: string }
+              output:      { type: string, description: "★ 這一步結束時你手上多了什麼" }
+              prompt_seen: { type: string, description: "畫面上出現的提示詞原文（標明是否 OCR 重建）" }
+        author_claims:
+          type: array
+          description: "⛔ E6 · 作者宣稱，我方未驗。不得與 pitfalls 混寫。"
+          items: { type: string }
+        pitfalls:
+          type: array
+          description: >-
+            ★ 從證據推得的坑，不是從想像。
+            不合格的坑：「可能不穩定」「建議多試幾次」—— 對任何技巧都成立，等於沒說。
+          items:
+            type: object
+            required: [what, evidence]
+            properties:
+              what:     { type: string }
+              evidence: { type: string, description: "哪一段逐字稿／哪一幀 OCR 支持這個判斷" }
+        boundary:
+          type: string
+          description: >-
+            什麼情況下這一招不成立。必填 —— 寫不出邊界代表還沒讀懂它，此時不得進 L3。
+        evidence_level:
+          enum: [E1, E2, E3, E4, E5, E6]
+          description: >-
+            技巧影片預設 E6（作者自述）。只有我方實測過的才是 E1。
+            ★ 未經實測回填不得升格。
+        tools_seen:
+          type: array
+          description: 畫面上出現的工具名（E1，我方實測辨識）
+        gaps:
+          type: array
+          minItems: 1
+          description: >-
+            ★ 不得留白。一次萃取不可能沒有缺口；寫「無」的那份，是沒去找。
+
+  cross_cutting_disciplines:
+    type: array
+    description: 跨路線通用的紀律，會編譯成 skill 的 Step 2 落地紀律。
+
+  gaps:
+    type: array
+    minItems: 1
+    description: 案級缺口。同樣不得留白。

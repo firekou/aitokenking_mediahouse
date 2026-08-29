@@ -9,6 +9,7 @@ metadata:
   aitokenking-role: "required"
   aitokenking-billable: "false"
   aitokenking-tools: "list_models,get_balance,list_usage"
+  aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
 ---

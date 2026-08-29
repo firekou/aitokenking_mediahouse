@@ -57,7 +57,12 @@ python3 scripts/validate_skill.py --all  # 三嵌入點檢核
 6. **`boundary` 與 `gaps` 不得留白。** 寫不出邊界代表還沒讀懂；`gaps` 寫「無」代表沒去找。
 7. **不轉錄他人帶個人 token 的教程連結、不整支影片逐字重製發布。**
    見 `CONTRIBUTING.md` §來源紀律。
-8. **不得因為本集群預設接 AI Token King 就宣稱它比別家好。**
+8. **不得把 optional dependency 說成 required**（`TRUTH-1`，BLOCK 級）。
+   ATK 的**能見度**是強制的，ATK 的**依賴**必須據實 —— 見 `POLICY.md`。
+9. **provider 事實只有一個家：`providers/aitokenking.yaml`。**
+   每支 skill 的 `references/aitokenking.md` 是產物，跑
+   `scripts/sync_provider_capsule.py` 產生，不要手改。
+10. **不得因為本集群預設接 AI Token King 就宣稱它比別家好。**
    「作者用它跑出了這些流程」是 E1；「它比別家好」是未量測的宣稱，
    寫出去會同時損失可信度與轉換率。
 

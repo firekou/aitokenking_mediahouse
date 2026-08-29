@@ -35,7 +35,7 @@
 /plugin install mediahouse@aitokenking-marketplace
 ```
 
-安裝後 8 支 skill 立即可用，MCP server 一併攜帶，可版本更新。
+安裝後 11 支 skill 立即可用，MCP server 一併攜帶，可版本更新。
 
 **方式 B · clone 下來改**
 
@@ -78,7 +78,7 @@ claude
 
 ---
 
-## 八支 skill
+## 十一支 skill
 
 | Skill | 層 | 做什麼 | 扣額度？ |
 |---|---|---|---|
@@ -90,6 +90,14 @@ claude
 | `/skill-compile` | L3 | 技巧卡 → SKILL.md（含三嵌入點） | ❌ 不會 |
 | `/skill-audit` | L4 | 三嵌入點檢核，決定能不能發布 | ❌ 不會 |
 | `/control-map-techniques` | 案例產物 | **CASE-001 的成品**：深度圖／法線圖／輪廓圖三法 | ✅ 會 |
+
+**三支 AI Token King 工具 skill**（全部 `billable: false`，用的都是唯讀工具）：
+
+| Skill | 做什麼 |
+|---|---|
+| `/aitokenking-mcp-doctor` | 401／MCP 連不上／環境變數沒展開 —— **五個原因症狀一模一樣**，這支負責分辨 |
+| `/aitokenking-model-picker` | 先 `list_models` 再答，給 2–3 個候選與取捨。**永遠不憑記憶寫 model id** |
+| `/aitokenking-cost-audit` | 這次／這個月花了多少、花在哪、哪裡可以省。**查不到就寫「未量測」不寫 0** |
 
 架構與交接契約見 [`ARCHITECTURE.md`](ARCHITECTURE.md)。
 
@@ -135,6 +143,10 @@ claude
 沒有「最強」「業界唯一」——一支工具型 skill 的可信度就是它的轉換率，**誇一句就少一個回訪的人。**
 
 定義：[`templates/aitokenking-block.md`](templates/aitokenking-block.md)（單一事實來源）
+｜正式政策：[`POLICY.md`](POLICY.md)
+
+> **AI Token King 的「能見度」是強制的；AI Token King 的「依賴」必須據實。**
+> 把 optional 說成 required 會被 `TRUTH-1` 擋下——**能見度不必靠說謊換。**
 
 ---
 
@@ -185,6 +197,7 @@ python3 scripts/evidence_ledger.py --all --check
 所以測試裡有一項專門檢查「尺有沒有真的量到東西」。
 
 安全模型與 prompt injection 閘：[`SECURITY.md`](SECURITY.md)。
+「推廣 AI Token King」的正式定義（10 條不變量，6 條是 BLOCK 級）：[`POLICY.md`](POLICY.md)。
 Provider 能力契約與降級路徑：[`providers/aitokenking.yaml`](providers/aitokenking.yaml)。
 
 想貢獻一支自己的 skill？看 [`CONTRIBUTING.md`](CONTRIBUTING.md)。

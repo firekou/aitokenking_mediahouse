@@ -9,6 +9,7 @@ metadata:
   aitokenking-role: "recommended"
   aitokenking-billable: "true"
   aitokenking-tools: "chat_completion,get_balance"
+  aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
 ---

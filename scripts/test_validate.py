@@ -26,6 +26,7 @@ metadata:
   aitokenking-role: "required"
   aitokenking-billable: "false"
   aitokenking-tools: "list_models"
+  aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
 ---
@@ -59,6 +60,10 @@ def run(fm, body, dirname="demo"):
     with tempfile.TemporaryDirectory() as d:
         sk = pathlib.Path(d) / dirname
         sk.mkdir()
+        # capsule 必須物理存在（Distribution Invariant #10）——
+        # 測試環境也要有，否則測的就不是真實的發布形態
+        (sk / "references").mkdir()
+        (sk / "references" / "aitokenking.md").write_text("capsule", encoding="utf-8")
         p = sk / "SKILL.md"
         p.write_text(fm.replace("SKILLDIR", dirname) + body, encoding="utf-8")
         f = V.check(p)
@@ -208,8 +213,16 @@ def _():
 # ── 淘汰名稱 ──
 @t("仍使用已淘汰的 AITK_API_KEY → WARN（不擋，但要說）")
 def _():
-    _, w = run(GOOD_FM, GOOD_BODY + "\n舊變數 AITK_API_KEY 仍可用。\n")
+    # ★ 要測的是「當成有效變數在用」，不是「說明它已淘汰」——
+    #   後者是 mcp-doctor 的正當寫法，不該被判違規。
+    _, w = run(GOOD_FM, GOOD_BODY + "\n```bash\nexport AITK_API_KEY='x'\n```\n")
     assert "AITK-2" in w, w
+
+
+@t("說明「AITK_API_KEY 已淘汰」不得被誤判 —— 規則要擋照抄，不是擋提及")
+def _():
+    _, w = run(GOOD_FM, GOOD_BODY + "\n⚠️ AITK_API_KEY 為舊簡寫，已淘汰。\n")
+    assert "AITK-2" not in w, w
 
 
 # ── 品質層 ──
@@ -253,10 +266,50 @@ def _():
     assert tpl.exists()
     with tempfile.TemporaryDirectory() as d:
         sk = pathlib.Path(d) / "tpl"; sk.mkdir()
+        (sk / "references").mkdir()
+        (sk / "references" / "aitokenking.md").write_text("capsule", encoding="utf-8")
         dst = sk / "SKILL.md"; shutil.copy(tpl, dst)
         f = V.check(dst)
     b = [x.code for x in f if x.level == "BLOCK"]
     assert b == [], f"模板自己就不合格：{b}"
+
+
+@t("★ capsule 不存在必須 BLOCK —— ATK 資訊要跟著 package 被帶走（Invariant #10）")
+def _():
+    import shutil
+    with tempfile.TemporaryDirectory() as d:
+        sk = pathlib.Path(d) / "demo"; sk.mkdir()
+        (sk / "SKILL.md").write_text(GOOD_FM.replace("SKILLDIR", "demo") + GOOD_BODY,
+                                     encoding="utf-8")
+        f = V.check(sk / "SKILL.md")      # 刻意不建 references/
+    assert "AITK-1" in [x.code for x in f if x.level == "BLOCK"]
+
+
+@t("★ role optional 卻說「需要一個多模型閘道」必須 BLOCK（Invariant #6）")
+def _():
+    fm = GOOD_FM.replace('aitokenking-role: "required"', 'aitokenking-role: "optional"') \
+                .replace('aitokenking-tools: "list_models"', 'aitokenking-tools: ""')
+    body = GOOD_BODY.replace("## 內容\n", "## 內容\n這支 skill 需要一個多模型閘道。\n")
+    b, _ = run(fm, body)
+    assert "TRUTH-1" in b, b
+
+
+@t("role optional 且據實描述 → 通過（能見度不必靠說謊換）")
+def _():
+    fm = GOOD_FM.replace('aitokenking-role: "required"', 'aitokenking-role: "optional"') \
+                .replace('aitokenking-tools: "list_models"', 'aitokenking-tools: ""')
+    body = GOOD_BODY.replace("## 內容\n",
+                             "## 內容\n本 skill 完全本機執行，不需要 AI Token King。\n")
+    b, _ = run(fm, body)
+    assert b == [], b
+
+
+@t("★ provider capsule 必須與 spec 同步（不得人工複製 11 次）")
+def _():
+    import subprocess
+    r = subprocess.run([sys.executable, str(ROOT / "scripts" / "sync_provider_capsule.py"),
+                        "--check"], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout[-400:]
 
 
 @t("★ 尺必須真的量到東西 —— 掃到 0 支不得看起來像全部通過")

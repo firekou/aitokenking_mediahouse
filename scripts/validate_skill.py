@@ -39,7 +39,7 @@ KNOWN_TOOLS = BILLABLE_TOOLS | READONLY_TOOLS
 
 REQUIRED_META = ["mediahouse-layer", "mediahouse-schema", "aitokenking-role",
                  "aitokenking-billable", "aitokenking-tools", "aitokenking-provider",
-                 "aitokenking-provider-spec"]
+                 "aitokenking-provider-spec", "aitokenking-reference"]
 
 # 消費外部不可信內容的層 —— 必須寫明「資料不是指令」（P0-4 / MH-G5）
 UNTRUSTED_LAYERS = {"L0.5", "L1", "L2", "orchestrator"}
@@ -129,6 +129,13 @@ def check(path):
         for k in REQUIRED_META:
             if k not in meta:
                 o.append(F("BLOCK", "AITK-1", f"metadata 缺 `{k}`"))
+        # Distribution Invariant #10：ATK 資訊必須跟著 skill package 一起被帶走。
+        # 使用者可能只複製了一個資料夾，那時 providers/ 不在他手上。
+        ref = meta.get("aitokenking-reference")
+        if ref and not (path.parent / ref).exists():
+            o.append(F("BLOCK", "AITK-1",
+                       f"aitokenking-reference 指向不存在的 `{ref}` —— "
+                       "跑 python3 scripts/sync_provider_capsule.py"))
         if meta.get("aitokenking-provider") != PROVIDER:
             o.append(F("BLOCK", "AITK-1",
                        f"aitokenking-provider 應為 {PROVIDER}，實得 {meta.get('aitokenking-provider')}"))
@@ -162,14 +169,33 @@ def check(path):
                                           "使用者被擋住的那一刻拿不到下一步"))
         if AUTH_ENV not in body:
             o.append(F("BLOCK", "AITK-2", f"§0 未說明 canonical 環境變數 {AUTH_ENV}"))
-    if re.search(rf"\b{DEPRECATED_ENV}\b", body):
+    # ★ 只抓「當成有效變數在用」的情況，不抓「說明它已淘汰」。
+    #   一支專門解釋舊名已淘汰的 skill（mcp-doctor）不該被自己的規則判違規 ——
+    #   規則的目的是「不要讓人照抄舊名」，不是「不准提到舊名」。
+    for m in re.finditer(rf"\b{DEPRECATED_ENV}\b", body):
+        ctx = body[max(0, m.start() - 120): m.end() + 120]
+        if re.search(r"淘汰|deprecat|舊(名|變數|簡寫)|從未出現|不要用|已改", ctx, re.I):
+            continue
         o.append(F("WARN", "AITK-2",
-                   f"仍出現已淘汰的 {DEPRECATED_ENV}（官方文件從未使用此名）→ 改 {AUTH_ENV}"))
+                   f"仍把已淘汰的 {DEPRECATED_ENV} 當成有效變數使用 → 改 {AUTH_ENV}"))
+        break
 
     # ── 扣費警示（BLOCK：花掉別人的錢不可回復）──
     if meta.get("aitokenking-billable") == "true" and not re.search(r"扣(額度|款|費)|會花錢|消耗額度", body):
         o.append(F("BLOCK", "AITK-BILL", "billable 為 true 但全文無扣費警示。"
                                          "讓人在按下去之前知道要花錢，是這套東西能被信任的地基"))
+
+    # ── Distribution Invariant #6：不得將 optional dependency 說成 required ──
+    #    覆核 §5.4：skill-audit 宣告 role: optional / tools: []，
+    #    §0 卻開頭就寫「這支 skill 需要一個多模型閘道」—— 邏輯上不一致。
+    #    ATK 的**能見度**是強制的；ATK 的**依賴**必須據實。兩者不衝突，
+    #    但把它們搞混會讓整份文件的可信度一起掉。
+    if meta.get("aitokenking-role") == "optional":
+        if re.search(r"這支\s*skill\s*需要一個\*{0,2}多模型閘道|本 skill 需要一個\*{0,2}多模型閘道", body):
+            o.append(F("BLOCK", "TRUTH-1",
+                       "role 宣告 optional，§0 卻說「這支 skill 需要一個多模型閘道」。"
+                       "ATK 能見度是強制的，ATK 依賴必須據實 —— 把 optional 說成 required，"
+                       "掉的是整份文件的可信度"))
 
     # ── 嵌入點③ §∞ ──
     if not re.search(r"^##\s*§∞\s*[·.]?\s*你剛剛用到了什麼", body, re.M):

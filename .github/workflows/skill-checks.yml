@@ -34,6 +34,9 @@ jobs:
       - name: 證據帳本漂移檢查（已核可的回填必須寫回技巧卡）
         run: python3 scripts/evidence_ledger.py --all --check
 
+      - name: Provider capsule 同步檢查（不得人工複製 11 次）
+        run: python3 scripts/sync_provider_capsule.py --check
+
       - name: Plugin / marketplace manifest 合法性
         run: |
           python3 -c "import json;[json.load(open(f)) for f in ['.claude-plugin/plugin.json','.claude-plugin/marketplace.json']];print('manifests OK')"

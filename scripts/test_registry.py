@@ -2,6 +2,7 @@
 """registry ＋ dashboard 的回歸測試。"""
 import json
 import pathlib
+import re
 import subprocess
 import sys
 import tempfile
@@ -139,6 +140,28 @@ def _():
     df = (ROOT / "skill-dashboard" / "Dockerfile").read_text()
     for need in ("COPY registry/", "COPY skills/", "COPY drafts/"):
         assert need in df, need
+
+
+@t("★ Dockerfile 每一行 COPY 的來源路徑都必須真的存在 —— git 不追蹤空目錄")
+def _():
+    """2026-08-29 真的炸過一次：最後一支草稿被移進 skills/ 之後，
+    drafts/ 整個從版本庫消失，Railway 建置死在 `\"/drafts\": not found`。
+
+    ★ 那次所有測試都是綠的、所有檢核都是 0 BLOCK 0 WARN ——
+      因為沒有任何一支測試在檢查「建置需要的東西還在不在」。
+      檢核器量的是內容對不對，量不到檔案還在不在。"""
+    df = (ROOT / "skill-dashboard" / "Dockerfile").read_text()
+    srcs = re.findall(r"^COPY\s+(\S+)\s+\S+\s*$", df, re.M)
+    assert srcs, "解析不到任何 COPY —— 這個測試自己壞掉了，不是 Dockerfile 沒問題"
+    missing = [s for s in srcs if not (ROOT / s.rstrip("/")).exists()]
+    assert not missing, f"Dockerfile COPY 的來源不存在：{missing}（空目錄請放一個檔案佔位）"
+
+
+@t("★ drafts/skills/ 必須存在（可以是空的）—— 空目錄要有檔案佔位才活得過 git")
+def _():
+    d = ROOT / "drafts"
+    assert d.is_dir(), "drafts/ 不存在 —— Dockerfile 會建置失敗"
+    assert any(d.rglob("*")), "drafts/ 是完全空的 —— git 不會追蹤它，下次 clone 就沒了"
 
 
 def main():

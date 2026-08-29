@@ -105,7 +105,13 @@ def page(title, body):
 一支 skill 是 draft 還是 published，判定依據是它在 <code>drafts/</code> 還是 <code>skills/</code>。<br>
 <b>GitHub 是唯一事實來源。</b> 本服務不寫入任何東西，每次請求重讀檔案。<br>
 資料來源 <code>registry/skills.json</code>（產物，由 <code>scripts/build_registry.py</code> 產生）
-· <a href="/api/state">/api/state</a>
+· <a href="/api/state">/api/state</a><br>
+<b>上游方法論。</b> 這條產線是兌心科技影像方法論的下游 ——
+盤點與方法論的接點寫在
+<a href="https://research-board-production.up.railway.app/#mhskills" target="_blank" rel="noopener">Research 報告欄 REPORT 28</a>
+（81 支全索引：<a href="https://research-board-production.up.railway.app/mediahouse-skills.html" target="_blank" rel="noopener">/mediahouse-skills.html</a>，
+<b>該頁是有日期的死快照，本頁才是即時的</b>）。<br>
+<b>技巧內容預設 E6（作者自述），我方未實測</b>，未經實測回填不得作為對外效果承諾依據。
 </footer></div><script>{JS}</script></body></html>"""
 
 

@@ -99,15 +99,23 @@ claude
 | `/aitokenking-model-picker` | 先 `list_models` 再答，給 2–3 個候選與取捨。**永遠不憑記憶寫 model id** |
 | `/aitokenking-cost-audit` | 這次／這個月花了多少、花在哪、哪裡可以省。**查不到就寫「未量測」不寫 0** |
 
-**另有 73 支自動產生的草稿**在 [`drafts/skills/`](drafts/skills/)——
-由規則從 129 支 IG Reel 的逐字稿萃取，`status: draft`、`verification: V0`。
+**另有 46 支自動產生的草稿**在 [`drafts/skills/`](drafts/skills/)——
+由規則從 129 支 IG Reel 的逐字稿萃取（判定值得做的有 73 支，其中 25 支已晉升到 `skills/`），
+`status: draft`、`verification: V0`。
 **它們不在 `skills/` 是刻意的**：實測證明逐字稿在專有名詞與否定詞上系統性不可靠，
 **晉升是人的動作，不是腳本的動作**。
 
+> ⚠️ 這一行原本寫「73 支草稿」——那是**分流判定值得做的支數**，不是**磁碟上草稿的支數**。
+> 25 支晉升之後就不再相等，而這份 README 沒有跟著動。
+> **會過期而不自知的數字，正是 dashboard 那個交叉核對存在的理由**（見下）。
+> 兩個數字有疑義時，以 `registry/skills.json` 與 dashboard 為準，不以本檔為準。
+
 管理介面：**https://skill-dashboard-production.up.railway.app** （[`skill-dashboard/`](skill-dashboard/)，無資料庫無登入）
+——首頁會比對「registry 說的數字」與「磁碟上真的有幾個 `SKILL.md`」，不一致就印紅字。
 ｜清單：[`registry/skills.json`](registry/skills.json)（產物，`scripts/build_registry.py` 產生）
 
-架構與交接契約見 [`ARCHITECTURE.md`](ARCHITECTURE.md)。
+架構與交接契約見 [`ARCHITECTURE.md`](ARCHITECTURE.md)；
+**這條產線掛在哪一套上游方法論上**，見 [`ARCHITECTURE.md` §8](ARCHITECTURE.md#8-上游方法論與盤點介面)。
 
 ---
 

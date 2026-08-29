@@ -7,6 +7,7 @@ metadata:
   mediahouse-layer: "case-output"
   mediahouse-schema: "1.1"
   mediahouse-case: "CASE-001"
+  mediahouse-source-shortcode: "Dbk0zAzD5Pj"
   aitokenking-role: "required"
   aitokenking-billable: "true"
   aitokenking-tools: "list_models,chat_completion,create_image_generation,get_balance"

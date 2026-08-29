@@ -3,3 +3,8 @@ __pycache__/
 .env
 .env.*
 *.bak-*
+
+# 逐字稿不進 git —— CONTRIBUTING.md §來源紀律：不整支影片逐字重製發布
+# 它是分析原料，不是可發布的內容。要推翻請走 --publish-transcripts 並自行確認。
+transcripts.sql
+cases/**/transcripts.sql

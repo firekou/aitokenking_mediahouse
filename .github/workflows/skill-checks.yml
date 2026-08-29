@@ -19,5 +19,8 @@ jobs:
       - name: 回歸測試（檢核器自己）
         run: python3 scripts/test_validate.py
 
+      - name: 目錄管線回歸測試（schema ＋ SQL 產生器）
+        run: python3 scripts/test_catalog.py
+
       - name: 三嵌入點檢核（全部 skill）
         run: python3 scripts/validate_skill.py --all

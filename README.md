@@ -47,6 +47,16 @@ claude
 /video-to-skill https://www.instagram.com/reel/xxxxxxxx/
 ```
 
+**不知道要做哪一支？先盤這個創作者的全部影片：**
+
+```
+/catalog-harvest hedge.sphere.ai
+```
+
+它會產出一份 SQL 目錄（網址、文案、逐字稿、指標），並挑出哪幾支真的有可執行步驟。
+需要 `APIFY_TOKEN`——因為 Instagram 對未登入請求一律 302 導向登入頁，
+而繞過平台的存取控制不在我們的選項裡。
+
 **第一次用建議先跑乾跑模式**，看它打算做什麼、要花多少，再決定按不按下去：
 
 ```
@@ -56,12 +66,13 @@ claude
 
 ---
 
-## 七支 skill
+## 八支 skill
 
 | Skill | 層 | 做什麼 | 扣額度？ |
 |---|---|---|---|
 | **`/video-to-skill`** | ★ 主入口 | 一次跑完 L1→L4。**多數人只會用到這一支** | ✅ 會 |
 | `/aitokenking-setup` | L0 | 金鑰、MCP、401 排錯、模型選型、對帳 | ❌ 不會 |
+| `/catalog-harvest` | L0.5 | **一個帳號的全部短影音** → 目錄 SQL（網址／文案／逐字稿） | ✅ 會 |
 | `/video-ingest` | L1 | 影片 → 逐字稿 ＋ 抽幀 OCR ＋ 畫面工具辨識 | ✅ 會 |
 | `/technique-extract` | L2 | 逐字稿 → 技巧卡 YAML（含證據強度與缺口） | ✅ 會 |
 | `/skill-compile` | L3 | 技巧卡 → SKILL.md（含三嵌入點） | ❌ 不會 |

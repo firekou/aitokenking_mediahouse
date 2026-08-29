@@ -45,11 +45,24 @@ Railway 專案 `aitokenking-dashboard` → 服務 `skill-dashboard`
 `create-deployment` 的第一次部署早於 `dockerfilePath` 設定生效，
 Railway fallback 到自動偵測，deployment 直接 `FAILED`。
 
-**那不是 Dockerfile 的問題，是時序問題。** 正確處置是設好 config 後推一個 commit 重新觸發，
+**那不是 Dockerfile 的問題，是時序問題。**
 **不要去改 Dockerfile**——改一個沒有壞的東西，只會讓下一次更難診斷。
 
-順序：`create-deployment` → `update-service`（設 `dockerfilePath` ＋ healthcheck）
-→ `generate-domain` → 推 commit 觸發第二次建置。
+**實際發生的順序（2026-08-29 逐筆對時，非事後推測）：**
+
+```
+11:05:02  create-deployment          → deploy 65efa529  FAILED
+11:05:49  update-service              → deploy c88b313d  SUCCESS
+          （設 dockerfilePath ＋ healthcheck，★ 這一步自己就會重觸發建置）
+```
+
+★ **修正一個我原本寫錯的地方：不需要推 commit。**
+`update-service` 設定 `dockerfilePath` 之後 Railway 會自己重新建置，47 秒後就成功了。
+我原本寫「推一個 commit 重新觸發」，那是從別的服務抄來的印象，
+**而這次的紀錄顯示不需要**——把沒發生的步驟寫進 runbook，下一個人會多做一次白工。
+
+正確順序：`create-deployment` → `update-service`（設 `dockerfilePath` ＋ healthcheck）
+→ `generate-domain` → 等 healthcheck 轉綠。
 
 **無環境變數、無資料庫、無登入、無第三方套件。**
 逐字稿原始檔（`raw-transcripts.json`／`transcripts.sql`）被 `.gitignore` 擋在版本庫外，

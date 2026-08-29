@@ -104,7 +104,7 @@ claude
 **它們不在 `skills/` 是刻意的**：實測證明逐字稿在專有名詞與否定詞上系統性不可靠，
 **晉升是人的動作，不是腳本的動作**。
 
-管理介面：[`skill-dashboard/`](skill-dashboard/)（Railway 可部署，無資料庫無登入）
+管理介面：**https://skill-dashboard-production.up.railway.app** （[`skill-dashboard/`](skill-dashboard/)，無資料庫無登入）
 ｜清單：[`registry/skills.json`](registry/skills.json)（產物，`scripts/build_registry.py` 產生）
 
 架構與交接契約見 [`ARCHITECTURE.md`](ARCHITECTURE.md)。

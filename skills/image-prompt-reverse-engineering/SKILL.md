@@ -1,6 +1,6 @@
 ---
 name: image-prompt-reverse-engineering
-description: 鎖不變項、抓結構骨架、讓模型自己糾錯。解決：把圖丟給模型要提示詞，拿到的東西不好用，生出來還是靠運氣 當使用者問到這類問題、或提到「靜態圖提示詞反推」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 鎖不變項、抓結構骨架、讓模型自己糾錯。解決：把圖丟給模型要提示詞，拿到的東西不好用，生出來還是靠運氣。 當使用者問到這類問題、或提到「靜態圖提示詞反推」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

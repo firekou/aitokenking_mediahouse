@@ -1,6 +1,6 @@
 ---
 name: video-element-replacement-range-control
-description: 控制的是變化範圍，不是內容。解決：想換掉影片裡的某個元素，一改提示詞連風格、動作、整個場景都跟著變掉 當使用者問到這類問題、或提到「影片元素替換」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 控制的是變化範圍，不是內容。解決：想換掉影片裡的某個元素，一改提示詞連風格、動作、整個場景都跟著變掉。 當使用者問到這類問題、或提到「影片元素替換」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

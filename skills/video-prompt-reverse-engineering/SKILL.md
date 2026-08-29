@@ -1,6 +1,6 @@
 ---
 name: video-prompt-reverse-engineering
-description: 反推的是過程，不是畫面。解決：看到一支想複製的 AI 影片，截圖去反推提示詞，結果畫面很像但動起來完全不對 當使用者問到這類問題、或提到「影片提示詞反推」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 反推的是過程，不是畫面。解決：看到一支想複製的 AI 影片，截圖去反推提示詞，結果畫面很像但動起來完全不對。 當使用者問到這類問題、或提到「影片提示詞反推」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

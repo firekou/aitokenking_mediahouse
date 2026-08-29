@@ -1,6 +1,6 @@
 ---
 name: deconstruction-product-ad
-description: 單張產品圖 → 多角度 → 首尾幀成片。解決：想做那種產品被拆解、多角度展示的廣告影片 當使用者問到這類問題、或提到「產品解構廣告」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 單張產品圖 → 多角度 → 首尾幀成片。解決：想做那種產品被拆解、多角度展示的廣告影片。 當使用者問到這類問題、或提到「產品解構廣告」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

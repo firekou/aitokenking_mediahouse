@@ -1,6 +1,6 @@
 ---
 name: cinematic-photography-constraints
-description: 先寫鏡頭參數，最後才寫風格。解決：加了一堆風格詞（cinematic、film、電影感），畫面就是沒有電影感 當使用者問到這類問題、或提到「電影感是攝影約束」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 先寫鏡頭參數，最後才寫風格。解決：加了一堆風格詞（cinematic、film、電影感），畫面就是沒有電影感。 當使用者問到這類問題、或提到「電影感是攝影約束」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

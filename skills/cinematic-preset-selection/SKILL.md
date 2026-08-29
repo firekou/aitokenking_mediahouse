@@ -1,6 +1,6 @@
 ---
 name: cinematic-preset-selection
-description: 把複雜的東西變成簡單的選擇。解決：想要電影感，但一直在寫提示詞、一直在抽卡，每次結果都不一樣 當使用者問到這類問題、或提到「電影感預設」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 把複雜的東西變成簡單的選擇。解決：想要電影感，但一直在寫提示詞、一直在抽卡，每次結果都不一樣。 當使用者問到這類問題、或提到「電影感預設」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

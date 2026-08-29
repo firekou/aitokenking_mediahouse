@@ -1,6 +1,6 @@
 ---
 name: removing-staged-feel
-description: 讓鏡頭變得不那麼聰明。解決：AI 影片有很重的擺拍感，一不滿意就去換提示詞，換了還是假 當使用者問到這類問題、或提到「消除擺拍感」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 讓鏡頭變得不那麼聰明。解決：AI 影片有很重的擺拍感，一不滿意就去換提示詞，換了還是假。 當使用者問到這類問題、或提到「消除擺拍感」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

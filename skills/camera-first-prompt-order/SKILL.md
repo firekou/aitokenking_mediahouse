@@ -1,6 +1,6 @@
 ---
 name: camera-first-prompt-order
-description: 用鏡頭包裹動作，把自己當成攝影機。解決：影片生出來動作和鏡頭有割裂感，像拼出來的；而且人物常常走錯方向 當使用者問到這類問題、或提到「鏡頭先寫」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 用鏡頭包裹動作，把自己當成攝影機。解決：影片生出來動作和鏡頭有割裂感，像拼出來的；而且人物常常走錯方向。 當使用者問到這類問題、或提到「鏡頭先寫」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

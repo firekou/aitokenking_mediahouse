@@ -1,6 +1,6 @@
 ---
 name: reusable-fashion-workflow
-description: 把 AI 當生產系統不是輸出工具。解決：生了很多圖，但每一張都是從零開始，累積不出東西 當使用者問到這類問題、或提到「可複用工作流」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 把 AI 當生產系統不是輸出工具。解決：生了很多圖，但每一張都是從零開始，累積不出東西。 當使用者問到這類問題、或提到「可複用工作流」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

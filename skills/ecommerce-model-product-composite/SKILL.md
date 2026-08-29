@@ -1,6 +1,6 @@
 ---
 name: ecommerce-model-product-composite
-description: 提示詞從成品反推，產品由蒙版鎖住。解決：要做電商產品的模特圖，但自己寫的提示詞生不出那種質感，而且模特手上的產品每次都變形 當使用者問到這類問題、或提到「電商模特圖合成」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 提示詞從成品反推，產品由蒙版鎖住。解決：要做電商產品的模特圖，但自己寫的提示詞生不出那種質感，而且模特手上的產品每次都變形。 當使用者問到這類問題、或提到「電商模特圖合成」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

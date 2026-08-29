@@ -1,6 +1,6 @@
 ---
 name: style-extraction-invariants
-description: 看不變的，看共性，然後搭成體系。解決：想提取某張圖的風格，把圖丟給模型讓它反推，拿到的東西套到別的內容上就不像了 當使用者問到這類問題、或提到「風格提取」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 看不變的，看共性，然後搭成體系。解決：想提取某張圖的風格，把圖丟給模型讓它反推，拿到的東西套到別的內容上就不像了。 當使用者問到這類問題、或提到「風格提取」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

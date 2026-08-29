@@ -1,6 +1,6 @@
 ---
 name: brand-grade-product-shot
-description: 多角度實拍當參考，微距靠截圖再上傳。解決：想要那種品牌廣告等級的產品畫面，但純文字生成出來的產品永遠不是自己的那個產品 當使用者問到這類問題、或提到「品牌級產品畫面」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 多角度實拍當參考，微距靠截圖再上傳。解決：想要那種品牌廣告等級的產品畫面，但純文字生成出來的產品永遠不是自己的那個產品。 當使用者問到這類問題、或提到「品牌級產品畫面」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

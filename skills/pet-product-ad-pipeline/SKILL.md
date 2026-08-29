@@ -1,6 +1,6 @@
 ---
 name: pet-product-ad-pipeline
-description: 元素、構圖、色彩三個關鍵點。解決：要做寵物類產品的宣傳影片，每張畫面分開看都不錯，放在一起卻不像同一支廣告 當使用者問到這類問題、或提到「寵物品類產品廣告」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 元素、構圖、色彩三個關鍵點。解決：要做寵物類產品的宣傳影片，每張畫面分開看都不錯，放在一起卻不像同一支廣告。 當使用者問到這類問題、或提到「寵物品類產品廣告」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

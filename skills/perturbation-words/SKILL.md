@@ -1,6 +1,6 @@
 ---
 name: perturbation-words
-description: 用一個沒有意義的詞改變模型的注意力分配。解決：寫「質感高級、畫面乾淨」反而讓主體發硬、噪點多；寫「夢幻」模型就亂加光斑濾鏡 當使用者問到這類問題、或提到「擾動詞」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 用一個沒有意義的詞改變模型的注意力分配。解決：寫「質感高級、畫面乾淨」反而讓主體發硬、噪點多；寫「夢幻」模型就亂加光斑濾鏡。 當使用者問到這類問題、或提到「擾動詞」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

@@ -1,6 +1,6 @@
 ---
 name: lighting-three-controls
-description: 體積光、反光、補光層次。解決：AI 圖就是假，說不出哪裡假 當使用者問到這類問題、或提到「光線三控」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 體積光、反光、補光層次。解決：AI 圖就是假，說不出哪裡假。 當使用者問到這類問題、或提到「光線三控」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

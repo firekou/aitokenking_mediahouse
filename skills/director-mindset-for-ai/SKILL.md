@@ -1,6 +1,6 @@
 ---
 name: director-mindset-for-ai
-description: 調度優先、敘事優先、補拍思維。解決：影片畫面越來越有質感，但自己其實不知道為什麼好、也說不出哪裡不對 當使用者問到這類問題、或提到「導演思維」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 調度優先、敘事優先、補拍思維。解決：影片畫面越來越有質感，但自己其實不知道為什麼好、也說不出哪裡不對。 當使用者問到這類問題、或提到「導演思維」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

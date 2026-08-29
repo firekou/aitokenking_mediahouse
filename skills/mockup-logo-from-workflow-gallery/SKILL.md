@@ -1,6 +1,6 @@
 ---
 name: mockup-logo-from-workflow-gallery
-description: 從別人的成品反查提示詞。解決：要做品牌樣機（mockup）並嵌入自己的 Logo，但自己寫的提示詞生不出那種質感 當使用者問到這類問題、或提到「樣機嵌 Logo」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 從別人的成品反查提示詞。解決：要做品牌樣機（mockup）並嵌入自己的 Logo，但自己寫的提示詞生不出那種質感。 當使用者問到這類問題、或提到「樣機嵌 Logo」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

@@ -1,6 +1,6 @@
 ---
 name: prompt-order-subject-light-abstract
-description: 主體前、光影中、抽象詞末。解決：畫面不對，於是一直往提示詞後面加東西，結果越加越假 當使用者問到這類問題、或提到「提示詞語序」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 主體前、光影中、抽象詞末。解決：畫面不對，於是一直往提示詞後面加東西，結果越加越假。 當使用者問到這類問題、或提到「提示詞語序」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

@@ -1,6 +1,6 @@
 ---
 name: fast-storyboard-from-brief
-description: 故事板起手，實拍圖回融。解決：要在很短的時間內生出一份能給客戶看的廣告分鏡腳本 當使用者問到這類問題、或提到「快速分鏡腳本」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 故事板起手，實拍圖回融。解決：要在很短的時間內生出一份能給客戶看的廣告分鏡腳本。 當使用者問到這類問題、或提到「快速分鏡腳本」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

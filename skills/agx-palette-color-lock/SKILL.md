@@ -1,6 +1,6 @@
 ---
 name: agx-palette-color-lock
-description: 把顏色從後期提前到生成前。解決：每張 AI 圖生完都要一張一張調色，整組畫面的色彩還是不統一 當使用者問到這類問題、或提到「AgX 色板調色」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
+description: 把顏色從後期提前到生成前。解決：每張 AI 圖生完都要一張一張調色，整組畫面的色彩還是不統一。 當使用者問到這類問題、或提到「AgX 色板調色」時使用此 skill。⚠️ 技巧內容為影片作者自述（E6），我方未實測，不得作為效果承諾依據。
 license: MIT
 compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
 metadata:

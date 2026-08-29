@@ -2,11 +2,17 @@
 
 **帳號：** https://www.instagram.com/hedge.sphere.ai/ （刺蝟星球）
 **目標：** 把這個帳號的全部 Reel 盤成可查詢的目錄——網址、文案、逐字稿、指標——並輸出 SQL。
-**狀態：** ⏸ **管線已完成並測過，等 `APIFY_TOKEN`。目前尚無任何真實資料。**
+**狀態：** ✅ **首批 5 支已抓、已人工回看**（2026-08-29）。全帳號盤點未做。
 
-> **⚠️ 這個資料夾現在是空的，而空不等於零。**
-> 沒有 `raw-reels.json`、沒有 `catalog.sql`，代表**還沒抓**，
-> 不代表這個帳號沒有影片。兩者在畫面上長得一模一樣，所以這裡明講。
+| | |
+|---|---|
+| 已抓 | **5 支**（含逐字稿 5/5，`transcripts_missing = 0`） |
+| 實際花費 | **US$0.3820**（用量 203.111126 → 203.493130） |
+| 逐字稿品質 | **已回看** → [`transcript-quality-review.md`](transcript-quality-review.md) |
+| 驗收條件 | ✅ **通過**（見下） |
+
+> **⚠️ 這 5 支不是「最新 5 支」。** 實測發現 `resultsLimit` 的回傳順序不可預期——
+> 取回的日期橫跨 2026-05 到 2026-08。要特定期間用 `--newer-than`。
 
 ---
 
@@ -49,15 +55,30 @@ python3 scripts/build_catalog_sql.py cases/CASE-002-hedge-sphere-catalog/raw-ree
 
 | 檔案 | 內容 | 進 git？ |
 |---|---|---|
-| `raw-reels.json` | Apify 原始回應（正規化後） | ✅ 是（不含逐字稿以外的敏感內容） |
-| `catalog.sql` | `ig_harvest_run` ＋ `ig_reel`：網址／文案／指標 | ✅ **是**——它是指向原片的索引 |
-| `transcripts.sql` | `ig_reel_transcript`：完整逐字稿 | ⛔ **否**（`.gitignore`），見下 |
+| `raw-reels.json` | 網址／文案／指標／`has_transcript` 標記 | ✅ **是**——**已在來源層剝除逐字稿** |
+| `raw-transcripts.json` | 完整逐字稿原始檔 | ⛔ **否**（`.gitignore`） |
+| `catalog.sql` | `ig_harvest_run` ＋ `ig_reel` | ✅ **是**——它是指向原片的索引 |
+| `transcripts.sql` | `ig_reel_transcript` | ⛔ **否**（`.gitignore`） |
+
+**★ 拆在來源層而不只是 SQL 層，是首次真跑時撞出來的修正。**
+原設計只拆了 SQL，但 `raw-reels.json` 仍帶著全部逐字稿而它要進 git——
+**等於從後門違反了 §來源紀律。** 現已有回歸測試鎖死。
 
 ---
 
-## ★ 一個現在就能寫下的驗收條件
+## ✅ 驗收條件（已通過）
 
-**這批資料抓回來時，必須包含 `Dbk0zAzD5Pj`，且 `duration_s` 約 109 秒。**
+**條件：這批資料必須包含 `Dbk0zAzD5Pj`，且 `duration_s` 約 109 秒。**
+
+首批 5 支未含該片（`resultsLimit` 不是取最新），故**另外針對性抓了那一支驗證**（US$0.004）：
+
+```
+shortCode  : Dbk0zAzD5Pj
+帳號       : hedge.sphere.ai        ✅ 帳號歸屬正確
+duration   : 110.333336 s           ✅ 我方 CASE-001 實測 109s，差 1.3s 在容差內
+```
+
+**兩件事因此同時被驗證：抓對了帳號，且 Apify 的欄位對得上我方既有量測。**
 
 那是 [CASE-001](../CASE-001-control-map/) 的來源影片，我方已獨立實測過片長（E1）。
 它同時驗兩件事：①抓對了帳號 ②Apify 的欄位對得上我方既有量測。
@@ -111,8 +132,10 @@ CASE-001 就是照這條刻意只收節錄、不收完整逐字稿的。
 
 | ID | 缺口 | 為什麼重要 |
 |---|---|---|
-| **C2-G1** | **Apify 逐字稿品質我方零實測**（E6） | 未揭露用哪套 ASR。`video-ingest` 對自家 ASR 列得出誤字表（Control Night＝ControlNet），對 Apify 的**一次都沒對過**。第一批抓回來先人工回看兩三支——`asr_reviewed` 預設 0 就是為此 |
-| C2-G2 | 該帳號實際有幾支 Reel 未知 | `--limit 200` 是猜的。第一次跑完才知道要不要調 |
+| ~~C2-G1~~ | ~~逐字稿品質零實測~~ **✅ 已關閉** | 5 支人工回看完成。**結構可用、專有名詞不可用**——`tools_seen` 不得單獨由逐字稿填。詳見 [`transcript-quality-review.md`](transcript-quality-review.md) |
+| C2-G2 | 該帳號實際有幾支 Reel 未知 | `--limit 200` 是猜的。**新資訊：`resultsLimit` 不是取最新 N 支，順序不可預期** |
+| **C2-G5** | **估價方法會系統性偏低** | 計費是「逐支進位後相加」，估價是「平均 × 支數」。本次實際 11 分鐘、估價用 10。`--tier` 預設 FREE（最貴）抵銷此方向 |
+| **C2-G6** | **plan → tier 對照僅驗證一組** | 帳單反推確認 `SCALE = SILVER`（算術完全吻合）。其餘 plan 未驗，**不得類推** |
 | C2-G3 | `video_url` 是 CDN 簽名網址，數小時後失效 | 別把它當永久連結存。要留影片得另外下載（`--with-video`，本 skill 刻意不開） |
 | C2-G4 | Step 4 分流判準未在真實資料上校準 | 「動作句 < 3 句」的門檻沿用 `/technique-extract`，未在本帳號驗過 |
 

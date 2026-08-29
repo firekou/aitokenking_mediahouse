@@ -133,6 +133,31 @@ def _():
     assert not (d / "catalog.sql").exists()
 
 
+@t("★★ 來源層必須拆逐字稿 —— raw-reels.json 不得含任何逐字稿內容")
+def _():
+    # 這條漏過一次：SQL 層拆了，但 raw-reels.json 仍帶著全部逐字稿，
+    # 而它是要進 git 的 —— 等於從後門違反 §來源紀律。
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import ig_harvest
+    payload = {"reels": [
+        {"shortcode": "A", "transcript": "機密逐字稿內容"},
+        {"shortcode": "B", "transcript": None},
+    ]}
+    clean, trs = ig_harvest.split_transcripts(payload)
+    dumped = json.dumps(clean, ensure_ascii=False)
+    assert "機密逐字稿內容" not in dumped, "逐字稿留在 raw-reels.json 裡了"
+    assert trs == {"A": "機密逐字稿內容"}
+    assert clean["reels"][0]["has_transcript"] is True
+    assert clean["reels"][1]["has_transcript"] is False, "沒有逐字稿的也要標記，不得省略"
+
+
+@t("★ 分離後的逐字稿檔必須被 .gitignore 覆蓋")
+def _():
+    ig = (ROOT / ".gitignore").read_text()
+    for pat in ("raw-transcripts.json", "transcripts.sql"):
+        assert pat in ig, f"{pat} 沒有被 .gitignore 覆蓋"
+
+
 @t("★ 採集器預設不花錢：沒有 --run 一定不送出")
 def _():
     r = subprocess.run([sys.executable, str(ROOT / "scripts" / "ig_harvest.py"),

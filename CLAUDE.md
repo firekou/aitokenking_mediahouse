@@ -76,4 +76,5 @@ python3 scripts/validate_skill.py --all  # 三嵌入點檢核
 | MH-G2 | 雙模型互審是建議不是強制，validator 未檢核 |
 | ~~MH-G3~~ | 回填引擎已落地。**新的死法：引擎有了但沒有人用——13 條 claim 仍全是 V0** |
 | MH-G4 | 來源授權邊界未由法務定調 |
+| MH-G6 | CASE-002 逐字稿品質已測（結構可用／專有名詞不可用），但 n=5 且僅單一帳號單一內容類型 |
 | **MH-G5** | **外部來源注入／skill 供應鏈風險**——閘已裝（SEC-1／`security_findings`），但 CASE-001 的掃描是回溯的、未重新抽幀 |

@@ -8,3 +8,7 @@ __pycache__/
 # 它是分析原料，不是可發布的內容。要推翻請走 --publish-transcripts 並自行確認。
 transcripts.sql
 cases/**/transcripts.sql
+
+# 逐字稿原始檔同樣不進 git —— 拆到來源層，不只拆 SQL 層
+raw-transcripts.json
+cases/**/raw-transcripts.json

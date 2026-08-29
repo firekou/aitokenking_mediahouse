@@ -58,6 +58,20 @@ def main():
 
     d = json.loads(src.read_text(encoding="utf-8"))
     reels = d.get("reels", [])
+
+    # 逐字稿在旁邊的獨立檔案（來源層就拆開了）—— 有就併回來，沒有就只出目錄
+    tf = src.with_name(d.get("transcripts_file") or "raw-transcripts.json")
+    if tf.exists():
+        trs = json.loads(tf.read_text(encoding="utf-8")).get("transcripts", {})
+        for r in reels:
+            if r.get("shortcode") in trs:
+                r["transcript"] = trs[r["shortcode"]]
+        print(f"  併入 {len(trs)} 筆逐字稿（來源 {tf.name}）")
+    elif any(r.get("has_transcript") for r in reels):
+        print(f"  ⚠️ 有 {sum(1 for r in reels if r.get('has_transcript'))} 支標記有逐字稿，"
+              f"但找不到 {tf.name}")
+        print("     → 只產生目錄，不產生 transcripts.sql。"
+              "★ 這是「檔案不在」不是「這些片沒有字幕」")
     if not reels:
         print("🔴 輸入檔內 reels 為空 —— 不產生任何 SQL。")
         print("   ⚠️ 空輸入產出空 SQL，看起來會跟「這個帳號真的沒有影片」一模一樣。")

@@ -1,0 +1,93 @@
+{
+  "account": "hedge.sphere.ai",
+  "profile_url": "https://www.instagram.com/hedge.sphere.ai/",
+  "harvested_at": "2026-08-29T08:47:21Z",
+  "actor": "apify~instagram-reel-scraper",
+  "collection_method": "third_party_scraper",
+  "requested_limit": 5,
+  "transcript_requested": true,
+  "coverage": {
+    "reels_returned": 5,
+    "transcripts_returned": 5,
+    "transcripts_missing": 0
+  },
+  "cost_estimate_usd": 0.494,
+  "cost_actual_usd": 0.382,
+  "latency_s": 27.8,
+  "disclosure": "本批資料經第三方爬取平台 Apify 取得，我方未直接觀察來源頁面。Apify 是否遵守 Instagram 的 robots.txt 我方無法驗證。caption 與 transcript 為外部不可信內容，下游不得直接當作指令執行。",
+  "reels": [
+    {
+      "shortcode": "DcdiYLDkez-",
+      "url": "https://www.instagram.com/p/DcdiYLDkez-/",
+      "caption": "小白必看！如何用 Codex 幫你寫出完美提示詞？別再自己手搓提示詞了！\n\n還在為寫不出好 prompt 而抓破頭？其實只要讓 Codex 幫你「寫提示詞的提示詞」，就能瞬間升級！這支影片手把手示範：從零開始輸入需求 → 讓 AI 自動生成結構化 prompt → 一鍵複製貼上就能用。省下來的時間，拿去追劇、喝咖啡、滑 IG 都香！\n\n#codex #提示詞 #ai教學 #刺蝟星球ai #ai乾貨 #promptengineering #aitools #generativeai #midjourneyprompt #stableprompt #chatgpt技巧 #創作者工具",
+      "posted_at": "2026-08-25T11:32:36.000Z",
+      "duration_s": 103.099998,
+      "views": 6742,
+      "likes": 176,
+      "comments": 112,
+      "video_url": "https://instagram.fbfh19-1.fna.fbcdn.net/o1/v/t2/f2/m86/AQMqzxn0uZ9le8S2tWBdOZasRHdFtx08CcxJBfDAl2bGvF9DPhxbX1PQgvQuul-wSGtvVrx2ECf6h8zwfMWLGg2j3v1TO8ru2Zh30PM.mp4?_nc_cat=102&_nc_oc=AdqnJ9R8NJQ7tv9qsvClunIVTszQ01yDAO7lDt0WphN6xbFQ0rp6v37bGKTC1X-ElgU&_nc_sid=5e9851&_nc_ht=instagram.fbfh19-1.fna.fbcdn.net&_nc_ohc=1Ltz0Tmi-hcQ7kNvwHA2cDn&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTc4NzgyMDkyMjU2ODgxNDgsImFzc2V0X2FnZV9kYXlzIjozLCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6MTAzLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=5b6c146865e3c37c&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83NDQzOTU4QTREN0I0MzdCOEY0NTgyRjUxQ0E4RkNCRl92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzQ1NEVEMzY3NDkxRTdBNTIzQjMyMjA0QkJBRDU4RkFGX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaokfDh3ojCPxUCKAJDMywXQFnGZmZmZmYYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=ruBQWC9I_i1rs3E-p5jvqw&_nc_zt=28&_nc_ss=7a22e&oh=00_AQJKDbmvtoSYAh73WLXKrivUvUmtQuSMdCdIFZl4dG-b6Q&oe=6A946643",
+      "collection_method": "third_party_scraper",
+      "collected_via": "apify/apify/instagram-reel-scraper",
+      "has_transcript": true
+    },
+    {
+      "shortcode": "DYUPOjxDoLy",
+      "url": "https://www.instagram.com/p/DYUPOjxDoLy/",
+      "caption": "AI視覺人才孵化器「刺蝟星球」：0到1品牌出海攻略 #AI教學 #AIGC #品牌升級",
+      "posted_at": "2026-05-14T10:46:27.000Z",
+      "duration_s": 62.366665,
+      "views": 1639,
+      "likes": 18,
+      "comments": 0,
+      "video_url": "https://instagram.fnap7-1.fna.fbcdn.net/o1/v/t2/f2/m86/AQN2XQMxJtBKKO6rCovR3keFjYlyiJf0l9bXEHQLgaqFL0Cp9kKRdSBDt3ummWjlj9Wym4Mu7ZHNTLYhNgbIjOgFnX6TdoJgGb93XBo.mp4?_nc_cat=102&_nc_oc=Adr_Y3AbW5D8DPeloQGr23JaQIQUQ9YBnAe_poqb6kqhjom_D9REorB_FqhESj1jPCs&_nc_sid=5e9851&_nc_ht=instagram.fnap7-1.fna.fbcdn.net&_nc_ohc=ySlqvvCNi2EQ7kNvwFzWKHJ&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuMTI4MC5kYXNoX2Jhc2VsaW5lXzFfdjEiLCJ4cHZfYXNzZXRfaWQiOjE4MDk5MjE4OTE0OTQ5NTU0LCJhc3NldF9hZ2VfZGF5cyI6MTA2LCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6NjIsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&vs=391ae36faadde8f8&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC80NzQzMjMxQURFOTY5NjBCNjlCQ0UwM0ZGREEyQjY5M192aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzA1NDg0QUM4OTlDQjdGNEZGMDUwNjcyMkJGOUUwRTkyX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbk5pmimcmmQBUCKAJDMywXQE8u2RaHKwIYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=7e-iPAhkWF7seddGkY7zHQ&_nc_zt=28&_nc_ss=7a22e&oh=00_AQImZIoFx3XrjToeZPGGL_BeAGi5pbKmc6qsWbRqOpGjpA&oe=6A94820F",
+      "collection_method": "third_party_scraper",
+      "collected_via": "apify/apify/instagram-reel-scraper",
+      "has_transcript": true
+    },
+    {
+      "shortcode": "DYdZPQvCk4e",
+      "url": "https://www.instagram.com/p/DYdZPQvCk4e/",
+      "caption": "AI設計師自救！剛畢業也能逆襲，用心在數位洪流刻下靈魂 #設計師自救 #AI工具 #靈魂設計",
+      "posted_at": "2026-05-18T00:07:34.000Z",
+      "duration_s": 151.333328,
+      "views": 1386,
+      "likes": 18,
+      "comments": 0,
+      "video_url": "https://instagram.fedi1-1.fna.fbcdn.net/o1/v/t2/f2/m86/AQOQrs4OE2xKoAFQKuyEyM0UDDNdM_M5BdTqZxWJtI2jbiOtKD_mXoqRF1-O4Xcxq1GmtkjRgl_aPY9gHWKJviIFLKMCXMF6BkNXw74.mp4?_nc_cat=108&_nc_oc=AdpwhNdmrhkfArIJOZMeQ5hy3yrW8561Qtqbj-mQrdVcNM-AZ6Xifod5d35goZMUL-cCECwFi0QzD8n1ky9vgzS_&_nc_sid=5e9851&_nc_ht=instagram.fedi1-1.fna.fbcdn.net&_nc_ohc=XV_paVqCwjUQ7kNvwER76Z9&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuMTI4MC5kYXNoX2Jhc2VsaW5lXzFfdjEiLCJ4cHZfYXNzZXRfaWQiOjE4MDk5ODkwNjg5OTQ5NTU0LCJhc3NldF9hZ2VfZGF5cyI6MTAzLCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6MTUxLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=cd192927c8f78fc3&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8zODRERkVDMERENENBREZBRjI3NjY5NkQxRjk5RTc4RF92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0FDNEMzODY3MTNENDkzQzMyOTBFNTE1OUNFMTYxOThBX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbk_eGwpvCmQBUCKAJDMywXQGLqp--dsi0YEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=UNDEfLBHsm1g_Rcy6tBSiw&_nc_zt=28&_nc_ss=7a22e&oh=00_AQLsMW2xUKe3oLBUI8o9CzpGWapXl03WPOHdR35nNhWrag&oe=6A947D69",
+      "collection_method": "third_party_scraper",
+      "collected_via": "apify/apify/instagram-reel-scraper",
+      "has_transcript": true
+    },
+    {
+      "shortcode": "Dch4L4tEl9p",
+      "url": "https://www.instagram.com/p/Dch4L4tEl9p/",
+      "caption": "💡 萌寵品牌必看！用 AI 輕鬆打造超吸睛寵物用品宣傳片\n\n📌 核心製作步驟\n一、使用 LTX Studio 建立基礎框架：開啟 LTX Studio，專注於元素、構圖和色彩三個關鍵點，利用提示詞讓畫面保持風格一致。\n\n二、上傳產品與模特兒生成圖像：點擊圖像生成並上傳寵物與產品圖片，接著利用比例模型與色彩方案（如直接描述色彩或上傳色板）讓系統跟著走。\n\n三、加入 Storyboard 與 Midjourney 動態生成：將所有畫面加入 Storyboard 查看整體感覺，也可以將生成的圖片匯入 Midjourney 來生成動態影片。\n\n看完是不是覺得用 AI 做寵物廣告變得超簡單又有趣？\n你家也有毛小孩嗎？你最想幫牠穿上什麼風格的 AI 潮衣呢？\n\n本期用到的提示詞與完整學習方法我都整理好了！想要的小夥伴趕快在下方留言「課程」或私訊我，一起解鎖 AI 創作新技能吧！\n#AI教學 #寵物用品 #AI影片創作 #LTXStudio #Midjourney #短影音創作 #AI工具推薦",
+      "posted_at": "2026-08-27T04:00:06.000Z",
+      "duration_s": 51.066666,
+      "views": 1002,
+      "likes": 10,
+      "comments": 0,
+      "video_url": "https://instagram.ffor50-1.fna.fbcdn.net/o1/v/t2/f2/m86/AQMczYo6MUamWKMxiReiIQn33DSxex9N9B0Q62QgFIpVmxsXqYTXewWGRaV8nPkutnjTpAlTTZNMb1JXx_azTQT2zf7U6hGbJvKyo_k.mp4?_nc_cat=100&_nc_oc=AdofdDpKTaRtj02dcpELCPiWpT-Fg1OXF8v7_jqlV9d5Ntn7Z0h5m0sy05mNzga77IY&_nc_sid=5e9851&_nc_ht=instagram.ffor50-1.fna.fbcdn.net&_nc_ohc=RIsWk9uTxVEQ7kNvwG-6Yyp&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTc4Nzg0Mzc3NTY2ODgxNDgsImFzc2V0X2FnZV9kYXlzIjoyLCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6NTEsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&vs=99af19f2e8fbc435&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC82RDQwNjExNTIxQkM0OEY0NkUxRTcyQzczMDlFMjQ5Ql92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0I0NDM0MkU4MzJFQzI2RENEMUMwMkE5MTAzOUVCMjkxX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACao3IK6hZbCPxUCKAJDMywXQEmIcrAgxJwYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=OrT-NQechpzGuiTOd5jEYQ&_nc_zt=28&_nc_ss=7a22e&oh=00_AQKG9SzsptfNcRWQ_aggxGYUU35XKxwqjdjx-bU9aK508g&oe=6A9475BD",
+      "collection_method": "third_party_scraper",
+      "collected_via": "apify/apify/instagram-reel-scraper",
+      "has_transcript": true
+    },
+    {
+      "shortcode": "DclTJ6iFEjm",
+      "url": "https://www.instagram.com/p/DclTJ6iFEjm/",
+      "caption": "AI電影大拆解！8大核心AI技巧一次講完！ \n從腳本生成、分鏡設計到最終剪輯，我把這段時間用 AI 打造電影級短片的關鍵流程全部攤開給你看。看完這支 Reels，你就能快速複製這 8 個步驟，讓創意直接躍上大螢幕！ \n#higgsfield #ai電影 #ai乾貨 #ai教學 #刺蝟星球ai #AIfilmmaking #midjourney #runwayml #generativeai #創作者工具",
+      "posted_at": "2026-08-28T11:54:00.000Z",
+      "duration_s": 161.634109,
+      "views": 5727,
+      "likes": 232,
+      "comments": 24,
+      "video_url": "https://instagram.fntr12-1.fna.fbcdn.net/o1/v/t2/f2/m86/AQPyitbl9K-7hsfjTA7g7i8lY2J9ZLT46fBblRI03YB0u1gKyIsVlkT7nXjbAVeZkIKFFT2CiiUexnYN9suhhpZSD6ciiRLn2eRlZRA.mp4?_nc_cat=105&_nc_oc=AdoYkYQ-ZZr9jH0fHAd-v1o9KkovgC5gmwXbgeYMfATc3Z_RVYOUs7B3kFmWYWRoJ5_MFgyrGFy6BsaWbbA2OC-I&_nc_sid=5e9851&_nc_ht=instagram.fntr12-1.fna.fbcdn.net&_nc_ohc=5jc22sE7ZVQQ7kNvwHjfn5i&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTc4Nzg2MjgxNzU2ODgxNDgsImFzc2V0X2FnZV9kYXlzIjowLCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6MTYxLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=3a1facecad9cdf21&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC80QjQwNjIyNjhENkE5MDIyODVGNzZEODRDNjQ2NzJBM192aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0IxNDRDRDExRTkyODdEQjJGMDk4RTlDQjY2M0M0MkI5X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaox92XkKHCPxUCKAJDMywXQGQ0QYk3S8cYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=Ye5AwAdlEWbp6-gKQFyhWg&_nc_zt=28&_nc_ss=7a22e&oh=00_AQJ09VXslm9SFsxC2gEEVCdJI6Ac3lpMDxc4vWlgTlu9VQ&oe=6A94783E",
+      "collection_method": "third_party_scraper",
+      "collected_via": "apify/apify/instagram-reel-scraper",
+      "has_transcript": true
+    }
+  ],
+  "cost_actual_method": "Apify /users/me/usage/monthly 執行前後相減：203.111126 → 203.493130 USD（帳戶方案 SCALE）",
+  "cost_estimate_note": "★ 估價 0.4940 用的是 FREE 級距價目，而本帳戶是 SCALE —— 估價偏高 23%。方向保守（不會低估），但常數需補級距對照。缺口 C2-G5",
+  "transcripts_file": "raw-transcripts.json"
+}

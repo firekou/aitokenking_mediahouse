@@ -43,14 +43,37 @@ BASE = "https://api.apify.com/v2"
 # 價目表 —— 即時查自 Apify API，FREE 方案級距。
 # ★ 標 measured_at 是刻意的：計價是時點判定，不標日期的價目表無法被覆核，
 #   而 Apify 自 2024-05 起已改過六次計價模型。
+# ★ 級距是實測撞出來的：2026-08-29 首次真跑，估價 US$0.4940 vs 實際 US$0.3820。
+#   原因是常數只有 FREE 級距，而該帳戶是 SCALE。方向保守（不會低估）但仍然不準。
+#   ⚠️ Apify 的 plan 名稱（FREE/STARTER/SCALE/BUSINESS）與計價級距
+#      （FREE/BRONZE/…/DIAMOND）不是同一套命名，官方未公開對照表 ——
+#      因此 --tier 不自動偵測，要由人指定。猜一個對照表比誠實地用保守值更糟。
+#
+#   ★ 已由帳單反推確認一組對照（E1，2026-08-29）：
+#       plan SCALE  →  tier SILVER
+#     驗算：0.001（start）+ 5×0.0014（reel）+ 11×0.034（transcript）= 0.3820
+#     與實際扣款 0.3820 完全吻合。其餘 plan 未驗，不得類推。
+#
+#   ★ 同時修正一個估價方法的問題：估價用「平均分鐘 × 支數」，
+#     而計費是「逐支無條件進位後相加」。本次 5 支實際 11 分鐘、估價用 10 分鐘。
+#     跑之前拿不到逐支片長，所以平均是唯一選項 —— 但要知道它會偏低，
+#     而 --tier 預設 FREE（最貴）正好抵銷這個方向。
+TIERS = {
+    "FREE":     {"reel": 0.0026, "transcript": 0.048, "download": 0.020},
+    "BRONZE":   {"reel": 0.0023, "transcript": 0.041, "download": 0.015},
+    "SILVER":   {"reel": 0.0014, "transcript": 0.034, "download": 0.012},
+    "GOLD":     {"reel": 0.0010, "transcript": 0.027, "download": 0.010},
+    "PLATINUM": {"reel": 0.0008, "transcript": 0.016, "download": 0.0085},
+    "DIAMOND":  {"reel": 0.0004, "transcript": 0.010, "download": 0.007},
+}
 PRICING = {
     "measured_at": "2026-08-29",
-    "plan": "FREE",
+    "plan": "FREE",                  # 預設用最貴的級距 —— 高估比低估安全
     "source": f"{BASE}/acts/{ACTOR} → pricingInfos[-1]",
-    "actor_start_usd": 0.001,        # 每次執行，一次性
-    "reel_usd": 0.0026,              # 每支 reel 寫進 dataset
-    "transcript_usd_per_min": 0.048, # ★ 每支 × 每「開始的一分鐘」
-    "video_download_usd_per_mb": 0.02,
+    "actor_start_usd": 0.001,        # 每次執行，一次性，各級距相同
+    "reel_usd": TIERS["FREE"]["reel"],
+    "transcript_usd_per_min": TIERS["FREE"]["transcript"],
+    "video_download_usd_per_mb": TIERS["FREE"]["download"],
     "shares_count_usd": 0.007,
 }
 
@@ -103,8 +126,9 @@ def print_estimate(n, avg, transcript):
     if transcript:
         print("\n  ⚠️ transcript 是「每支 × 每開始的一分鐘」計費，是全部成本的大宗。")
         print("     一支 109 秒的片＝2 個計費分鐘，不是 1.8 個。")
-    print("  ⚠️ 這是估算不是報價。實際扣款以 Apify 帳單為準；"
-          "reel 數未知時 n 用的是 --limit。\n")
+    print("  ⚠️ 這是估算不是報價。實際扣款以 Apify 帳單為準；reel 數未知時 n 用的是 --limit。")
+    print("  ⚠️ 計費是「逐支進位後相加」，估價是「平均分鐘 × 支數」—— 估價會略低於實際。")
+    print("     跑之前拿不到逐支片長，所以平均是唯一選項；--tier 預設 FREE（最貴）抵銷這個方向。\n")
     return total
 
 
@@ -118,6 +142,9 @@ def run_actor(username, limit, transcript, newer_than=None):
         "skipPinnedPosts": False,
         "skipTrialReels": True,
     }
+    # ⚠️ 實測（2026-08-29）：resultsLimit 回傳的**不是「最新 N 支」**。
+    #    limit=5 取回的 5 支日期橫跨 2026-05 到 2026-08，順序不可預期。
+    #    要特定期間請用 --newer-than；要特定某支請直接把 reel URL 當 username 傳。
     if newer_than:
         payload["onlyPostsNewerThan"] = newer_than
 
@@ -168,6 +195,21 @@ def normalise(it):
     }
 
 
+def split_transcripts(payload):
+    """把逐字稿從 payload 抽出來，回傳 (payload_無逐字稿, {shortcode: transcript})。
+
+    ★ 抽成獨立函式是為了能被測試。這條紀律漏過一次（2026-08-29 首次真跑時，
+      SQL 層拆了但來源層沒拆），所以它現在有回歸測試鎖著。
+    """
+    trs = {r["shortcode"]: r.pop("transcript")
+           for r in payload["reels"] if r.get("transcript")}
+    for r in payload["reels"]:
+        r.pop("transcript", None)
+        r["has_transcript"] = r["shortcode"] in trs
+    payload["transcripts_file"] = "raw-transcripts.json"
+    return payload, trs
+
+
 def main():
     ap = argparse.ArgumentParser(description="IG 短影音目錄採集器（經 Apify）")
     ap.add_argument("username", help="IG 帳號，例如 hedge.sphere.ai")
@@ -179,9 +221,16 @@ def main():
     ap.add_argument("--with-transcript", action="store_true", help="連逐字稿一起抓")
     ap.add_argument("--i-understand-transcript-policy", action="store_true",
                     help="確認已讀 CONTRIBUTING.md §來源紀律：逐字稿不得整支重製發布")
+    ap.add_argument("--tier", choices=sorted(TIERS), default="FREE",
+                    help="計價級距（預設 FREE＝最貴，高估比低估安全）。"
+                         "實際級距見 Apify Console 帳單頁")
     ap.add_argument("--out", help="輸出 JSON 路徑")
     a = ap.parse_args()
 
+    tier = TIERS[a.tier]
+    PRICING.update(plan=a.tier, reel_usd=tier["reel"],
+                   transcript_usd_per_min=tier["transcript"],
+                   video_download_usd_per_mb=tier["download"])
     out = Path(a.out) if a.out else ROOT / "cases" / f"CASE-{a.username}" / "raw-reels.json"
 
     print(f"IG 目錄採集 · @{a.username}")
@@ -244,8 +293,28 @@ def main():
         ),
         "reels": items,
     }
+    # ★ 在來源層就拆開，不是等到 SQL 層才拆。
+    #   2026-08-29 首次真跑時發現的漏洞：SQL 層拆了逐字稿，但 raw-reels.json
+    #   仍然帶著全部逐字稿，而它是要進 git 的 —— 等於從後門違反了
+    #   CONTRIBUTING.md §來源紀律「不整支影片逐字重製發布」。
+    #   拆兩層的理由跟拆兩個 SQL 檔完全一樣：只要它們待在同一個檔案裡，
+    #   任何一次「把來源檔加進 git」都會把逐字稿一起帶走。
     out.parent.mkdir(parents=True, exist_ok=True)
+    payload, transcripts = split_transcripts(payload)
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if transcripts:
+        tp = out.with_name("raw-transcripts.json")
+        tp.write_text(json.dumps({
+            "_note": ("⛔ 預設不進 git（見 .gitignore）。"
+                      "CONTRIBUTING.md §來源紀律：不整支影片逐字重製發布。"
+                      "這是我方分析的原料，不是可發布的內容。"),
+            "account": payload["account"],
+            "harvested_at": payload["harvested_at"],
+            "content_trust": "untrusted_external",
+            "transcripts": transcripts,
+        }, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"   → {tp}（{len(transcripts)} 筆逐字稿 · 預設不進 git）")
 
     print(f"\n✅ 取得 {len(items)} 支 reel（逐字稿 {got_tr} 支），{res['latency_s']}s")
     if a.with_transcript and got_tr < len(items):

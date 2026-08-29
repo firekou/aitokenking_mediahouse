@@ -78,7 +78,7 @@ claude
 
 ---
 
-## 十一支 skill
+## 十一支 skill ＋ 73 支草稿
 
 | Skill | 層 | 做什麼 | 扣額度？ |
 |---|---|---|---|
@@ -98,6 +98,14 @@ claude
 | `/aitokenking-mcp-doctor` | 401／MCP 連不上／環境變數沒展開 —— **五個原因症狀一模一樣**，這支負責分辨 |
 | `/aitokenking-model-picker` | 先 `list_models` 再答，給 2–3 個候選與取捨。**永遠不憑記憶寫 model id** |
 | `/aitokenking-cost-audit` | 這次／這個月花了多少、花在哪、哪裡可以省。**查不到就寫「未量測」不寫 0** |
+
+**另有 73 支自動產生的草稿**在 [`drafts/skills/`](drafts/skills/)——
+由規則從 129 支 IG Reel 的逐字稿萃取，`status: draft`、`verification: V0`。
+**它們不在 `skills/` 是刻意的**：實測證明逐字稿在專有名詞與否定詞上系統性不可靠，
+**晉升是人的動作，不是腳本的動作**。
+
+管理介面：[`skill-dashboard/`](skill-dashboard/)（Railway 可部署，無資料庫無登入）
+｜清單：[`registry/skills.json`](registry/skills.json)（產物，`scripts/build_registry.py` 產生）
 
 架構與交接契約見 [`ARCHITECTURE.md`](ARCHITECTURE.md)。
 

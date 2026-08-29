@@ -34,7 +34,16 @@ jobs:
       - name: 證據帳本漂移檢查（已核可的回填必須寫回技巧卡）
         run: python3 scripts/evidence_ledger.py --all --check
 
-      - name: Provider capsule 同步檢查（不得人工複製 11 次）
+      - name: 草稿三嵌入點檢核（drafts/）
+        run: python3 scripts/validate_skill.py --drafts
+
+      - name: Registry ＋ Dashboard 回歸測試
+        run: python3 scripts/test_registry.py
+
+      - name: Registry 是否過期
+        run: python3 scripts/build_registry.py --check
+
+      - name: Provider capsule 同步檢查（不得人工複製）
         run: python3 scripts/sync_provider_capsule.py --check
 
       - name: Plugin / marketplace manifest 合法性

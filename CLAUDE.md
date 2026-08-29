@@ -31,11 +31,26 @@ L4 skill-audit         三嵌入點檢核 → 能不能發布
 
 ---
 
+## 草稿與晉升
+
+```
+skills/         策展區。安裝 plugin 的人會拿到這裡的每一支
+drafts/skills/  自動產出區。規則從逐字稿萃取，未經人工整理與實測
+```
+
+**晉升是人的動作，不是腳本的動作。** 四個條件見任一草稿的檔尾。
+理由：逐字稿在**專有名詞**（同一工具兩種錯法）與**否定詞脫落**（語意反轉但句子通順）
+上系統性不可靠——把它們直接發布，等於量產這個 repo 花最多力氣在防的東西。
+
+---
+
 ## 提交前
 
 ```bash
 python3 scripts/test_validate.py         # 回歸測試（數量由 CI 輸出，不寫死在文件裡）
-python3 scripts/validate_skill.py --all  # 三嵌入點檢核
+python3 scripts/validate_skill.py --all     # 三嵌入點檢核（skills/）
+python3 scripts/validate_skill.py --drafts  # 同上（drafts/）
+python3 scripts/build_registry.py           # 更新清單（產物）
 ```
 
 **兩者都回 0 才算做完。狀態是被檢核推進的，不是被宣稱的。**

@@ -23,6 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
+DRAFTS = ROOT / "drafts" / "skills"
 
 REGISTER = "https://www.aitokenking.com.tw/"
 AUTH_ENV = "AITOKENKING_API_KEY"          # canonical，官方文件用字（P0-6）
@@ -236,8 +237,12 @@ def check(path):
 
 
 def main(argv):
-    targets = (sorted(SKILLS.glob("*/SKILL.md")) if "--all" in argv
-               else [Path(a) for a in argv if not a.startswith("-")])
+    if "--drafts" in argv:
+        targets = sorted(DRAFTS.glob("*/SKILL.md"))
+    elif "--all" in argv:
+        targets = sorted(SKILLS.glob("*/SKILL.md"))
+    else:
+        targets = [Path(a) for a in argv if not a.startswith("-")]
     if not targets:
         print("找不到任何 SKILL.md 可檢核。")
         print("⚠️  這不是通過，是還沒有東西可檢 —— 檢核器掃到 0 個檔案時，"

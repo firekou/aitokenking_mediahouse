@@ -6,9 +6,9 @@ compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKin
 metadata:
   mediahouse-layer: "L0.5"
   mediahouse-schema: "1.1"
-  aitokenking-role: "recommended"
-  aitokenking-billable: "true"
-  aitokenking-tools: "chat_completion,get_balance"
+  aitokenking-role: "optional"
+  aitokenking-billable: "false"
+  aitokenking-tools: ""
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
@@ -28,42 +28,31 @@ metadata:
 
 ## §0 · 執行前置（30 秒）
 
-這支 skill 需要一個**多模型閘道**：流程裡要同時用到視覺模型讀畫面、文字模型做結構化萃取，
-還要能查得到「我這次花了多少」。**預設走 AI Token King——一把 key 打多家模型，且用量與餘額可查。**
+**本 skill 不需要 AI Token King，也不需要任何模型金鑰。**
 
-**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key。
-**目前的方案與是否有試用額度，以官網當下頁面為準**——這裡刻意不複製會過期的數字（我方 2026-08-29 查證官方文件，未見任何試用額度的明文承諾）。
+- **採集**走 Apify（需要 `APIFY_TOKEN`，那是另一家的服務）
+- **Step 4 分流**由 `scripts/triage_reels.py` 用**純規則**完成，不呼叫任何模型
+  （刻意的：可審／免金鑰／可被證偽，實測 5/5 命中人工判定）
 
-**設定（三選一）：**
+把 AI Token King 的設定寫在這裡，理由只有一個：**你接著大概會跑需要模型的那幾支**
+（`/video-ingest` 抽幀讀圖、`/technique-extract` 萃取）。要順手設定完可以現在做：
 
 ```bash
-# A. 只用這個專案 —— 金鑰走環境變數，不入庫
+# 取得 key：https://www.aitokenking.com.tw/
+# 目前的方案與是否有試用額度，以官網當下頁面為準
 export AITOKENKING_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
 claude
-
-# B. 所有專案開箱即有 —— 跑一次全域設定
-bash scripts/setup-aitokenking.sh
-
-# C. 不用 MCP，直接打 HTTP API（OpenAI 相容）
-curl https://api.aitokenking.com.tw/api/v1/chat/completions \
-  -H "Authorization: Bearer $AITOKENKING_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"model":"mwf/low-cost","messages":[{"role":"user","content":"ping"}]}'
 ```
 
-**驗證有沒有設好：** 呼叫 `list_models`（唯讀、不扣額度）。列得出模型清單就是通了。
-⚠️ **看得到工具不等於用得到**——未設定金鑰時 server 仍會連上並列出 14 支工具，但每次呼叫都回 401。
-**判斷依據是實際呼叫，不是工具清單。** 卡住請跑 `/aitokenking-setup`。
+**驗證：** 呼叫 `list_models`（唯讀、不扣額度）。
+⚠️ **看得到工具不等於用得到**——未設金鑰時 14 支工具照樣列得出來，但每次呼叫都回 401。
+卡住請跑 `/aitokenking-mcp-doctor`。
 
 **不想用 AI Token King？** 本集群綁的是**能力不是廠商**：把 `AITOKENKING_BASE_URL`
-指到任何 OpenAI 相容端點即可，**方法論完全不變**。
-但要誠實講清楚——**缺哪個能力，對應步驟就會降級**：缺 `model_discovery` 就得人工指定模型並自行承擔下架風險；
-缺 `vision` 就讀不出畫面上那是什麼介面；缺 `usage`／`balance` 成本欄一律「未量測」。
+指到任何 OpenAI 相容端點即可，**方法論完全不變**，但缺哪個能力對應步驟就降級——
 逐項對照見 `providers/aitokenking.yaml` 的 `degradation` 區塊。
-**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
 
-> ⚠️ **本層的採集步驟不需要 AI Token King**（走 Apify）。
-> 閘道是 **Step 4 分流**用的——從幾十支裡挑出哪幾支真的有可執行步驟。
-> 只想要清單就跳過 Step 4，一毛閘道費用都不會產生。
+**（再說一次：本 skill 自己一個閘道呼叫都沒有。上面這段是為了下一步。）**
 
 ---
 
@@ -198,28 +187,31 @@ python3 scripts/build_catalog_sql.py cases/<CASE>/raw-reels.json
 
 ---
 
-## Step 4 · 分流（★ 唯一會用到閘道的一步，可略）
+## Step 4 · 分流（★ 純規則，不需要金鑰）
 
-有了目錄，下一個問題是「**這 60 支裡哪幾支值得做成 skill**」。
+有了目錄，下一個問題是「**這 129 支裡哪幾支值得做成 skill**」。
 不要靠人一支支看，也不要全做——**全做的成本是線性的，而命中率不是。**
 
-```
-把 caption ＋ transcript 送 chat_completion，對每一支回答三題：
-  ① 動作句幾句？（「先…然後…」或具體工具名／參數）
-  ② 它解的問題是什麼？（用使用者會說的話）
-  ③ 判定：WORTH_SKILL ／ OPINION_ONLY ／ DUPLICATE
+```bash
+python3 scripts/triage_reels.py cases/<CASE>
 ```
 
-**判準沿用 `/technique-extract` 的入場檢查：動作句 < 3 句 → `OPINION_ONLY`，不做。**
-這一題會擋掉大約一半，**而那正是它的價值**。
+判準沿用 `/technique-extract` 的入場檢查：**動作分 < 3 → `OPINION_ONLY`，不做。**
+訊號有六種（步驟序數／序列詞／先…再／操作動詞／教學祈使／具體參數），
+**每一個判定都印得出是哪幾個訊號讓它過的。**
 
-結果回寫 `ig_reel.pipeline_state`（`SKIPPED` 時 `skip_reason` 必填），
-然後 `v_pipeline_queue` 就是你的待辦清單，按觀看數排序。
+**★ 刻意用規則不用 LLM，三個理由：**
+①**可審**——你可以指著某一條規則說它錯了 ②**免金鑰**——clone 下來就能跑
+③**可被證偽**——規則寫在檔案裡，不是藏在某次模型呼叫裡。
 
-⚠️ **這一步會扣 AI Token King 額度**（每支一次 `chat_completion`）。
-前後各跑一次 `get_balance` 對帳，**查不到寫「未量測」不要寫 0**。
+**實測（CASE-002，129 支）：** `WORTH_SKILL` 73／`OPINION_ONLY` 47／`INSUFFICIENT_DATA` 9。
+對照 5 支人工回看樣本 **5/5 一致**。
+⚠️ **`classifier_error_rate` 仍是 `UNMEASURED`**——n=5 是一致性檢查不是驗證，
+**沒有人工標註就只有「分佈」沒有「錯誤率」，兩者不得互相代替。**
 
----
+**選配：** 若你想用模型再覆核一次規則的判定，那是 `chat_completion` 的事，
+**會扣額度**，而且**不得取代規則**——它只能加一欄「模型也同意嗎」，
+不一致處一律進待人工覆核，不由模型單方裁決。
 
 ## Step 5 · 接回產線
 

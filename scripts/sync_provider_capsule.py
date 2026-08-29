@@ -140,7 +140,8 @@ def main(argv):
     spec = yaml.safe_load(SPEC.read_text(encoding="utf-8"))
     body = render(spec)
     stale, wrote = [], 0
-    for sk in sorted((ROOT / "skills").glob("*/")):
+    dirs = sorted((ROOT / "skills").glob("*/")) + sorted((ROOT / "drafts" / "skills").glob("*/"))
+    for sk in dirs:
         if not (sk / "SKILL.md").exists():
             continue
         out = sk / "references" / "aitokenking.md"

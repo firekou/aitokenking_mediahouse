@@ -22,5 +22,9 @@ jobs:
       - name: 目錄管線回歸測試（schema ＋ SQL 產生器）
         run: python3 scripts/test_catalog.py
 
-      - name: 三嵌入點檢核（全部 skill）
+      - name: Plugin / marketplace manifest 合法性
+        run: |
+          python3 -c "import json;[json.load(open(f)) for f in ['.claude-plugin/plugin.json','.claude-plugin/marketplace.json']];print('manifests OK')"
+
+      - name: 三嵌入點 ＋ 安全閘 ＋ 斷鏈檢核（全部 skill）
         run: python3 scripts/validate_skill.py --all

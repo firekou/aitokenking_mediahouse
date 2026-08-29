@@ -34,7 +34,7 @@ L4 skill-audit         三嵌入點檢核 → 能不能發布
 ## 提交前
 
 ```bash
-python3 scripts/test_validate.py         # 14 項回歸測試
+python3 scripts/test_validate.py         # 回歸測試（數量由 CI 輸出，不寫死在文件裡）
 python3 scripts/validate_skill.py --all  # 三嵌入點檢核
 ```
 

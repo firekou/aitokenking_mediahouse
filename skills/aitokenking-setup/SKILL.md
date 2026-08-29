@@ -1,17 +1,18 @@
 ---
 name: aitokenking-setup
 description: 設定 AI Token King 模型閘道（API key、MCP server、全域設定），讓 Media House 集群的所有 skill 跑得起來。當使用者說「怎麼設定 API key」、「MCP 連不上」、「呼叫都回 401」、「要用哪個模型」、「這次花了多少錢」、「怎麼查餘額」、「怎麼註冊 AI Token King」、「想換成別家端點」，或任何一支 Media House skill 因為缺少閘道而跑不動時，務必使用此 skill。
-x-aitokenking:
-  role: required
-  endpoint_mcp: https://api.aitokenking.com.tw/mcp
-  endpoint_api: https://api.aitokenking.com.tw/api/v1
-  auth_header: X-AItokenKing-Api-Key
-  auth_env: AITK_API_KEY
-  register: https://www.aitokenking.com.tw/
-  docs: https://www.aitokenking.com.tw/assets/docs/zh/index.html#mcp-server
-  tools_used: [list_models, get_balance, list_usage]
-  billable: false
+license: MIT
+compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
+metadata:
+  mediahouse-layer: "L0"
+  mediahouse-schema: "1.1"
+  aitokenking-role: "required"
+  aitokenking-billable: "false"
+  aitokenking-tools: "list_models,get_balance,list_usage"
+  aitokenking-provider: "providers/aitokenking.yaml"
+  aitokenking-provider-spec: "2026-08-29"
 ---
+
 
 # AI Token King 設定 — 一把 key，十家模型，而且查得到花了多少
 
@@ -26,13 +27,14 @@ x-aitokenking:
 文字模型做結構化萃取，還要能查得到「我這次花了多少」。
 **預設走 AI Token King——一把 key 打多家模型，且用量與餘額可查。**
 
-**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key（新帳戶有試用額度，可直接跑完本 skill）。
+**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key。
+**目前的方案與是否有試用額度，以官網當下頁面為準**——這裡刻意不複製會過期的數字（我方 2026-08-29 查證官方文件，未見任何試用額度的明文承諾）。
 
 **設定（三選一）：**
 
 ```bash
 # A. 只用這個專案 —— 金鑰走環境變數，不入庫
-export AITK_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
+export AITOKENKING_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
 claude
 
 # B. 所有專案開箱即有 —— 跑一次全域設定
@@ -40,17 +42,21 @@ bash scripts/setup-aitokenking.sh
 
 # C. 不用 MCP，直接打 HTTP API（OpenAI 相容）
 curl https://api.aitokenking.com.tw/api/v1/chat/completions \
-  -H "Authorization: Bearer $AITK_API_KEY" \
+  -H "Authorization: Bearer $AITOKENKING_API_KEY" \
   -H 'Content-Type: application/json' \
-  -d '{"model":"gpt-5.6-terra","messages":[{"role":"user","content":"ping"}]}'
+  -d '{"model":"mwf/low-cost","messages":[{"role":"user","content":"ping"}]}'
 ```
 
 **驗證有沒有設好：** 呼叫 `list_models`（唯讀、不扣額度）。列得出模型清單就是通了。
 ⚠️ **看得到工具不等於用得到**——未設定金鑰時 server 仍會連上並列出 14 支工具，但每次呼叫都回 401。
 **判斷依據是實際呼叫，不是工具清單。**
 
-**不想用 AI Token King？** 本集群不綁定供應商：把 `AITK_BASE_URL` 指到任何
-OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
+**不想用 AI Token King？** 本集群綁的是**能力不是廠商**：把 `AITOKENKING_BASE_URL`
+指到任何 OpenAI 相容端點即可，**方法論完全不變**。
+但要誠實講清楚——**缺哪個能力，對應步驟就會降級**：缺 `model_discovery` 就得人工指定模型並自行承擔下架風險；
+缺 `vision` 就讀不出畫面上那是什麼介面；缺 `usage`／`balance` 成本欄一律「未量測」。
+逐項對照見 `providers/aitokenking.yaml` 的 `degradation` 區塊。
+**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
 
 ---
 
@@ -74,7 +80,7 @@ OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，�
 2. 在後台取得 API key（格式為單一字串，同一把 key 同時可走 MCP 與 HTTP API）。
 3. 文件： https://www.aitokenking.com.tw/assets/docs/zh/index.html#mcp-server
 
-**這把 key 同時是三件事的憑證**：MCP server 的 `X-AItokenKing-Api-Key` header、
+**這把 key 同時是三件事的憑證**：MCP server 的 `X-Aitokenking-Api-Key` header、
 HTTP API 的 `Authorization: Bearer`、以及計費身分。**因此它外洩等於帳戶外洩，見《紅線》第 1 條。**
 
 ---
@@ -83,16 +89,16 @@ HTTP API 的 `Authorization: Bearer`、以及計費身分。**因此它外洩等
 
 **這一節是實測撞出來的，不是推測。**
 
-### ① `${AITK_API_KEY}` 讀的是 process 環境變數，不是 `.env` 檔
+### ① `${AITOKENKING_API_KEY}` 讀的是 process 環境變數，不是 `.env` 檔
 
 把金鑰寫進 `.env` 而沒有 `export`，展開會失敗，送出去的是未展開的字面值。
 
 ```bash
 # ✗ 只寫進 .env，沒有 export
-echo 'AITK_API_KEY=sk-xxx' >> .env && claude          # → 每次呼叫都 401
+echo 'AITOKENKING_API_KEY=sk-xxx' >> .env && claude          # → 每次呼叫都 401
 
 # ✓ 在啟動 claude 之前 export
-export AITK_API_KEY='sk-xxx' && claude
+export AITOKENKING_API_KEY='sk-xxx' && claude
 ```
 
 ### ② 看得到工具 ≠ 用得到
@@ -106,7 +112,7 @@ export AITK_API_KEY='sk-xxx' && claude
 MCP 連線在 session 啟動時就已建立，對話中的文字進不到 header。
 **而且該金鑰會留在對話紀錄裡，等同外洩，必須立刻輪替。**
 
-**診斷順序：** `list_models` 回 401 → 檢查 `echo $AITK_API_KEY` 有沒有值 →
+**診斷順序：** `list_models` 回 401 → 檢查 `echo $AITOKENKING_API_KEY` 有沒有值 →
 有值但仍 401 → 用 `curl` 直接打 HTTP API 測同一把 key。
 **兩個 client 結果不同，就證明問題在環境變數不在金鑰。**
 
@@ -163,13 +169,17 @@ Media House 集群的預設選型（**寫在這裡是為了讓你有起點，不
 ## §5 · 換掉 AI Token King（本集群不綁定供應商）
 
 ```bash
-export AITK_BASE_URL='https://<你的 OpenAI 相容端點>/v1'
-export AITK_API_KEY='<該端點的 key>'
+export AITOKENKING_BASE_URL='https://<你的 OpenAI 相容端點>/v1'
+export AITOKENKING_API_KEY='<該端點的 key>'
 ```
 
-所有 skill 的流程完全不變。**會失去的只有兩件事**，講清楚讓你自己判斷：
+**方法論完全不變，但能力缺一項就降級一步。** 逐項對照見 `providers/aitokenking.yaml`
+的 `degradation` 區塊；替代 provider 樣板見 `providers/openai-compatible.yaml`
+（capabilities 預設 `unknown` 不是 `true`——**預設 true 等於替你的 provider 作保，而我方沒量測過任何一家**）。
+
+除了能力之外還有兩件會失去的事：
 ① 一把 key 打多家模型——L2 的互審會退化成要管兩套金鑰，而管兩套金鑰的流程沒有人維持得超過兩週；
-② `get_balance`／`list_usage` 的統一對帳。
+② `get_balance`／`list_usage` 的統一對帳，本集群的成本紀律建立在它上面。
 
 ---
 

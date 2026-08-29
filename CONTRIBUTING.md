@@ -29,12 +29,12 @@
 
 ```bash
 # 1. 從模板開始
-mkdir -p .claude/skills/<your-skill>
-cp templates/SKILL.template.md .claude/skills/<your-skill>/SKILL.md
+mkdir -p skills/<your-skill>
+cp templates/SKILL.template.md skills/<your-skill>/SKILL.md
 
 # 2. 寫。骨架與各段落的作用見 ARCHITECTURE.md §5
 # 3. 檢核（回 0 才算做完）
-python3 scripts/validate_skill.py .claude/skills/<your-skill>/SKILL.md
+python3 scripts/validate_skill.py skills/<your-skill>/SKILL.md
 ```
 
 **四個一定會被 review 退回的問題：**
@@ -94,7 +94,7 @@ python3 scripts/validate_skill.py .claude/skills/<your-skill>/SKILL.md
 ## 檢核與 CI
 
 ```bash
-python3 scripts/test_validate.py        # 先跑：檢核器自己的 14 項回歸測試
+python3 scripts/test_validate.py        # 先跑：檢核器自己的回歸測試（CI 會印出 n/n）
 python3 scripts/validate_skill.py --all # 再跑：三嵌入點檢核
 ```
 

@@ -1,4 +1,5 @@
 {
+  "_comment": "本 repo 內開發用。skills/ 已是 plugin canonical 位置，安裝者由 .claude-plugin/plugin.json 載入，不需要這個檔案。",
   "enabledMcpjsonServers": ["aitokenking"],
   "permissions": {
     "allow": [

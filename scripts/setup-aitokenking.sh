@@ -8,7 +8,7 @@
 # ★ 為什麼一定要兩件一起放：只放 server 是搬了一半 —— 新專案會有 MCP，
 #   但那 9 支不扣額度的唯讀工具每次都要人工核准，等於把麻煩換了個地方。
 #
-# ★ 金鑰不入設定檔。 這裡寫的是 ${AITK_API_KEY} 這個「參照」，
+# ★ 金鑰不入設定檔。 這裡寫的是 ${AITOKENKING_API_KEY} 這個「參照」，
 #   金鑰本身只存在 shell 環境（~/.zshrc 或 ~/.bashrc 的 export）。
 #   本腳本不接受、不寫入、不回顯金鑰值。
 #
@@ -46,15 +46,15 @@ echo "  文件     : https://www.aitokenking.com.tw/assets/docs/zh/index.html#mc
 echo "  模式     : $([[ $DRY_RUN == 1 ]] && echo 乾跑 || echo 寫入)"
 echo
 
-if [[ -z "${AITK_API_KEY:-}" ]]; then
-  echo "⚠️  目前 shell 沒有 AITK_API_KEY。設定檔仍會寫入（它存的是參照不是金鑰），"
+if [[ -z "${AITOKENKING_API_KEY:-}" ]]; then
+  echo "⚠️  目前 shell 沒有 AITOKENKING_API_KEY。設定檔仍會寫入（它存的是參照不是金鑰），"
   echo "    但在 export 之前每次呼叫都會回 401。"
   echo
   echo "    到 https://www.aitokenking.com.tw/ 註冊取得 key，然後："
-  echo "      echo \"export AITK_API_KEY='<你的 key>'\" >> ~/.zshrc && source ~/.zshrc"
+  echo "      echo \"export AITOKENKING_API_KEY='<你的 key>'\" >> ~/.zshrc && source ~/.zshrc"
   echo
   echo "    ⚠️ 寫進 .env 而沒有 export 是最常見的 401 原因 ——"
-  echo "       \${AITK_API_KEY} 讀的是 process 環境變數，不是 .env 檔。"
+  echo "       \${AITOKENKING_API_KEY} 讀的是 process 環境變數，不是 .env 檔。"
   echo
 fi
 
@@ -100,7 +100,7 @@ cfg.setdefault("mcpServers", {})["aitokenking"] = {
     "type": "http",
     "url": url,
     # ★ 存的是參照不是金鑰
-    "headers": {"X-AItokenKing-Api-Key": "${AITK_API_KEY}"},
+    "headers": {"X-Aitokenking-Api-Key": "${AITOKENKING_API_KEY}"},
 }
 print("① mcpServers.aitokenking")
 save(path, cfg)

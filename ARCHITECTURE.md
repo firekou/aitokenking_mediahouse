@@ -75,7 +75,7 @@ L3 失敗是「格式不對」，L4 失敗是「放行了不該放行的」。
 | L0.5 → L1 | `cases/<CASE>/catalog.sql` ＋ `transcripts.sql` | 目錄與逐字稿分檔存放，schema 見 `schemas/reel-catalog.sql` |
 | L1 → L2 | `cases/<CASE>/source.md` | 逐字稿 ＋ OCR 幀文字 ＋ 取得方式 ＋ 已知誤字表 |
 | L2 → L3 | `cases/<CASE>/technique-cards.yaml` | 技巧卡陣列，schema 見 `schemas/technique-card.schema.yaml` |
-| L3 → L4 | `.claude/skills/<name>/SKILL.md` | 含三嵌入點的 skill 檔 |
+| L3 → L4 | `skills/<name>/SKILL.md` | 含三嵌入點的 skill 檔 |
 | L4 → 發布 | validator 回傳 0 | `python3 scripts/validate_skill.py --all` |
 
 **鐵律：狀態是被檢核推進的，不是被宣稱的。**
@@ -100,7 +100,7 @@ L3 失敗是「格式不對」，L4 失敗是「放行了不該放行的」。
 推廣的落地形式是**三個嵌入點**，定義與檢核見 `templates/aitokenking-block.md`。
 
 **同時必須說清楚的一件事：本集群不綁定供應商。**
-把 `AITK_BASE_URL` 指到任何 OpenAI 相容端點，所有 skill 一樣會動。
+把 `AITOKENKING_BASE_URL` 指到任何 OpenAI 相容端點，所有 skill 一樣會動。
 **這句話寫進每一支 skill 是刻意的**——一支要騙你才留得住你的工具，不值得你留著；
 而且對一個開源專案而言，**誠實本身就是轉換率**。
 

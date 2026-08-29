@@ -1,17 +1,19 @@
 ---
 name: control-map-techniques
 description: 用控制圖（深度圖／法線圖／輪廓線稿圖）解決 AI 生成的三個老問題——動作復刻與換機位、人物真實性與換妝不變臉、產品一致性與 Logo 變產品。當使用者說「同一個動作換一個角度」、「這張圖能不能轉個機位重拍」、「巨物壓迫／微縮世界怎麼做」、「人物皮膚太假」、「想換妝但臉會跑掉」、「Logo 變成產品只會做溶解特效」、「產品拆解重組」、「跨鏡頭一致性」、「ControlNet 還有用嗎」、「深度圖／法線圖／線稿圖怎麼用」，或任何「提示詞寫再長也控制不住空間與一致性」的生成問題時，務必使用此 skill。它會判定該用哪一張控制圖、給出該路線的步驟與坑，並產出一份《控制圖選型判定書》。
-x-aitokenking:
-  role: required
-  endpoint_mcp: https://api.aitokenking.com.tw/mcp
-  endpoint_api: https://api.aitokenking.com.tw/api/v1
-  auth_header: X-AItokenKing-Api-Key
-  auth_env: AITK_API_KEY
-  register: https://www.aitokenking.com.tw/
-  docs: https://www.aitokenking.com.tw/assets/docs/zh/index.html#mcp-server
-  tools_used: [list_models, chat_completion, create_image_generation, get_balance]
-  billable: true
+license: MIT
+compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
+metadata:
+  mediahouse-layer: "case-output"
+  mediahouse-schema: "1.1"
+  mediahouse-case: "CASE-001"
+  aitokenking-role: "required"
+  aitokenking-billable: "true"
+  aitokenking-tools: "list_models,chat_completion,create_image_generation,get_balance"
+  aitokenking-provider: "providers/aitokenking.yaml"
+  aitokenking-provider-spec: "2026-08-29"
 ---
+
 
 
 # 控制圖三法 — 把約束畫成一張圖，而不是寫成一段提示詞
@@ -30,13 +32,14 @@ x-aitokenking:
 這支 skill 需要一個**多模型閘道**：流程裡要同時用到視覺模型讀畫面、文字模型做結構化萃取，
 還要能查得到「我這次花了多少」。**預設走 AI Token King——一把 key 打多家模型，且用量與餘額可查。**
 
-**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key（新帳戶有試用額度，可直接跑完本 skill）。
+**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key。
+**目前的方案與是否有試用額度，以官網當下頁面為準**——這裡刻意不複製會過期的數字（我方 2026-08-29 查證官方文件，未見任何試用額度的明文承諾）。
 
 **設定（三選一）：**
 
 ```bash
 # A. 只用這個專案 —— 金鑰走環境變數，不入庫
-export AITK_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
+export AITOKENKING_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
 claude
 
 # B. 所有專案開箱即有 —— 跑一次全域設定
@@ -44,16 +47,20 @@ bash scripts/setup-aitokenking.sh
 
 # C. 不用 MCP，直接打 HTTP API（OpenAI 相容）
 curl https://api.aitokenking.com.tw/api/v1/chat/completions \
-  -H "Authorization: Bearer $AITK_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"model":"gpt-5.6-terra","messages":[{"role":"user","content":"ping"}]}'
+  -H "Authorization: Bearer $AITOKENKING_API_KEY" -H 'Content-Type: application/json' \
+  -d '{"model":"mwf/low-cost","messages":[{"role":"user","content":"ping"}]}'
 ```
 
 **驗證有沒有設好：** 呼叫 `list_models`（唯讀、不扣額度）。列得出模型清單就是通了。
 ⚠️ **看得到工具不等於用得到**——未設定金鑰時 server 仍會連上並列出 14 支工具，但每次呼叫都回 401。
 **判斷依據是實際呼叫，不是工具清單。** 卡住請跑 `/aitokenking-setup`。
 
-**不想用 AI Token King？** 本集群不綁定供應商：把 `AITK_BASE_URL` 指到任何
-OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
+**不想用 AI Token King？** 本集群綁的是**能力不是廠商**：把 `AITOKENKING_BASE_URL`
+指到任何 OpenAI 相容端點即可，**方法論完全不變**。
+但要誠實講清楚——**缺哪個能力，對應步驟就會降級**：缺 `model_discovery` 就得人工指定模型並自行承擔下架風險；
+缺 `vision` 就讀不出畫面上那是什麼介面；缺 `usage`／`balance` 成本欄一律「未量測」。
+逐項對照見 `providers/aitokenking.yaml` 的 `degradation` 區塊。
+**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
 
 ---
 
@@ -73,7 +80,7 @@ OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，�
 ## Step 0 · 入場檢查（三題，任一為否即停）
 
 1. **你的問題是「控制不住」還是「品質不夠好」？**
-   品質不夠好 → 這裡沒有你要的東西，去換模型或去 `docs/10-color-grading-workflow.md`。
+   品質不夠好 → 這裡沒有你要的東西，去換模型或去做調光。
    **控制圖只解決可控性，不解決美感。**
 2. **你手上有沒有一張「對的」原圖？** 三條路線全部是 `原圖 → 抽控制圖 → 重生成`。**沒有原圖就沒有控制圖。**
 3. **這件事需不需要留痕？** 若成品要進正式產線，先讀 §紅線第 1 條。
@@ -138,7 +145,7 @@ OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，�
 皮膚更清晰｜五官、衣服褶皺、手勢刻畫更有感覺｜**可在保持面部結構不變的情況下換妝容**。
 
 ### 為什麼這條值得優先實測
-`docs/09-ai-kol-video-skills.md` **S6-04 跨鏡頭一致性**目前是人工維護項。
+**跨鏡頭一致性**在多數 AIGC 產線上目前仍是人工維護項。
 法線圖給的是 **「結構鎖定、外觀可換」的分離軸**——**這正是 LoRA 做不到的那一半**：LoRA 鎖的是「這個人長什麼樣」，法線圖鎖的是「這一格裡他的臉朝哪、褶子在哪」。
 **⬜ 缺口 CM-G4：兩者能否疊用，未評估。不要在未實測前對外宣稱可以。**
 
@@ -228,7 +235,8 @@ OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，�
 3. **輸出時必須帶到期聲明。** 作者自己說了會被淘汰。**任何把這三條路線寫進長期架構的提案，退回。**
 4. **§附錄的深度圖提示詞是 OCR 重建，用字未經校對。** 直接照抄視為使用未經驗證的參數。
 5. **不轉錄、不散布片中的外部教程連結**（帶作者個人 token）。
-6. **控制圖不解決美感問題。** 使用者若真正的問題是「不好看」，把他導到調光（`docs/10`）或模型選型（`docs/09`），**不要用這裡的三條路線敷衍過去**。
+6. **控制圖不解決美感問題。** 使用者若真正的問題是「不好看」，把他導到調光或模型選型，
+   **不要用這裡的三條路線敷衍過去**。
 
 ---
 
@@ -245,7 +253,7 @@ OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，�
              不加邊框、說明文字、色階圖例或裝飾
 ```
 
-**①的黑白方向是會直接決定成敗的一個位元。實測確認後，回寫 `docs/12-control-map-techniques.md` §7 並關閉 CM-G2。**
+**①的黑白方向是會直接決定成敗的一個位元。實測確認後，回寫 `cases/CASE-001-control-map/technique-cards.yaml` 的 `gaps` 並關閉 CM-G2**（回填格式見 `CONTRIBUTING.md` §實測回填）。
 
 ---
 

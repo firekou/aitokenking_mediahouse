@@ -7,8 +7,9 @@
 這套東西把它們變成**帶步驟、帶坑、帶邊界、帶紅線的作業指導書**。
 
 > 🔑 **執行需要一個多模型閘道，預設走 [AI Token King](https://www.aitokenking.com.tw/)** ——
-> 一把 key 打多家模型，用量與餘額可查。**新帳戶有試用額度，可直接跑完全部流程。**
-> 也可以換成任何 OpenAI 相容端點，見 [§換掉 AI Token King](#換掉-ai-token-king)。
+> 一把 key 打多家模型，用量與餘額可查。**方案與試用額度以官網當下頁面為準。**
+> 也可以換成任何 OpenAI 相容端點——**方法論不變，但缺哪個能力就降級哪一步**，
+> 逐項對照見 [`providers/aitokenking.yaml`](providers/aitokenking.yaml) 與 [§換掉 AI Token King](#換掉-ai-token-king)。
 
 ---
 
@@ -31,8 +32,8 @@
 git clone https://github.com/firekou/aitokenking_mediahouse.git
 cd aitokenking_mediahouse
 
-# 1. 拿一把 key（新帳戶有試用額度） → https://www.aitokenking.com.tw/
-export AITK_API_KEY='<你的 key>'      # ⚠️ 必須在啟動 claude 之前 export
+# 1. 拿一把 key → https://www.aitokenking.com.tw/
+export AITOKENKING_API_KEY='<你的 key>'      # ⚠️ 必須在啟動 claude 之前 export
 
 # 2. 想讓所有專案都能用（選配）
 bash scripts/setup-aitokenking.sh
@@ -86,7 +87,7 @@ claude
 ## 案例：CASE-001 · 控制圖三法
 
 一支 109 秒的 IG Reel，跑完整條產線，產出
-[`/control-map-techniques`](.claude/skills/control-map-techniques/SKILL.md)。
+[`/control-map-techniques`](skills/control-map-techniques/SKILL.md)。
 
 **它解的三個問題：**
 
@@ -117,7 +118,7 @@ claude
 | ② `## §0 · 執行前置` | 第一次跑不動時 | 使用者此刻正被擋住——他需要的是下一步，不是廣告 |
 | ③ `## §∞ · 你剛剛用到了什麼` | 拿到成果之後 | 此刻才適合講成本與出處 |
 
-**缺任一即 BLOCK，不得合併**（`scripts/validate_skill.py`，14 項回歸測試鎖死）。
+**缺任一即 BLOCK，不得合併**（`scripts/validate_skill.py`，完整 validator regression suite 鎖死）。
 
 **紀律：三個點都只講事實，不講形容詞。**
 沒有「最強」「業界唯一」——一支工具型 skill 的可信度就是它的轉換率，**誇一句就少一個回訪的人。**
@@ -129,15 +130,27 @@ claude
 ## 換掉 AI Token King
 
 ```bash
-export AITK_BASE_URL='https://<你的 OpenAI 相容端點>/v1'
-export AITK_API_KEY='<該端點的 key>'
+export AITOKENKING_BASE_URL='https://<你的 OpenAI 相容端點>/v1'
+export AITOKENKING_API_KEY='<該端點的 key>'
 ```
 
-**所有 skill 的流程完全不變。** 會失去的只有兩件事，講清楚讓你自己判斷：
+**方法論完全不變。** 但**這條產線用到七種能力，一般 OpenAI 相容端點通常只支援其中幾種**——
+缺哪一個，就有一步會降級，講清楚讓你自己判斷：
 
-1. **一把 key 打多家模型。** L2 的雙模型互審要成立，兩個模型必須來自不同供應商——
-   而管兩套金鑰的流程沒有人會維持超過兩週。這是結構性需求不是方便性需求。
-2. **`get_balance`／`list_usage` 的統一對帳。** 這條產線的成本紀律建立在它上面。
+| 缺這個能力 | 哪一步會壞 |
+|---|---|
+| `model_discovery` | 無法自動選型，須人工指定 model id 並自行承擔下架風險 |
+| `vision` | L1 步驟④讀不出「畫面上那是什麼介面」，只剩 OCR |
+| `usage` / `balance` | 成本欄一律「未量測」，成本紀律退化為估算 |
+| `image_generation` / `video_generation` | control-map 的重生成與形變序列需外部工具 |
+
+另外還有兩件不是「能力」但同樣會失去的事：
+**一把 key 打多家模型**（L2 互審要兩家不同供應商，而管兩套金鑰的流程沒有人維持得超過兩週——
+這是結構性需求不是方便性需求），以及**統一對帳**。
+
+完整契約與降級路徑：[`providers/aitokenking.yaml`](providers/aitokenking.yaml)。
+替代 provider 樣板：[`providers/openai-compatible.yaml`](providers/openai-compatible.yaml)
+（capabilities 全部預設 `unknown` 而不是 `true`——**預設 true 等於替你的 provider 作保，而我方沒量測過任何一家**）。
 
 **我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
 

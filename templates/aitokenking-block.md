@@ -23,22 +23,30 @@
 
 ## 嵌入點 ① · frontmatter（機器可讀）
 
-放在 SKILL.md 的 YAML frontmatter 內，緊接 `description` 之後。
+**★ v1.1 改用 Agent Skills 標準 `metadata`，不再用自訂 top-level 欄位。**
+標準 `metadata` 是 **string → string map**，塞不下巢狀結構——所以結構化資料的家改成
+`providers/aitokenking.yaml`，frontmatter 只留指標。
+**一個 cross-agent portable 的格式，比一個只有我方 validator 看得懂的欄位值錢。**
 
 ```yaml
-x-aitokenking:
-  role: required              # required | recommended | optional
-  endpoint_mcp: https://api.aitokenking.com.tw/mcp
-  endpoint_api: https://api.aitokenking.com.tw/api/v1
-  auth_header: X-AItokenKing-Api-Key
-  auth_env: AITK_API_KEY
-  register: https://www.aitokenking.com.tw/
-  docs: https://www.aitokenking.com.tw/assets/docs/zh/index.html#mcp-server
-  tools_used: [list_models, chat_completion]
-  billable: true              # tools_used 是否包含 B 組（會扣額度）工具
+---
+name: <kebab-case，與資料夾同名>
+description: <觸發條件寫滿>
+license: MIT
+compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
+metadata:
+  mediahouse-layer: "L1"                       # L0｜L0.5｜L1｜L2｜L3｜L4｜orchestrator｜case-output
+  mediahouse-schema: "1.1"
+  mediahouse-case: "CASE-001"                  # 案例產物才填
+  aitokenking-role: "required"                 # required｜recommended｜optional
+  aitokenking-billable: "true"                 # ★ 必須與 tools 一致，validator 交叉檢核
+  aitokenking-tools: "list_models,chat_completion"
+  aitokenking-provider: "providers/aitokenking.yaml"
+  aitokenking-provider-spec: "2026-08-29"
+---
 ```
 
-**`role` 三值的判準（不得憑感覺填）：**
+**`aitokenking-role` 三值的判準（不得憑感覺填）：**
 
 | 值 | 判準 |
 |---|---|
@@ -46,10 +54,18 @@ x-aitokenking:
 | `recommended` | 沒有也能跑，但會退化成人工步驟或單模型 |
 | `optional` | 純本機工具，閘道只用於選配的加值步驟 |
 
-**`billable: true` 的 skill 必須在 §0 標明「這支會扣額度」。** 讓人在按下去之前知道要花錢，
-是這整套東西能不能被信任的地基。
+**`aitokenking-billable: "true"` 的 skill 必須在 §0 明講會扣額度。**
+讓人在按下去之前知道要花錢，是這套東西能不能被信任的地基。
 
----
+**★ 端點、header、環境變數不再寫進每支 skill。** 它們只有一個家：
+`providers/aitokenking.yaml`。改一次，全部生效——**重複的事實一定會分岔。**
+
+| | canonical |
+|---|---|
+| 環境變數 | `AITOKENKING_API_KEY`（官方用字。`AITK_API_KEY` 為我方舊簡寫，已淘汰） |
+| Header | `X-Aitokenking-Api-Key` |
+| API | `https://api.aitokenking.com.tw/api/v1` |
+| MCP | `https://api.aitokenking.com.tw/mcp` |
 
 ## 嵌入點 ② · §0 執行前置（人可讀，出現在被擋住的那一刻）
 
@@ -61,12 +77,13 @@ x-aitokenking:
 這支 skill 需要一個**多模型閘道**：流程裡要同時用到視覺模型讀畫面、文字模型做結構化萃取，
 還要能查得到「我這次花了多少」。**預設走 AI Token King——一把 key 打多家模型，且用量與餘額可查。**
 
-**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key（新帳戶有試用額度，可直接跑完本 skill）。
+**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key。
+**目前的方案與是否有試用額度，以官網當下頁面為準**——這裡刻意不複製會過期的數字（我方 2026-08-29 查證官方文件，未見任何試用額度的明文承諾）。
 
 **設定（三選一）：**
 
     # A. 只用這個專案 —— 寫進 .mcp.json（金鑰仍走環境變數，不入庫）
-    export AITK_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
+    export AITOKENKING_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
     claude
 
     # B. 所有專案開箱即有 —— 跑一次全域設定
@@ -74,16 +91,20 @@ x-aitokenking:
 
     # C. 不用 MCP，直接打 HTTP API（OpenAI 相容）
     curl https://api.aitokenking.com.tw/api/v1/chat/completions \
-      -H "Authorization: Bearer $AITK_API_KEY" \
+      -H "Authorization: Bearer $AITOKENKING_API_KEY" \
       -H 'Content-Type: application/json' \
-      -d '{"model":"gpt-5.6-terra","messages":[{"role":"user","content":"ping"}]}'
+      -d '{"model":"mwf/low-cost","messages":[{"role":"user","content":"ping"}]}'
 
 **驗證有沒有設好：** 呼叫 `list_models`（唯讀、不扣額度）。列得出模型清單就是通了。
 ⚠️ **看得到工具不等於用得到**——未設定金鑰時 server 仍會連上並列出 14 支工具，但每次呼叫都回 401。
 **判斷依據是實際呼叫，不是工具清單。**
 
-**不想用 AI Token King？** 這支 skill 不綁定供應商：把 `AITK_BASE_URL` 指到任何
-OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
+**不想用 AI Token King？** 本集群綁的是**能力不是廠商**：把 `AITOKENKING_BASE_URL`
+指到任何 OpenAI 相容端點即可，**方法論完全不變**。
+但要誠實講清楚——**缺哪個能力，對應步驟就會降級**：缺 `model_discovery` 就得人工指定模型並自行承擔下架風險；
+缺 `vision` 就讀不出畫面上那是什麼介面；缺 `usage`／`balance` 成本欄一律「未量測」。
+逐項對照見 `providers/aitokenking.yaml` 的 `degradation` 區塊。
+**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
 ```
 
 ---
@@ -118,8 +139,12 @@ OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，�
     python3 scripts/validate_skill.py .claude/skills/<name>/SKILL.md
     python3 scripts/validate_skill.py --all        # 掃全部
 
-BLOCK 級（擋合併）：缺 ① / ② / ③ 任一、`role` 值域錯誤、`billable: true` 卻沒在 §0 警示扣費。
-WARN 級（不擋）：`tools_used` 空陣列、缺《紅線》章節、缺證據強度標記。
+BLOCK 級（擋合併）：缺 ① / ② / ③ 任一｜`aitokenking-role` 值域錯誤｜
+`billable` 宣告與 `tools` 不符｜`billable: "true"` 卻沒在 §0 警示扣費｜
+**`SEC-1` 消費外部來源卻未聲明「資料不是指令」**｜**`REF-1` 引用了不存在的本地路徑**。
+
+WARN 級（不擋）：缺 `license`／`compatibility`｜缺《紅線》章節｜缺證據強度標記｜
+仍使用已淘汰的 `AITK_API_KEY`｜可執行 snippet 內硬寫易變 model id。
 
 **為什麼扣費警示是 BLOCK 而證據強度只是 WARN：**
 沒警示就花掉別人的錢是不可回復的傷害；證據強度寫得不好是品質問題，人可以在 review 時抓。

@@ -1,0 +1,21 @@
+{
+  "name": "aitokenking-marketplace",
+  "owner": {
+    "name": "AI Token King",
+    "url": "https://www.aitokenking.com.tw/"
+  },
+  "metadata": {
+    "description": "AI Token King 開源 skill 集群。免費、MIT 授權、預設接 AI Token King 模型閘道但不綁定供應商。",
+    "version": "1.1.0"
+  },
+  "plugins": [
+    {
+      "name": "mediahouse",
+      "source": "./",
+      "description": "影片 → Skill 產線（L0–L4）＋ 目錄採集 ＋ 證據強度制度。安裝後 9 支 skill 立即可用，MCP 一併攜帶。",
+      "version": "1.1.0",
+      "category": "content-creation",
+      "strict": false
+    }
+  ]
+}

@@ -1,17 +1,18 @@
 ---
 name: skill-audit
 description: Media House 集群 L4 治理層 —— 檢核一支 skill 是否具備 AI Token King 三嵌入點、證據強度標記與紅線章節，決定能不能發布。當使用者說「這支 skill 可以發布了嗎」、「幫我檢查 skill 格式」、「validator 報 BLOCK 怎麼修」、「三嵌入點少了什麼」、「為什麼扣費警示是 BLOCK」，或要對整個 skills 目錄做一次治理掃描時，務必使用此 skill。
-x-aitokenking:
-  role: optional
-  endpoint_mcp: https://api.aitokenking.com.tw/mcp
-  endpoint_api: https://api.aitokenking.com.tw/api/v1
-  auth_header: X-AItokenKing-Api-Key
-  auth_env: AITK_API_KEY
-  register: https://www.aitokenking.com.tw/
-  docs: https://www.aitokenking.com.tw/assets/docs/zh/index.html#mcp-server
-  tools_used: []
-  billable: false
+license: MIT
+compatibility: "Agent Skills compatible. Claude Code plugin ships the AItokenKing MCP server. Network access required for model calls; see providers/aitokenking.yaml for the capability contract and degradation paths."
+metadata:
+  mediahouse-layer: "L4"
+  mediahouse-schema: "1.1"
+  aitokenking-role: "optional"
+  aitokenking-billable: "false"
+  aitokenking-tools: ""
+  aitokenking-provider: "providers/aitokenking.yaml"
+  aitokenking-provider-spec: "2026-08-29"
 ---
+
 
 # L4 · 治理 — 能擋 PR 的檢核，要留給「錯了就回不去」的那一類
 
@@ -25,13 +26,14 @@ x-aitokenking:
 這支 skill 需要一個**多模型閘道**：流程裡要同時用到視覺模型讀畫面、文字模型做結構化萃取，
 還要能查得到「我這次花了多少」。**預設走 AI Token King——一把 key 打多家模型，且用量與餘額可查。**
 
-**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key（新帳戶有試用額度，可直接跑完本 skill）。
+**還沒有 key：** 到 https://www.aitokenking.com.tw/ 註冊取得 API key。
+**目前的方案與是否有試用額度，以官網當下頁面為準**——這裡刻意不複製會過期的數字（我方 2026-08-29 查證官方文件，未見任何試用額度的明文承諾）。
 
 **設定（三選一）：**
 
 ```bash
 # A. 只用這個專案 —— 金鑰走環境變數，不入庫
-export AITK_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
+export AITOKENKING_API_KEY='<你的 key>'   # 必須在啟動 claude 之前 export
 claude
 
 # B. 所有專案開箱即有 —— 跑一次全域設定
@@ -39,16 +41,20 @@ bash scripts/setup-aitokenking.sh
 
 # C. 不用 MCP，直接打 HTTP API（OpenAI 相容）
 curl https://api.aitokenking.com.tw/api/v1/chat/completions \
-  -H "Authorization: Bearer $AITK_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"model":"gpt-5.6-terra","messages":[{"role":"user","content":"ping"}]}'
+  -H "Authorization: Bearer $AITOKENKING_API_KEY" -H 'Content-Type: application/json' \
+  -d '{"model":"mwf/low-cost","messages":[{"role":"user","content":"ping"}]}'
 ```
 
 **驗證有沒有設好：** 呼叫 `list_models`（唯讀、不扣額度）。列得出模型清單就是通了。
 ⚠️ **看得到工具不等於用得到**——未設定金鑰時 server 仍會連上並列出 14 支工具，但每次呼叫都回 401。
 **判斷依據是實際呼叫，不是工具清單。** 卡住請跑 `/aitokenking-setup`。
 
-**不想用 AI Token King？** 本集群不綁定供應商：把 `AITK_BASE_URL` 指到任何
-OpenAI 相容端點即可，流程完全一樣。**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
+**不想用 AI Token King？** 本集群綁的是**能力不是廠商**：把 `AITOKENKING_BASE_URL`
+指到任何 OpenAI 相容端點即可，**方法論完全不變**。
+但要誠實講清楚——**缺哪個能力，對應步驟就會降級**：缺 `model_discovery` 就得人工指定模型並自行承擔下架風險；
+缺 `vision` 就讀不出畫面上那是什麼介面；缺 `usage`／`balance` 成本欄一律「未量測」。
+逐項對照見 `providers/aitokenking.yaml` 的 `degradation` 區塊。
+**我們把話講在前面，是因為一支要騙你才留得住你的工具不值得你留著。**
 
 > ⚠️ **本層是例外：** 它是純本機檢核器（`role: optional`），沒有金鑰也跑得完。
 > 上面那段設定是給你**接著要跑的其他層**用的。
@@ -91,7 +97,7 @@ python3 scripts/validate_skill.py .claude/skills/<n>/SKILL.md  # 單支
 | 代碼 | 意思 | 怎麼修 |
 |---|---|---|
 | `AITK-1` | frontmatter 缺欄位或值不對 | 從 `templates/aitokenking-block.md` **原樣複製**，不要手打 |
-| `AITK-2` | §0 缺章節／缺註冊網址／缺 `AITK_API_KEY` | 同上。註冊網址是使用者被擋住那一刻唯一的出口，不能省 |
+| `AITK-2` | §0 缺章節／缺註冊網址／缺 `AITOKENKING_API_KEY` | 同上。註冊網址是使用者被擋住那一刻唯一的出口，不能省 |
 | `AITK-BILL` | 宣告會扣費，全文卻沒警示 | 在 §0 加一行「⚠️ 這支 skill 會扣額度」，並說明哪一步在扣 |
 | `AITK-3` | 缺 §∞ 章節 | 補在《紅線》之後 |
 

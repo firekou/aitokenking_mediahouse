@@ -78,7 +78,7 @@ claude
 
 ---
 
-## 十一支 skill ＋ 73 支草稿
+## 80 支 skill（草稿已全部清空）
 
 | Skill | 層 | 做什麼 | 扣額度？ |
 |---|---|---|---|
@@ -99,10 +99,24 @@ claude
 | `/aitokenking-model-picker` | 先 `list_models` 再答，給 2–3 個候選與取捨。**永遠不憑記憶寫 model id** |
 | `/aitokenking-cost-audit` | 這次／這個月花了多少、花在哪、哪裡可以省。**查不到就寫「未量測」不寫 0** |
 
-**另有 73 支自動產生的草稿**在 [`drafts/skills/`](drafts/skills/)——
-由規則從 129 支 IG Reel 的逐字稿萃取，`status: draft`、`verification: V0`。
-**它們不在 `skills/` 是刻意的**：實測證明逐字稿在專有名詞與否定詞上系統性不可靠，
-**晉升是人的動作，不是腳本的動作**。
+**另有 69 支影片產物 skill**，來自 CASE-002（`hedge.sphere.ai` 帳號 129 支 IG Reel）。
+**規則萃取的 73 支草稿現已全部清空——但不是被腳本晉升的，是被人逐支重寫的：**
+每一支都經過人工重讀逐字稿、改寫步驟、補上作者沒講的邊界、標出 ASR 誤聽。
+`drafts/skills/` 現在是空的，而**空的理由必須講清楚**——
+草稿目錄空著代表「這批做完了」，不代表「以後不會再有草稿」。
+
+**73 → 69 的差額是四筆，其中三筆是人工判定**（全部留痕於
+[`human-review-log.md`](cases/CASE-002-hedge-sphere-catalog/human-review-log.md)）：
+FP-1 一支業配廣告被誤判為技巧片（規則數得出動作句，數不出動作屬於誰）、
+DUP-1 與 DUP-2 兩組重複（一組同主題、一組是同一支影片的二次上傳）。
+**三筆都只有人讀才抓得到。**
+
+第四筆不是判定，是一個對帳時才發現的事實：**`Dbk0zAzD5Pj` 同時出現在兩個案例裡。**
+它是 CASE-001 那支單獨處理的影片，也在 CASE-002 的 129 支裡——
+因為**我們後來全量採集的帳號，就是當初那支影片所屬的帳號**。
+它已經以 `/control-map-techniques` 發布，不重做。
+**這件事寫出來是因為它會影響數字對不對得起來**：
+`skills/` 的 80 支 ＝ CASE-002 的 69 ＋ CASE-001 的 1 ＋ 產線與工具 10 支。
 
 管理介面：**https://skill-dashboard-production.up.railway.app** （[`skill-dashboard/`](skill-dashboard/)，無資料庫無登入）
 ｜清單：[`registry/skills.json`](registry/skills.json)（產物，`scripts/build_registry.py` 產生）

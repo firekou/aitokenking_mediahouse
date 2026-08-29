@@ -60,6 +60,23 @@ def _():
     assert not bad, f"草稿階段不執行任何東西，role 應為 optional：{bad[:5]}"
 
 
+@t("★ 已晉升的來源不得同時留在 drafts/ —— 晉升是搬移不是複製")
+def _():
+    import re
+    def srcs(base):
+        out = {}
+        for q in pathlib.Path(base).glob("*/SKILL.md"):
+            m = re.search(r'mediahouse-source-shortcode:\s*"([^"]+)"', q.read_text(encoding="utf-8"))
+            if m:
+                out[m.group(1)] = q.parent.name
+        return out
+    pub, dft = srcs(ROOT / "skills"), srcs(ROOT / "drafts" / "skills")
+    dup = set(pub) & set(dft)
+    assert not dup, (
+        f"同一支影片同時有正式 skill 與草稿：{ {k: (pub[k], dft[k]) for k in dup} }。"
+        "晉升是搬移不是複製 —— 留著的那份草稿會被下一個人重做一次")
+
+
 @t("每支 skill 都指得回 provider capsule")
 def _():
     for p in list((ROOT / "skills").glob("*/")) + list((ROOT / "drafts" / "skills").glob("*/")):

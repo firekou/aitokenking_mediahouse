@@ -33,6 +33,7 @@
         ┌───────────────────────▼──────────────────────┐
   L0.5  │  catalog-harvest       目錄層（經 Apify）      │
         │  創作者帳號 → 全部短影音的網址／文案／逐字稿    │
+        │  ★ canonical 實作：scripts/ig_harvest.py（Apify）│
         │  ★ 回答「有哪些片可以做」，L1 只處理「這一支」  │
         └───────────────────────┬──────────────────────┘
                                 │
@@ -72,7 +73,7 @@ L3 失敗是「格式不對」，L4 失敗是「放行了不該放行的」。
 
 | 交接點 | 產物 | 格式 |
 |---|---|---|
-| L0.5 → L1 | `cases/<CASE>/catalog.sql` ＋ `transcripts.sql` | 目錄與逐字稿分檔存放，schema 見 `schemas/reel-catalog.sql` |
+| L0.5 → L1 | `cases/<CASE>/catalog.sql`（可公開，含 sha256）＋ `raw-transcripts.json`／`transcripts.sql`（不進 git） | 目錄與逐字稿分檔存放，schema 見 `schemas/reel-catalog.sql` |
 | L1 → L2 | `cases/<CASE>/source.md` | 逐字稿 ＋ OCR 幀文字 ＋ 取得方式 ＋ 已知誤字表 |
 | L2 → L3 | `cases/<CASE>/technique-cards.yaml` | 技巧卡陣列，schema 見 `schemas/technique-card.schema.yaml` |
 | L3 → L4 | `skills/<name>/SKILL.md` | 含三嵌入點的 skill 檔 |

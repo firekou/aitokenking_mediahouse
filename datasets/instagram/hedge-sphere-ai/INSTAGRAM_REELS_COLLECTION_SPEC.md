@@ -1,184 +1,70 @@
-# `hedge.sphere.ai` Instagram Reels Collection Spec
+# `hedge.sphere.ai` Reels 採集規格 —— ⛔ 已由 Apify 路線取代
 
-## 目的
+> **狀態：SUPERSEDED（2026-08-29，Frank 拍板「使用 Apify 的 API」）**
+> **canonical 實作：** [`scripts/ig_harvest.py`](../../../scripts/ig_harvest.py)
+> **canonical 規格：** [`skills/catalog-harvest/SKILL.md`](../../../skills/catalog-harvest/SKILL.md)
+> **canonical schema：** [`schemas/reel-catalog.sql`](../../../schemas/reel-catalog.sql)
+>
+> 原本的 instaloader ＋ 本機 whisper 實作（`scripts/collect_instagram_reels.py`）
+> **已移除**，內容仍可由 git 歷史取回（commit `1d35ae3`）。
 
-建立一份可持續更新、可轉 SQL、可交給 Media House `video-ingest → technique-extract → skill-compile` 的 Instagram Reel 索引。
+---
 
-目標帳號：
+## 為什麼改走 Apify
 
-`https://www.instagram.com/hedge.sphere.ai/`
+不是因為原方案不好，是因為**同一件事有兩份規格，改一次就會分岔一份**——
+而分岔的那一份不會報錯，只會在某個人照著做的時候壞掉。
 
-## 為什麼目前不能直接宣稱「已列完全部」
+兩條路線的實質差異：
 
-Instagram 現在常對未登入的 profile / Reel 自動存取加上登入牆與 rate limit。搜尋引擎也不會完整索引所有 Reels，因此「Google 找到幾支」不能視為完整 inventory。
+| | Apify（採用） | instaloader ＋ 本機 whisper（退役） |
+|---|---|---|
+| 取數 | 第三方平台代取 | 使用者本機**已登入的 IG session** |
+| 逐字稿 | actor 的 `includeTranscript` 加購 | 本機 faster-whisper |
+| 在 CI／遠端可跑 | ✅ | ❌ 需要人在自己機器上、且已登入 |
+| 前置安裝 | 無 | instaloader ＋ ffmpeg ＋ whisper 模型 |
+| 成本 | 逐支計費（129 支含逐字稿實測 US$8.8） | 免費，但要自己的機器與時間 |
 
-完整列舉應在**使用者自己的電腦**，利用已登入 Instagram 的本機 session 執行。不要把 cookie、session file 或密碼上傳到 GitHub 或聊天。
+**決定性的一點：本集群是要給陌生創作者下載使用的。**
+一條需要「先安裝三個套件、再登入自己的 IG、還要有一台跑得動 whisper 的機器」的路徑，
+大多數人會停在第一步。**能被執行的路徑，勝過理論上更好的路徑。**
 
-## 建議流程
+---
 
-### 1. 安裝
+## ★ 這份規格裡被保留下來的東西
 
-```bash
-python3 -m pip install --upgrade instaloader
-```
+退役的是實作，不是想法。以下三項**優於**我方原設計，已併入 `schemas/reel-catalog.sql`：
 
-若要同時掃描語音字幕：
+### 1. `transcript_sha256` / `caption_sha256` —— 存指紋不存內容
 
-```bash
-python3 -m pip install faster-whisper
-brew install ffmpeg
-```
+**這是本規格最好的一個想法。** 它同時解決兩件事：
 
-### 2. 第一次建立 IG session
+- 可以證明「我分析的是**哪一版**逐字稿」——三個月後有人質疑結論，你拿得出對照依據
+- **而且不必把逐字稿本身發布出去**，直接服務 `CONTRIBUTING.md` §來源紀律
 
-```bash
-instaloader --login YOUR_IG_USERNAME
-```
+逐字稿本體留在 `ig_reel_transcript`（不進 git），雜湊留在 `ig_reel`（可公開）。
 
-這一步在本機完成。不要把 session file 傳給任何人。
+### 2. `transcript_excerpt` —— 短節錄（≤120 字）
 
-### 3. 列出全部 Reels
+§來源紀律允許「節錄支撐判定所必需的原話」。有節錄，目錄本身就有最低限度的可讀性，
+不必每次都去翻不在 git 裡的檔案。
 
-```bash
-python3 scripts/collect_instagram_reels.py \
-  --username hedge.sphere.ai \
-  --login-user YOUR_IG_USERNAME
-```
+### 3. `transcript_status` 四態
 
-輸出：
+`ok` ／ `unknown`（我們沒拿到）／ `fail`（這支確實沒有）／ `not_requested`。
 
-`hedge_sphere_reels_manifest.jsonl`
+⚠️ **目前 `fail` 不會被填**——Apify 的回應無法區分「這支沒有語音」與「ASR 失敗」，
+所以一律留在 `unknown`。**寧可留在 unknown，也不要宣稱一件我們分不出來的事。**
 
-### 4. 同時做 ASR 字幕掃描
+---
 
-```bash
-python3 scripts/collect_instagram_reels.py \
-  --username hedge.sphere.ai \
-  --login-user YOUR_IG_USERNAME \
-  --scan-audio \
-  --whisper-model small \
-  --language zh
-```
+## 未採用、但值得記下來的一條
 
-完整 ASR 逐字稿只存到本機：
+原規格建議「完整列舉應在使用者自己的電腦、用已登入的 session 執行」，
+並明確要求不要把 cookie／session file 上傳。**這個安全姿態是對的。**
 
-`.private_instagram_transcripts/`
+我方選擇的是更保守的版本：`catalog-harvest` 的紅線第 1 條寫的是
+**「不接受任何登入憑證、不偽造 session」**——
+把憑證這件事整個移出我們的責任範圍，而不是「小心地處理它」。
 
-**不要把完整第三方逐字稿 commit 到公開 GitHub。**
-
-公開 GitHub / 未來 SQL 建議只保留：
-
-- Reel URL
-- shortcode
-- 發布日期
-- 片長
-- caption 短節錄
-- caption hash
-- 字幕短節錄
-- transcript hash
-- transcript word count
-- 技巧摘要
-- 關鍵詞
-- evidence / verification 狀態
-- local transcript reference（若是私人資料庫）
-- skill extraction status
-
-## SQL-ready 欄位
-
-建議未來主表：
-
-```sql
-CREATE TABLE instagram_reels (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    account TEXT NOT NULL,
-    platform TEXT NOT NULL DEFAULT 'instagram',
-    media_type TEXT NOT NULL DEFAULT 'reel',
-    shortcode TEXT NOT NULL UNIQUE,
-    reel_url TEXT NOT NULL UNIQUE,
-    published_at_utc TEXT,
-    owner_username TEXT,
-    video_duration_seconds REAL,
-    video_view_count INTEGER,
-    likes INTEGER,
-    comments INTEGER,
-
-    caption_excerpt TEXT,
-    caption_sha256 TEXT,
-    caption_char_count INTEGER,
-
-    transcript_status TEXT NOT NULL,
-    transcript_sha256 TEXT,
-    transcript_word_count INTEGER,
-    subtitle_excerpt TEXT,
-
-    subtitle_summary TEXT,
-    technique_summary TEXT,
-    keywords_json TEXT,
-
-    ocr_status TEXT,
-    skill_extraction_status TEXT,
-    collection_status TEXT,
-    collected_at_utc TEXT NOT NULL
-);
-```
-
-## 後續 Skill / SQL Pipeline
-
-```text
-Instagram account
-    ↓
-get_reels()
-    ↓
-reel manifest JSONL
-    ↓
-ASR / OCR
-    ↓
-subtitle summary + keywords
-    ↓
-technique-extract
-    ↓
-skill candidate
-    ↓
-SQLite / SQL dump
-    ↓
-GitHub
-```
-
-## GitHub 公開資料規則
-
-建議 commit：
-
-```text
-datasets/instagram/hedge-sphere-ai/
-├── reels-manifest.jsonl
-├── reels-index.md
-├── schema.sql
-└── README.md
-```
-
-不建議 commit：
-
-```text
-raw videos
-full transcripts
-Instagram cookies
-Instaloader session files
-private/tokenized URLs
-```
-
-原因：原始影片與完整逐字稿屬第三方內容；Media House 應保存「方法的結構化萃取與證據定位」，而不是建立原作者影片的替代鏡像。
-
-## 已確認的既有案例
-
-目前 `aitokenking_mediahouse` 的 CASE-001 已確認一支來自此帳號的 Reel：
-
-`https://www.instagram.com/reel/Dbk0zAzD5Pj/`
-
-主題摘要：
-
-- 深度圖：控制空間關係 / 換機位
-- 法線圖：控制表面結構
-- 輪廓圖：控制形變序列
-- 作者同時提醒這些舊方法可能隨模型進步而逐步淘汰
-
-這支可作為 collector 與 SQL pipeline 的第一筆 regression fixture。
+**兩者都合規，差別在於一個是紀律，一個是結構。結構比紀律可靠。**

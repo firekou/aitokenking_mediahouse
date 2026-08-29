@@ -40,6 +40,11 @@ ROOT = Path(__file__).resolve().parent.parent
 ACTOR = "apify~instagram-reel-scraper"
 BASE = "https://api.apify.com/v2"
 
+# 超過這個支數，或只要有要逐字稿，一律走非同步（run-sync 會被伺服器端截斷）
+ASYNC_THRESHOLD = 20
+POLL_S = 15
+MAX_WAIT_S = 2400
+
 # 價目表 —— 即時查自 Apify API，FREE 方案級距。
 # ★ 標 measured_at 是刻意的：計價是時點判定，不標日期的價目表無法被覆核，
 #   而 Apify 自 2024-05 起已改過六次計價模型。
@@ -148,17 +153,57 @@ def run_actor(username, limit, transcript, newer_than=None):
     if newer_than:
         payload["onlyPostsNewerThan"] = newer_than
 
-    print(f"送出 actor `{ACTOR}` …（可能需要數分鐘）")
     t0 = time.time()
-    ok, res = api(f"/acts/{ACTOR}/run-sync-get-dataset-items?clean=true&format=json",
-                  data=payload, timeout=900)
-    dt = time.time() - t0
-    if not ok:
-        return {"state": "fail", "error": res, "latency_s": round(dt, 1)}
-    if not isinstance(res, list):
-        return {"state": "broken", "error": f"預期陣列，實得 {type(res).__name__}",
+
+    # ★ 大批次一律走非同步。
+    #   run-sync 有伺服器端時間上限；129 支含逐字稿實測約 12 分鐘，會被截斷 ——
+    #   而被截斷的症狀是「拿到比較少的資料」，看起來會跟「這個帳號就只有這麼多片」
+    #   一模一樣。本 repo 反覆在防的正是這一種錯誤，所以這裡不賭 run-sync 撐得住。
+    if limit > ASYNC_THRESHOLD or transcript:
+        print(f"送出 actor `{ACTOR}`（非同步，大批次）…")
+        ok, run = api(f"/acts/{ACTOR}/runs", data=payload, timeout=60)
+        if not ok:
+            return {"state": "fail", "error": run, "latency_s": round(time.time() - t0, 1)}
+        rid = (run or {}).get("data", {}).get("id")
+        dsid = (run or {}).get("data", {}).get("defaultDatasetId")
+        if not rid:
+            return {"state": "broken", "error": f"啟動回應無 run id：{str(run)[:200]}"}
+        print(f"  run {rid} 已啟動，輪詢中…")
+        last = None
+        while time.time() - t0 < MAX_WAIT_S:
+            time.sleep(POLL_S)
+            ok, st = api(f"/acts/{ACTOR}/runs/{rid}", timeout=60)
+            if not ok:
+                continue
+            status = (st or {}).get("data", {}).get("status")
+            if status != last:
+                print(f"    [{int(time.time() - t0):>4}s] {status}")
+                last = status
+            if status in ("SUCCEEDED", "FAILED", "ABORTED", "TIMED-OUT"):
+                break
+        else:
+            return {"state": "fail",
+                    "error": f"等待逾時（{MAX_WAIT_S}s）。run {rid} 可能仍在跑 —— "
+                             f"到 Apify Console 查，不要重跑（會重複扣款）"}
+        if status != "SUCCEEDED":
+            return {"state": "fail", "error": f"run 結束狀態為 {status}（run {rid}）"}
+        ok, items = api(f"/datasets/{dsid}/items?clean=true&format=json&limit={limit}",
+                        timeout=300)
+        dt = time.time() - t0
+        if not ok:
+            return {"state": "fail", "error": items, "latency_s": round(dt, 1)}
+    else:
+        print(f"送出 actor `{ACTOR}` …（同步，小批次）")
+        ok, items = api(f"/acts/{ACTOR}/run-sync-get-dataset-items?clean=true&format=json",
+                        data=payload, timeout=300)
+        dt = time.time() - t0
+        if not ok:
+            return {"state": "fail", "error": items, "latency_s": round(dt, 1)}
+
+    if not isinstance(items, list):
+        return {"state": "broken", "error": f"預期陣列，實得 {type(items).__name__}",
                 "latency_s": round(dt, 1)}
-    return {"state": "ok", "items": res, "latency_s": round(dt, 1)}
+    return {"state": "ok", "items": items, "latency_s": round(dt, 1)}
 
 
 def pick(d, keys, default=None):

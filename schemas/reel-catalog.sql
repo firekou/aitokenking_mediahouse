@@ -49,6 +49,23 @@ CREATE TABLE IF NOT EXISTS ig_reel (
     likes           INTEGER,
     comments        INTEGER,
     video_url       TEXT,                   -- ⚠️ CDN 簽名網址，數小時後失效。不是永久連結
+    -- ★ 雜湊：存指紋不存內容。
+    --   來自 INSTAGRAM_REELS_COLLECTION_SPEC（2026-08-29 併入，該規格其餘部分已由
+    --   Apify 路線取代，但這個想法比我方原設計好）。
+    --   它同時解決兩件事：①證明「我分析的是哪一版逐字稿」②不必把逐字稿發布出去。
+    --   逐字稿本體在 ig_reel_transcript（不進 git），雜湊留在這裡（可公開）。
+    caption_sha256      TEXT,
+    caption_char_count  INTEGER,
+    transcript_sha256   TEXT,
+    transcript_char_count INTEGER,
+    transcript_excerpt  TEXT,               -- ★ 短節錄（≤120 字），§來源紀律允許的範圍
+    transcript_status   TEXT NOT NULL DEFAULT 'unknown'
+                        CHECK (transcript_status IN
+                              ('ok','unknown','fail','not_requested')),
+                        -- ★ 四態互斥：unknown＝我們沒拿到，fail＝這支確實沒有，
+                        --   兩者不得混為一談
+    technique_summary   TEXT,               -- L2 之前的一句話摘要（人或模型填）
+    keywords_json       TEXT,               -- JSON 陣列
     content_trust   TEXT NOT NULL DEFAULT 'untrusted_external',
     collected_via   TEXT NOT NULL,
     -- 產線串接欄位：這支影片被 Media House 產線處理到哪一層
@@ -79,6 +96,7 @@ CREATE VIEW IF NOT EXISTS v_reel_catalog AS
 SELECT r.account, r.shortcode, r.url, r.posted_at, r.duration_s,
        r.views, r.likes, r.comments, r.pipeline_state, r.case_id,
        SUBSTR(COALESCE(r.caption,''), 1, 120) AS caption_head,
+       r.transcript_status, r.transcript_sha256, r.transcript_excerpt,
        CASE WHEN t.shortcode IS NULL THEN 0 ELSE 1 END AS has_transcript
 FROM ig_reel r
 LEFT JOIN ig_reel_transcript t ON t.shortcode = r.shortcode;

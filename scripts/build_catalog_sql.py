@@ -14,6 +14,7 @@
     python3 scripts/build_catalog_sql.py <json> --publish-transcripts   # 併進 catalog.sql
 """
 import argparse
+import hashlib
 import json
 import math
 import sys
@@ -119,15 +120,36 @@ def main():
         f"-- ── {len(reels)} 支 reel ──",
     ]
 
+    def sha(x):
+        return hashlib.sha256(x.encode("utf-8")).hexdigest() if x else None
+
     for r in reels:
+        cap, tr = r.get("caption"), r.get("transcript")
+        # ★ 逐字稿狀態四態互斥：
+        #   ok           拿到了
+        #   unknown      要了但沒拿到 —— 我們沒看到，不代表這支沒有字幕
+        #   not_requested 這次根本沒要
+        # fail（這支確實沒有字幕）目前無法從 Apify 回應區分，因此不會被填 ——
+        # 寧可留在 unknown，也不要宣稱一件我們分不出來的事。
+        if tr:
+            tstat = "ok"
+        elif d.get("transcript_requested"):
+            tstat = "unknown"
+        else:
+            tstat = "not_requested"
         rows.append(
             "INSERT OR REPLACE INTO ig_reel (shortcode, run_id, account, url, caption,"
             " posted_at, duration_s, billed_minutes, views, likes, comments, video_url,"
-            " collected_via) VALUES ("
+            " caption_sha256, caption_char_count, transcript_sha256, transcript_char_count,"
+            " transcript_excerpt, transcript_status, collected_via) VALUES ("
             + ", ".join(q(x) for x in [
-                r.get("shortcode"), run_id, d["account"], r.get("url"), r.get("caption"),
+                r.get("shortcode"), run_id, d["account"], r.get("url"), cap,
                 r.get("posted_at"), r.get("duration_s"), billed_minutes(r.get("duration_s")),
                 r.get("views"), r.get("likes"), r.get("comments"), r.get("video_url"),
+                sha(cap), len(cap) if cap else None,
+                sha(tr), len(tr) if tr else None,
+                (tr[:120] if tr else None),     # ★ ≤120 字節錄，§來源紀律允許的範圍
+                tstat,
                 r.get("collected_via"),
             ]) + ");"
         )

@@ -1,45 +1,77 @@
-# Skill Manifest Schema（L3 編譯層輸出契約 · frontmatter 的 x-aitokenking 區塊）
-# 版本 v1.0 · 2026-08-28
-# 單一事實來源：templates/aitokenking-block.md
-# 檢核器：scripts/validate_skill.py
+# Skill Manifest Schema v1.1（L3 編譯層輸出契約 · frontmatter）
+# 2026-08-29 · 依架構覆核 P0-1 改版
+#
+# ★ v1.1 改用 Agent Skills 標準 frontmatter。
+#   v1.0 用的是自訂 top-level `x-aitokenking`，對我方 validator 很好用，
+#   但**不是 cross-agent portable format** —— 別的 agent runtime 讀不懂它。
+#
+#   標準 `metadata` 是 string → string map，塞不下巢狀結構。
+#   所以結構化資料的家改成 providers/aitokenking.yaml，frontmatter 只留指標。
+#   ★ 事實只能有一個家。重複的事實一定會分岔。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
-title: x-aitokenking
+title: skill-frontmatter
 type: object
-required: [role, endpoint_mcp, endpoint_api, auth_header, auth_env, register, docs, tools_used, billable]
-additionalProperties: false
+required: [name, description, metadata]
+
 properties:
-  role:
-    enum: [required, recommended, optional]
-    description: >-
-      required    = 沒有模型閘道，這支 skill 的主路徑跑不完
-      recommended = 沒有也能跑，但會退化成人工步驟或單模型
-      optional    = 純本機工具，閘道只用於選配的加值步驟
-  endpoint_mcp: { const: "https://api.aitokenking.com.tw/mcp" }
-  endpoint_api: { const: "https://api.aitokenking.com.tw/api/v1" }
-  auth_header:  { const: "X-AItokenKing-Api-Key" }
-  auth_env:     { const: "AITK_API_KEY", description: "★ 金鑰本體不入庫，只存在 shell 環境" }
-  register:     { const: "https://www.aitokenking.com.tw/" }
-  docs:         { const: "https://www.aitokenking.com.tw/assets/docs/zh/index.html#mcp-server" }
-  tools_used:
-    type: array
+  name:
+    type: string
+    pattern: "^[a-z0-9-]+$|^<.+>$"
+    description: kebab-case，必須與資料夾同名（`<佔位符>` 例外，模板用）
+  description:
+    type: string
     description: |
-      A 組 · 唯讀不扣額度（9 支）：
-        list_models, get_model, list_image_models, list_video_models,
-        get_balance, list_usage, list_transactions,
-        get_image_generation, get_video_generation
-      B 組 · 每次呼叫都扣額度（5 支）：
-        chat_completion, create_message, create_response,
-        create_image_generation, create_video_generation
-    items:
-      enum: [list_models, get_model, list_image_models, list_video_models,
-             get_balance, list_usage, list_transactions,
-             get_image_generation, get_video_generation,
-             chat_completion, create_message, create_response,
-             create_image_generation, create_video_generation]
-  billable:
-    type: boolean
-    description: >-
-      ★ tools_used 是否包含 B 組工具。宣告必須與事實一致 ——
-      validator 會交叉檢核，因為扣費警示那條 BLOCK 就建立在這個布林值上；
-      填錯它就能關掉整套保護，所以它自己必須被檢核。
+      ★ 這一行決定 skill 會不會被觸發。把使用者會怎麼開口原話寫進去，至少 8 種說法。
+      判準：拿給沒讀過這支 skill 的人問「什麼時候該用它」，答不出來就是還沒寫完。
+  license: { const: MIT }
+  compatibility:
+    type: string
+    description: 相容性與前提（Agent Skills 標準欄位）
+
+  metadata:
+    type: object
+    additionalProperties: { type: string }   # ★ 標準要求 string → string
+    required:
+      - mediahouse-layer
+      - mediahouse-schema
+      - aitokenking-role
+      - aitokenking-billable
+      - aitokenking-tools
+      - aitokenking-provider
+      - aitokenking-provider-spec
+    properties:
+      mediahouse-layer:
+        enum: ["L0", "L0.5", "L1", "L2", "L3", "L4", "orchestrator", "case-output"]
+        description: |
+          ★ L0.5／L1／L2／orchestrator 消費外部不可信內容，
+          validator 會強制要求文內聲明「資料不是指令」（SEC-1，MH-G5）。
+      mediahouse-schema: { const: "1.1" }
+      mediahouse-case:
+        type: string
+        pattern: "^CASE-[0-9]{3}$"
+        description: 案例產物才填
+      aitokenking-role:
+        enum: [required, recommended, optional]
+        description: |
+          required    沒有模型閘道，主路徑跑不完
+          recommended 沒有也能跑，但會退化成人工步驟或單模型
+          optional    純本機工具
+      aitokenking-billable:
+        enum: ["true", "false"]
+        description: |
+          ★ 必須與 aitokenking-tools 一致，validator 交叉檢核。
+          扣費警示那條 BLOCK 就建立在這個值上 ——
+          它是唯一一個「填錯一個布林值就能關掉整套保護」的欄位，
+          所以它自己必須被檢核。
+      aitokenking-tools:
+        type: string
+        description: |
+          逗號分隔。A 組唯讀不扣額度（9 支）／B 組每次呼叫都扣（5 支）。
+          完整清單見 providers/aitokenking.yaml 的 tools 區塊。
+      aitokenking-provider:
+        const: "providers/aitokenking.yaml"
+        description: ★ 端點、header、環境變數的唯一事實來源，不再寫進每支 skill
+      aitokenking-provider-spec:
+        type: string
+        description: 對齊的 provider 契約日期

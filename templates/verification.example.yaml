@@ -1,0 +1,47 @@
+# 實測回填範本 —— 複製到 cases/<CASE-ID>/verification/verification-<代號>-<日期>.yaml
+# schema: schemas/verification.schema.yaml
+#
+# ★ 這是本 repo 最歡迎、也最缺的一種貢獻（缺口 MH-G3）。
+#   不是更多技巧 skill —— 是把既有的 claim 從 V0 推到 V1 以上。
+#
+# ★ 回填單位是 claim 不是 technique。一次驗一條，才知道到底驗了什麼。
+
+case_id: CASE-001
+claim_id: T01-C03            # 見 cases/<CASE>/evidence-ledger.yaml 的 claims 清單
+
+verifier: "你的名字或 GitHub handle"   # ★ 具名。匿名回填不得升級 verification
+verified_at: "2026-09-01"
+
+environment:                 # ★ 沒有環境就無法重現，無法重現的回報不是證據是感想
+  provider: aitokenking
+  model_or_alias: "mwf/vision-chat"
+  model_resolved_at: "查得到就填當下解析到的實際模型；查不到留空，不要猜"
+  params:
+    temperature: 0.2
+  notes: "任何會影響結果的條件：解析度、參考圖張數、重試次數…"
+
+runs:                        # ★ 每一次都要記，包含失敗的。只記成功的會產生假的成功率
+  - n: 1
+    result: success
+    artifact: "cases/CASE-001-control-map/verification/artifacts/run1.png"
+    note: "側移約 15° 未見破圖"
+  - n: 2
+    result: fail
+    note: "側移約 35° 主體左側出現拉伸偽影 —— 這正是 C03 預測的失效模式"
+  - n: 3
+    result: success
+    note: "側移約 20°"
+
+outcome:
+  proposed_verification: V4  # ★ 提案值不是最終值。reviewer 才有權寫進 ledger
+  success_rate: "2/3"        # ★ n 太小算不出來就填 null，不要填看起來像量測結果的數字
+  failure_boundary: "側移超過約 30° 開始出現拉伸偽影"
+  contradicts: []            # ★ 這次實測推翻了原本的哪一句話。有就必須列，不得只報好消息
+
+# ── 以下由 reviewer 填，投稿者不得自填 ──
+# review:
+#   reviewer: ""
+#   reviewed_at: ""
+#   decision: ACCEPT | REVISE | REJECT
+#   applied_verification: V0 | V1 | V2 | V3 | V4
+#   reason: ""

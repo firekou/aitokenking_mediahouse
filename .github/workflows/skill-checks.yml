@@ -22,6 +22,18 @@ jobs:
       - name: 目錄管線回歸測試（schema ＋ SQL 產生器）
         run: python3 scripts/test_catalog.py
 
+      - name: 安裝 PyYAML（case 檢核需要）
+        run: pip install --quiet pyyaml
+
+      - name: 案例回歸測試（technique-card gate ＋ 證據帳本）
+        run: python3 scripts/test_case.py
+
+      - name: 案例檢核（boundary/gaps/claims/security_findings 不得留白）
+        run: python3 scripts/validate_case.py --all
+
+      - name: 證據帳本漂移檢查（已核可的回填必須寫回技巧卡）
+        run: python3 scripts/evidence_ledger.py --all --check
+
       - name: Plugin / marketplace manifest 合法性
         run: |
           python3 -c "import json;[json.load(open(f)) for f in ['.claude-plugin/plugin.json','.claude-plugin/marketplace.json']];print('manifests OK')"

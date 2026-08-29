@@ -1,26 +1,51 @@
-# CASE-001 · 技巧卡（L2 萃取層產出）
+# CASE-001 · 技巧卡 v1.1（L2 萃取層產出）
 # schema: schemas/technique-card.schema.yaml
-# ⚠️ evidence_level 全部為 E6（作者自述，我方零實測）。實測回填流程見 CONTRIBUTING.md §實測回填
+#
+# ★ v1.1 相對 v1.0 改了兩件事，v1.0 的判定刻意保留可見（見檔尾 revision_log）：
+#   ① 判定單位從 technique 降到 claim
+#   ② 證據強度拆成 provenance(E) ＋ verification(V) 兩條軸
+#
+#   最直接的後果：v1.0 整張卡打 E6，把「我方確實聽到作者這樣說」這個事實
+#   也一起降級了。v1.1 能同時說出「E1：我們確實看到他這樣講」與
+#   「V0：我們從沒測過」—— 而這兩句話都是真的。
 
 case_id: CASE-001
 source: cases/CASE-001-control-map/source.md
 extracted_at: "2026-08-27"
-extraction_review:
-  status: SINGLE_MODEL          # 缺口 MH-G2：本案未跑雙模型互審
+schema_version: "1.1"
+
+# ── P0-4 / MH-G5 ──
+security_findings:
+  prompt_injection_detected: false
+  suspicious_commands: []
+  suspicious_urls:
+    - "片中提供的完整教程連結（帶作者個人 token）—— 未收錄、未點擊、不散布"
+  credential_requests: []
+  reviewed_by: "Claude（回溯掃描）"
+  reviewed_at: "2026-08-29"
   note: >-
-    本案為集群啟動案例，萃取未經第二家供應商模型互審。
-    不一致處因此不可能被發現 —— 這不是「沒有不一致」，是「沒有量測」。
+    ⚠️ 本案的 L1 擷取發生在注入閘上線之前，這是 2026-08-29 對既有 source.md
+    的**回溯掃描**，不是當初的即時掃描。掃的是我方留存的逐字稿與 OCR 文字，
+    未重新抽幀 —— 因此「畫面上某一格角落有小字但 OCR 沒讀到」這種情況掃不出來。
+    這個限制寫出來，是因為 false negative 在安全掃描裡比 false positive 危險。
+
+extraction_review:
+  status: SINGLE_MODEL
+  note: >-
+    本案未跑雙模型互審（缺口 MH-G2）。不一致處因此不可能被發現 ——
+    這不是「沒有不一致」，是「沒有量測」。
 
 master_thesis: >-
   新模型解決的是「生成品質」。空間關係、身份一致性、形變連續性這三件事，
   新模型沒有變得更可控。可控性靠的是把約束畫成一張圖餵進去，
   不是靠把提示詞寫得更長。
 
-expiry_notice:                  # ★ 作者自己留的到期日，原話
+expiry_notice:
   quote: "所以這些老方法其實還是有用的，但隨著 AI 的進步，這些終究還是會被淘汰掉。"
   timecode: "102.66-105.56"
   implication: >-
-    三條路線的 Kill Criteria 不是我們外加的。任何把這三條路線寫進長期架構的提案，退回。
+    三條路線的 Kill Criteria 不是我們外加的，是作者自己留的。
+    任何把這三條路線寫進長期架構的提案，退回。
 
 techniques:
 
@@ -30,6 +55,8 @@ techniques:
     problem_solved: >-
       同一個動作想換一個角度重拍；巨物壓迫／微縮世界這類刻意破壞比例的畫面。
     route_when: 你要保住的是「空間關係」——前後、機位、構圖、動作姿態。
+    execution_origin: untrusted_source
+    human_review_required: true
     steps:
       - step: 原圖 → 用提示詞讓 AI 提取深度圖
         output: 一張灰度深度圖（⚠️ 黑白方向見 gaps CM-G2）
@@ -39,9 +66,37 @@ techniques:
         output: 新視角截圖
       - step: 新視角 ＋ 原始資產（人物／場景／道具參考圖）一起交給生圖模型
         output: 不同角度、但動作還原的畫面
-    author_claims:
-      - 可 1:1 遷移人物動作（作者稱「上一期講過」的已知用法）
-      - 在此層修改主體比例即可做出巨物壓迫與微縮世界
+    claims:
+      - id: T01-C01
+        claim: 深度圖可在更換機位時保住原有的空間關係與動作姿態
+        claim_type: author_claim
+        provenance: E6
+        verification: V0
+        source_refs: ["source.md#22.16-53.56"]
+        falsifier: 換機位後主體姿態或前後遮擋關係明顯改變，即推翻
+      - id: T01-C02
+        claim: 片中使用 Codex（介面標示 5.6 Sol）將深度圖建為可移動機位的場景
+        claim_type: observed
+        provenance: E1
+        verification: V0
+        source_refs: ["frame:38s", "source.md#畫面出現的工具"]
+        falsifier: 回看影片該段未見該介面，即推翻
+      - id: T01-C03
+        claim: 該場景是 2.5D 位移網格而非 3D 重建；側移過大會暴露單張圖無法還原的區域
+        claim_type: tool_output_observed
+        provenance: E1
+        verification: V0
+        source_refs: ["frame:38s"]
+        falsifier: >-
+          若實測顯示可自由繞行至主體背面而不失真，即推翻 ——
+          ★ 但這句話是工具自己講的，推翻它等於推翻工具對自己的描述
+      - id: T01-C04
+        claim: 在此層修改主體比例即可做出巨物壓迫與微縮世界
+        claim_type: author_claim
+        provenance: E6
+        verification: V0
+        source_refs: ["source.md#51.26-53.56"]
+        falsifier: 依步驟修改比例後畫面未呈現預期的尺度錯置，即推翻
     pitfalls:
       - what: 這是 2.5D 位移網格，不是 3D 重建。側移超過一定角度會露出單張圖裡不存在的資訊。
         evidence: >-
@@ -52,46 +107,74 @@ techniques:
     boundary: >-
       新機位若超過原圖能推斷的範圍（例如要繞到背後），這條路線不成立，
       改走實拍或多視角生成。
-    evidence_level: E6
-    tools_seen: [Codex (5.6 Sol), GPT Image 2.0, 節點畫布 node_204/207/210]
+    tools_seen: ["Codex (5.6 Sol)", "GPT Image 2.0", "節點畫布 node_204/207/210"]
     gaps:
       - CM-G2 深度圖提示詞的黑白方向未定（OCR 兩處互相矛盾），使用前必須實測
-      - 未測「超過幾度會崩」——邊界只有定性沒有定量
+      - 未測「超過幾度會崩」—— 邊界目前只有定性沒有定量
 
   - id: T-02
     name: 用法線圖換妝不換臉
     control_map: normal
     problem_solved: 人物真實性不足、皮膚太假；想換妝容但臉會跑掉。
     route_when: 你要保住的是「表面結構」——五官位置、衣服褶皺、手勢形狀。
+    execution_origin: untrusted_source
+    human_review_required: true
     steps:
       - step: 原圖 → 讓 AI 提取人物法線圖
         output: 法線圖（記錄表面朝向）
       - step: 讓 AI「按照法線圖重新生成人物角色的紋理」
         output: 結構鎖定、外觀已替換的人物圖
-    author_claims:                # ⛔ 全部 E6，我方未驗
-      - 皮膚變得更清晰
-      - 五官、衣服褶皺、手勢刻畫「都會更有感覺」
-      - 可在保持面部結構不變的情況下重新更換妝容
+    claims:
+      - id: T02-C01
+        claim: 可在保持面部結構不變的情況下重新更換妝容
+        claim_type: author_claim
+        provenance: E6
+        verification: V0
+        source_refs: ["source.md#54.66-75.66"]
+        falsifier: 換妝後五官位置或臉型改變，即推翻
+      - id: T02-C02
+        claim: 皮膚更清晰，五官、衣服褶皺、手勢刻畫更有感覺
+        claim_type: author_claim
+        provenance: E6
+        verification: V0
+        source_refs: ["source.md#54.66-75.66"]
+        falsifier: >-
+          ⚠️ 這條 claim 本身接近不可否證（「更有感覺」無判準）。
+          要驗必須先把它改寫成可量測的形式，否則不該被當成效果宣稱使用
+      - id: T02-C03
+        claim: 片中此段使用 NanoBanana 2（通道 2，5:9 · 2K）
+        claim_type: observed
+        provenance: E1
+        verification: V0
+        source_refs: ["source.md#畫面出現的工具"]
+        falsifier: 回看影片該段未見該標示，即推翻
+      - id: T02-C04
+        claim: 法線圖鎖的是「這一格裡他的臉朝哪、褶子在哪」，LoRA 鎖的是「這個人長什麼樣」
+        claim_type: inference
+        provenance: E1
+        verification: V0
+        source_refs: ["source.md#54.66-75.66"]
+        falsifier: >-
+          ★ 這是我方推論不是影片內容。若實測顯示法線圖也能維持跨鏡頭身份一致性，
+          即推翻此區分（缺口 CM-G4）
     pitfalls:
       - what: 效果宣稱完全未經我方驗證，不得轉述為本 skill 的能力。
         evidence: 影片全程無失敗案例、無對照組、無參數揭露。
     boundary: >-
-      法線圖鎖的是「這一格裡他的臉朝哪、褶子在哪」，不是「這個人長什麼樣」。
-      跨鏡頭的身份一致性它管不到 —— 那是 LoRA 的職責。
-    evidence_level: E6
-    tools_seen: [NanoBanana 2 (通道 2, 5:9 2K), 節點畫布 node_231/233]
-    why_worth_testing_first: >-
-      法線圖給的是「結構鎖定、外觀可換」的分離軸，這正是 LoRA 做不到的那一半。
-      兩者能否疊用未評估（CM-G4）—— 在實測前不得對外宣稱可以。
+      法線圖管的是單格內的結構，不是跨鏡頭的身份一致性 —— 後者是 LoRA 的職責。
+    tools_seen: ["NanoBanana 2 (通道 2, 5:9 2K)", "節點畫布 node_231/233"]
     gaps:
       - CM-G4 法線圖與 LoRA 能否疊用，未評估
       - 未取得任何失敗案例，等於不知道它什麼時候會壞
+      - T02-C02 目前不可否證，需先改寫成可量測形式
 
   - id: T-03
     name: 用動態輪廓圖讓形變過程完全可控
     control_map: contour
     problem_solved: 產品一致性；Logo 變產品只做得出溶解特效；產品拆解重組。
     route_when: 你要保住的是「形狀的連續變化」——A 變成 B 的每一格。
+    execution_origin: untrusted_source
+    human_review_required: true
     failing_approach: >-
       把「讓 Logo 變成產品」直接寫進提示詞 → AI 通常只會做一個簡單的溶解效果。
       （使用者八成正在做這件事）
@@ -103,9 +186,46 @@ techniques:
         output: 形變序列（每一格都是一張輪廓圖）
       - step: 把輪廓序列交給視頻模型，只讓它補充材質和特效
         output: 產品在整段形變中保持一致的影片
-    author_claims:
-      - 產品在整段形變中保持一致
-      - 同一手法可做產品拆解後重新組裝（片尾示範 MacBook 拆解圖）
+    claims:
+      - id: T03-C01
+        claim: 直接用提示詞要求 Logo 變產品，AI 通常只會做一個簡單的溶解效果
+        claim_type: author_claim
+        provenance: E6
+        verification: V0
+        source_refs: ["source.md#77.06-100.86"]
+        falsifier: 直接提示詞即可得到結構正確的形變，即推翻
+      - id: T03-C02
+        claim: 片中提取線稿的提示詞為「提取這兩個圖的線稿，背景為白色」
+        claim_type: observed
+        provenance: E1
+        verification: V0
+        source_refs: ["frame:88s"]
+        falsifier: 回看該幀文字不同，即推翻
+      - id: T03-C03
+        claim: 用輪廓序列驅動後，產品可在整段形變中保持一致
+        claim_type: author_claim
+        provenance: E6
+        verification: V0
+        source_refs: ["source.md#77.06-100.86"]
+        falsifier: 依步驟產出的序列中產品外觀漂移，即推翻
+      - id: T03-C04
+        claim: >-
+          一致性被解掉是因為一致性根本沒有交給模型決定 ——
+          模型從「決定會發生什麼」被降級為「決定看起來像什麼」
+        claim_type: inference
+        provenance: E1
+        verification: V0
+        source_refs: ["source.md#77.06-100.86"]
+        falsifier: >-
+          ★ 我方推論。若實測顯示即使給定完整輪廓序列，模型仍會自行改變產品外觀，
+          即推翻 —— 那代表「降級」並未真的發生
+      - id: T03-C05
+        claim: ControlNet 支援 depth／normal／edge 作為空間條件
+        claim_type: official_doc
+        provenance: E2
+        verification: V0
+        source_refs: ["arXiv:2302.05543v3（畫面出現論文首頁；⬜ 我方未回原文逐字核對）"]
+        falsifier: 原文摘要未列這些條件，即推翻
     pitfalls:
       - what: 需要 coding agent 有能力產出合理的形變序列，這是整條路線的單點依賴。
         evidence: 步驟②完全由 agent 自動生成，影片未展示人工修正的介面。
@@ -114,19 +234,12 @@ techniques:
     boundary: >-
       模型被降級為「決定看起來像什麼」。若你要的變化本身需要創意判斷
       （而不只是形狀插值），這條路線給不了你。
-    evidence_level: E6
-    tools_seen: [可靈 V3 Omni (首尾幀·專業檔), Seedance 2.0 (多模態)]
-    why_structurally_strongest: >-
-      路線 A、B 是「把約束餵給 AI」；路線 C 是「把過程的每一格先畫出來，
-      再讓 AI 只負責上材質」。一致性問題被解掉，是因為一致性根本沒有交給模型決定。
-    generalizable_rule: >-
-      任何「AI 每次都給我不一樣的結果」的問題，先問一句：
-      這件事有沒有辦法不交給它決定？
+    tools_seen: ["可靈 V3 Omni (首尾幀·專業檔)", "Seedance 2.0 (多模態)"]
     gaps:
       - 未測形變序列需要多少格才不會跳動
       - 未測 coding agent 產不出合理序列時的退路
 
-cross_cutting_disciplines:      # 跨路線通用，來自 14-16s 幀的教程頁
+cross_cutting_disciplines:
   - id: D-1
     rule: 每張圖只負責一件事
     detail: >-
@@ -139,19 +252,40 @@ cross_cutting_disciplines:      # 跨路線通用，來自 14-16s 幀的教程�
     rule: 提示詞必須有「禁止事項」段
     detail: 控制圖路線的失敗多半不是模型做不到，是它多做了。
 
-gaps:                           # 案級缺口
+gaps:
   - id: CM-G1
-    what: 三條路線我方零實測
-    disposition: 各跑一次並留痕。這是本案唯一能把 E6 升到 E1 的路。
+    what: 三條路線我方零實測 —— 全部 13 條 claim 的 verification 都是 V0
+    disposition: >-
+      逐條回填。回填格式見 schemas/verification.schema.yaml，
+      流程見 CONTRIBUTING.md §實測回填。★ 回填單位是 claim 不是 technique
   - id: CM-G2
     what: 深度圖提示詞黑白方向未定（OCR 兩處矛盾）
-    disposition: 隨 CM-G1 一併實測。這是一個位元，但它決定成敗。
+    disposition: 隨 CM-G1 一併實測。這是一個位元，但它決定成敗
   - id: CM-G3
     what: 節點式畫布的平台名稱未辨識（僅見 node_NNN 命名）
     disposition: 待補；不影響方法可用性
   - id: CM-G4
-    what: 法線圖路線與跨鏡頭一致性（LoRA）的關係未評估
+    what: 法線圖路線與 LoRA（跨鏡頭一致性）的關係未評估
     disposition: CM-G1 之後
   - id: CM-G5
     what: 逐字稿未經人工回看校對；影片檔未留存
     disposition: 需要時依 source.md §取得方式重跑
+  - id: CM-G6
+    what: T02-C02（「更有感覺」）目前不可否證
+    disposition: 改寫成可量測形式後才可被驗；在那之前不得作為效果宣稱使用
+
+revision_log:
+  - version: "1.0"
+    date: "2026-08-27"
+    note: >-
+      整張技巧卡一個 evidence_level: E6。
+      ★ 刻意保留這筆紀錄：那個做法把「我方確實觀察到 Codex 的回應原文」（E1）
+      與「作者宣稱換妝不變臉」（E6）壓在同一個數字上，
+      連我們真的看到的東西都被降級了。
+  - version: "1.1"
+    date: "2026-08-29"
+    note: >-
+      改為 claim 級 ＋ provenance/verification 雙軸。13 條 claim：
+      E1 六條、E2 一條、E6 六條；verification 全部 V0 —— 一條都沒驗過。
+      ★ 「13 條裡有 6 條是 E1」與「一條都沒驗過」同時成立，
+      而 v1.0 的格式講不出這句話。

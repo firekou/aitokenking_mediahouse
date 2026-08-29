@@ -28,6 +28,17 @@
 
 ## 60 秒開始
 
+**方式 A · 當成 Claude Code plugin 安裝（推薦）**
+
+```bash
+/plugin marketplace add firekou/aitokenking_mediahouse
+/plugin install mediahouse@aitokenking-marketplace
+```
+
+安裝後 8 支 skill 立即可用，MCP server 一併攜帶，可版本更新。
+
+**方式 B · clone 下來改**
+
 ```bash
 git clone https://github.com/firekou/aitokenking_mediahouse.git
 cd aitokenking_mediahouse
@@ -159,12 +170,22 @@ export AITOKENKING_API_KEY='<該端點的 key>'
 ## 開發
 
 ```bash
-python3 scripts/test_validate.py      # 檢核器的回歸測試（先跑這個）
+# 先跑三支回歸測試（尺自己有沒有壞）
+python3 scripts/test_validate.py      # 三嵌入點／安全閘／斷鏈檢核器
+python3 scripts/test_catalog.py       # 目錄管線
+python3 scripts/test_case.py          # 技巧卡 gate ＋ 證據帳本
+
+# 再用尺去量
 python3 scripts/validate_skill.py --all
+python3 scripts/validate_case.py --all
+python3 scripts/evidence_ledger.py --all --check
 ```
 
 **順序不可交換。** 一把壞掉的尺，量什麼都會過——
 所以測試裡有一項專門檢查「尺有沒有真的量到東西」。
+
+安全模型與 prompt injection 閘：[`SECURITY.md`](SECURITY.md)。
+Provider 能力契約與降級路徑：[`providers/aitokenking.yaml`](providers/aitokenking.yaml)。
 
 想貢獻一支自己的 skill？看 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 **最缺的貢獻是實測回填**（把某條路線從 E6 升到 E1），不是新增更多 E6。
@@ -177,8 +198,9 @@ python3 scripts/validate_skill.py --all
 |---|---|
 | MH-G1 | L1 的影片下載依賴執行環境，部分平台需登入或不在網路白名單內 |
 | MH-G2 | 雙模型互審目前是建議不是強制，validator 未檢核 |
-| **MH-G3** | **尚無實測回填機制——E6 升 E1 沒有流程入口** |
+| ~~MH-G3~~ | ~~尚無實測回填機制~~ **已重新定義並落地**：有格式也有引擎了（`evidence_ledger.py`），真正的缺口變成「**還沒有人回填過任何一條**」 |
 | MH-G4 | 來源授權邊界未由法務定調，目前採最保守做法 |
+| **MH-G5** | **外部來源注入／供應鏈風險**——閘已裝，但 CASE-001 為回溯掃描、未重新抽幀（false negative 掃不出來） |
 
 **MH-G3 是這個集群最可能的死法。** 如果沒有人回來把跑過的結果寫回去，
 這裡會累積出一整櫃「聽起來很強、但沒有人驗過」的 skill——

@@ -1,43 +1,137 @@
-# 技巧卡 Schema（L2 萃取層輸出契約）
-# 版本 v1.0 · 2026-08-28
+# 技巧卡 Schema v1.1（L2 萃取層輸出契約）
+# 2026-08-29 · 依架構覆核 P1-1／P1-2／P0-4 改版
 #
-# 這份 schema 的設計只有一個核心主張：
-#   author_claims 與 pitfalls 必須是兩個欄位。
-# 混寫的後果不是格式難看，是讀的人會把「作者宣稱」當成「保證」，然後拿去跟客戶承諾。
+# ═══════════════════════════════════════════════════════════════════════
+# v1.1 改了兩件結構性的事
+# ═══════════════════════════════════════════════════════════════════════
+#
+# ① 判定單位從 technique 降到 claim（P1-1）
+#
+#    v1.0 是 `evidence_level: E6` 掛在整張技巧卡上。但一張卡裡同時有：
+#      「畫面出現 Codex」            我方實測看到      E1
+#      「ControlNet 支援 depth 條件」 官方論文          E2
+#      「換妝不會變臉」              作者宣稱          E6
+#      「側移過大會露餡」            工具自己講的      E1
+#    一個數字蓋在上面，等於把最強的與最弱的一起拉到某個平均值 ——
+#    而讀的人會用它來決定要不要相信整張卡。
+#
+# ② 證據強度拆成兩條軸（P1-2，本次最重要的改動）
+#
+#    v1.0 的 E1 同時被用來表示兩件完全不同的事：
+#      「我方成功下載了影片並讀出這句話」   ← 來源可信度
+#      「我方實測這個技巧真的有效」         ← 效果驗證
+#    這兩件事混在一個刻度上，會產生一個很危險的句子：
+#      「這是 E1，我們驗證過。」——驗證過什麼？沒有人分得出來。
+#
+#    → provenance   (E1–E6)  我們怎麼知道有人這樣說／這件事被觀察到
+#    → verification (V0–V4)  這個效果被重現過幾次
+#
+#    ★ 一條 claim 可以同時是 E1 與 V0：
+#      「我方確實聽到作者說換妝不會變臉」(E1) ＋「我方從沒測過」(V0)。
+#      v1.0 表達不出這句話，於是只能整張卡打 E6 —— 連「我們確實聽到他這樣說」
+#      這個事實都被降級了。
+# ═══════════════════════════════════════════════════════════════════════
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 title: technique-card
 type: object
-required: [case_id, source, techniques]
+required: [case_id, source, techniques, security_findings]
+
+$defs:
+  provenance:
+    description: |
+      來源可信度 —— 我們憑什麼知道「有人這樣說」或「這件事發生了」。
+      ★ 它不回答「這招有沒有用」，那是 verification 的事。
+      E1 我方直接觀察（下載、OCR、實跑並留痕）
+      E2 官方文件／論文原文
+      E3 權威登錄資料
+      E4 平台訊號／第三方轉交
+      E5 LLM 探測結果
+      E6 作者自述
+    enum: [E1, E2, E3, E4, E5, E6]
+
+  verification:
+    description: |
+      效果驗證 —— 這個宣稱的效果被重現過幾次。
+      V0 未測                        ← ★ 技巧影片的預設值
+      V1 單次成功
+      V2 多次成功（≥3 次，同一組條件）
+      V3 跨模型／跨供應商成功
+      V4 有失敗邊界與成功率（知道它什麼時候會壞）
+      ★ 只有 V1 以上可以說「我們驗過」。V0 不論 provenance 多高都不行。
+    enum: [V0, V1, V2, V3, V4]
+
+  claim:
+    type: object
+    required: [id, claim, claim_type, provenance, verification, source_refs]
+    properties:
+      id: { type: string, pattern: "^T[0-9]{2}-C[0-9]{2}$" }
+      claim: { type: string, description: 一句話，可被單獨否證 }
+      claim_type:
+        enum: [observed, tool_output_observed, official_doc, author_claim, our_measurement, inference]
+        description: |
+          observed             我方在畫面／檔案裡直接看到
+          tool_output_observed ★ 影片中工具自己的回應原文 —— 常常同時是邊界聲明
+          official_doc         官方文件或論文
+          author_claim         作者說的（≠ 事實）
+          our_measurement      我方實跑得到的
+          inference            我方推論 —— ★ 必須標，不得混進 observed
+      provenance: { $ref: "#/$defs/provenance" }
+      verification: { $ref: "#/$defs/verification" }
+      source_refs:
+        type: array
+        minItems: 1
+        description: "指到 source.md 的錨點，如 source.md#38s、frame:38s、arXiv:2302.05543"
+        items: { type: string }
+      verified_by:
+        type: array
+        description: verification ≥ V1 時必填，指向 verification/ 下的回填檔
+        items: { type: string }
+      falsifier:
+        type: string
+        description: ★ 什麼結果會推翻這條 claim。寫不出來代表它不可否證，不該進表
+
 properties:
-  case_id:      { type: string, pattern: "^CASE-[0-9]{3}$" }
-  source:       { type: string, description: "指向 L1 產出的 source.md" }
+  case_id: { type: string, pattern: "^CASE-[0-9]{3}$" }
+  source: { type: string }
   extracted_at: { type: string, format: date }
+
+  # ── P0-4 / MH-G5 ──
+  security_findings:
+    type: object
+    required: [prompt_injection_detected, suspicious_commands, suspicious_urls, credential_requests]
+    description: |
+      ★ 四個欄位一個都不能省。沒發現寫空陣列，不要整段拿掉 ——
+      「省略」與「掃過但沒發現」在檔案裡必須長得不一樣。
+    properties:
+      prompt_injection_detected: { type: boolean }
+      suspicious_commands: { type: array, items: { type: string } }
+      suspicious_urls: { type: array, items: { type: string } }
+      credential_requests: { type: array, items: { type: string } }
+      reviewed_by: { type: [string, "null"], description: 有發現時必填 }
+      reviewed_at: { type: [string, "null"] }
 
   extraction_review:
     type: object
-    description: 雙模型互審狀態。SINGLE_MODEL 不是錯誤，但必須誠實標記。
     required: [status]
     properties:
       status:
         enum: [DUAL_MODEL_CROSS_VENDOR, SINGLE_MODEL, NOT_REVIEWED]
         description: >-
-          DUAL_MODEL_CROSS_VENDOR 才算互審 —— 同一家供應商的兩個模型不算，
+          只有 DUAL_MODEL_CROSS_VENDOR 算互審。同一供應商的兩個模型不算 ——
           它們共享訓練偏好，會一起漏掉同一件事。
       disagreements:
         type: array
-        description: 兩模型不一致處。★ 一律進 gaps，不得由萃取者單方裁決。
+        description: ★ 不一致處一律進 gaps，不得由萃取者單方裁決
 
-  master_thesis:
-    type: string
-    description: 這支影片真正的主張，一段話。抽不出來通常代表它是觀點影片不是技巧影片。
+  master_thesis: { type: string }
 
   expiry_notice:
     type: object
-    description: ★ 作者若自己說了這招會過期，原話抄在這裡。Kill Criteria 因此不是外加的。
+    description: ★ 作者若自己說了這招會過期，原話抄在這裡。Kill Criteria 因此不是外加的
     properties:
-      quote:       { type: string }
-      timecode:    { type: string }
+      quote: { type: string }
+      timecode: { type: string }
       implication: { type: string }
 
   techniques:
@@ -45,19 +139,17 @@ properties:
     minItems: 1
     items:
       type: object
-      required: [id, name, problem_solved, route_when, steps, boundary, evidence_level, gaps]
+      required: [id, name, problem_solved, route_when, steps, boundary, claims, gaps]
       properties:
-        id:   { type: string, pattern: "^T-[0-9]{2}$" }
-        name: { type: string, description: "動詞開頭" }
+        id: { type: string, pattern: "^T-[0-9]{2}$" }
+        name: { type: string, description: 動詞開頭 }
         problem_solved:
           type: string
-          description: 用「使用者會說的話」寫，不是用作者的話。這是 description 的原料。
-        route_when:
-          type: string
-          description: 什麼情況該選這一招。這是路線判定器的原料。
+          description: 用「使用者會說的話」寫，不是用作者的話。這是 description 的原料
+        route_when: { type: string, description: 路線判定器的原料 }
         failing_approach:
           type: string
-          description: 使用者現在八成正在做的錯誤做法。有的話一定要寫 —— 它是最強的共鳴點。
+          description: 使用者現在八成正在做的錯誤做法 —— 有的話一定要寫，它是最強的共鳴點
         steps:
           type: array
           minItems: 1
@@ -65,47 +157,40 @@ properties:
             type: object
             required: [step, output]
             properties:
-              step:        { type: string }
-              output:      { type: string, description: "★ 這一步結束時你手上多了什麼" }
-              prompt_seen: { type: string, description: "畫面上出現的提示詞原文（標明是否 OCR 重建）" }
-        author_claims:
+              step: { type: string }
+              output: { type: string, description: ★ 這一步結束時你手上多了什麼 }
+              prompt_seen: { type: string, description: 畫面原文（標明是否 OCR 重建） }
+        claims:
           type: array
-          description: "⛔ E6 · 作者宣稱，我方未驗。不得與 pitfalls 混寫。"
-          items: { type: string }
+          minItems: 1
+          description: ★ v1.1 的判定單位。逐條標 provenance ＋ verification
+          items: { $ref: "#/$defs/claim" }
         pitfalls:
           type: array
-          description: >-
+          description: |
             ★ 從證據推得的坑，不是從想像。
-            不合格的坑：「可能不穩定」「建議多試幾次」—— 對任何技巧都成立，等於沒說。
+            不合格：「可能不穩定」「建議多試幾次」—— 對任何技巧都成立，等於沒說。
           items:
             type: object
             required: [what, evidence]
             properties:
-              what:     { type: string }
-              evidence: { type: string, description: "哪一段逐字稿／哪一幀 OCR 支持這個判斷" }
+              what: { type: string }
+              evidence: { type: string, description: 哪一段逐字稿／哪一幀 OCR 支持這個判斷 }
         boundary:
           type: string
-          description: >-
-            什麼情況下這一招不成立。必填 —— 寫不出邊界代表還沒讀懂它，此時不得進 L3。
-        evidence_level:
-          enum: [E1, E2, E3, E4, E5, E6]
-          description: >-
-            技巧影片預設 E6（作者自述）。只有我方實測過的才是 E1。
-            ★ 未經實測回填不得升格。
-        tools_seen:
-          type: array
-          description: 畫面上出現的工具名（E1，我方實測辨識）
+          description: ★ 必填。寫不出邊界代表還沒讀懂它，此時不得進 L3
+        execution_origin:
+          enum: [our_own, untrusted_source]
+          description: 含命令／URL／憑證存取且來源是影片者，必須是 untrusted_source
+        human_review_required: { type: boolean }
+        tools_seen: { type: array }
         gaps:
           type: array
           minItems: 1
-          description: >-
-            ★ 不得留白。一次萃取不可能沒有缺口；寫「無」的那份，是沒去找。
+          description: ★ 不得留白。一次萃取不可能沒有缺口；寫「無」的那份，是沒去找
 
-  cross_cutting_disciplines:
-    type: array
-    description: 跨路線通用的紀律，會編譯成 skill 的 Step 2 落地紀律。
+  cross_cutting_disciplines: { type: array }
 
   gaps:
     type: array
     minItems: 1
-    description: 案級缺口。同樣不得留白。

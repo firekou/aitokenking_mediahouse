@@ -1,0 +1,83 @@
+# 實測回填 Schema（P1-3 · 把 MH-G3 從「沒有格式」變成「有引擎」）
+# 2026-08-29
+#
+# ★ MH-G3 的重新定義：
+#   舊說法「沒有實測回填機制」已經不精確 —— CONTRIBUTING.md 早就有提交格式。
+#   真正缺的是 **machine-readable ledger 與 claim promotion workflow**：
+#   有人回填了，但沒有任何東西會因此改變。一份沒有人讀的回報，跟沒有回報一樣。
+#
+# 流程：
+#   verification PR → schema 驗證 → reviewer → claim 的 verification 升級
+#                  → evidence-ledger.yaml 更新 → CHANGELOG
+#
+# 檔名：cases/<CASE-ID>/verification/verification-<代號>-<YYYY-MM-DD>.yaml
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: verification
+type: object
+required: [case_id, claim_id, verifier, verified_at, runs, outcome, environment]
+
+properties:
+  case_id: { type: string, pattern: "^CASE-[0-9]{3}$" }
+  claim_id:
+    type: string
+    pattern: "^T[0-9]{2}-C[0-9]{2}$"
+    description: ★ 回填的單位是 claim 不是 technique。一次驗一條，才知道到底驗了什麼
+
+  verifier: { type: string, description: 具名。匿名回填不得升級 verification }
+  verified_at: { type: string, format: date }
+
+  environment:
+    type: object
+    required: [provider, model_or_alias]
+    description: ★ 沒有環境就無法重現，無法重現的回報不是證據是感想
+    properties:
+      provider: { type: string, description: "aitokenking｜其他端點" }
+      model_or_alias: { type: string, description: "mwf/* 別名或實際 model id" }
+      model_resolved_at: { type: string, description: 別名當下解析到哪個模型（若查得到） }
+      params: { type: object }
+      notes: { type: string }
+
+  runs:
+    type: array
+    minItems: 1
+    description: ★ 每一次都要記，包含失敗的。只記成功的回填會產生假的成功率
+    items:
+      type: object
+      required: [n, result]
+      properties:
+        n: { type: integer }
+        result: { enum: [success, partial, fail] }
+        artifact: { type: string, description: 截圖／輸出檔路徑（可選但強烈建議） }
+        note: { type: string }
+
+  outcome:
+    type: object
+    required: [proposed_verification, success_rate]
+    properties:
+      proposed_verification:
+        enum: [V1, V2, V3, V4]
+        description: |
+          ★ 提案值，不是最終值 —— reviewer 才有權寫進 ledger。
+          自己給自己升級，這條線就不存在了。
+          V1 單次成功｜V2 ≥3 次同條件｜V3 跨模型/跨供應商｜V4 有失敗邊界與成功率
+      success_rate:
+        type: [string, "null"]
+        description: ★ n 太小算不出來就填 null，不要填一個看起來像量測結果的數字
+      failure_boundary:
+        type: string
+        description: V4 必填 —— 它什麼時候會壞。這是四級裡唯一真正有用的一級
+      contradicts:
+        type: array
+        description: ★ 這次實測推翻了原本的哪一句話。有的話必須列，不得只報好消息
+        items: { type: string }
+
+  review:
+    type: object
+    description: 由 reviewer 填，投稿者不得自填
+    properties:
+      reviewer: { type: string }
+      reviewed_at: { type: string, format: date }
+      decision: { enum: [ACCEPT, REVISE, REJECT] }
+      applied_verification: { enum: [V0, V1, V2, V3, V4] }
+      reason: { type: string }

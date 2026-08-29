@@ -1,0 +1,123 @@
+case_id: CASE-001
+generated_at: '2026-08-29'
+generated_by: scripts/evidence_ledger.py
+_note: ★ 這份檔案是產物不是原稿。改它沒有用 —— 唯一的事實來源是 technique-cards.yaml 與 verification/*.yaml。要升級一條 claim，走回填流程，見
+  CONTRIBUTING.md §實測回填。
+summary:
+  total_claims: 13
+  by_provenance:
+    E1: 6
+    E2: 1
+    E6: 6
+  by_verification:
+    V0: 13
+  verified_any: 0
+  pending_verifications: 0
+  drift: 0
+claims:
+- claim_id: T01-C01
+  technique: T-01
+  claim: 深度圖可在更換機位時保住原有的空間關係與動作姿態
+  claim_type: author_claim
+  provenance: E6
+  verification: V0
+  verified_by: []
+  falsifier: 換機位後主體姿態或前後遮擋關係明顯改變，即推翻
+- claim_id: T01-C02
+  technique: T-01
+  claim: 片中使用 Codex（介面標示 5.6 Sol）將深度圖建為可移動機位的場景
+  claim_type: observed
+  provenance: E1
+  verification: V0
+  verified_by: []
+  falsifier: 回看影片該段未見該介面，即推翻
+- claim_id: T01-C03
+  technique: T-01
+  claim: 該場景是 2.5D 位移網格而非 3D 重建；側移過大會暴露單張圖無法還原的區域
+  claim_type: tool_output_observed
+  provenance: E1
+  verification: V0
+  verified_by: []
+  falsifier: 若實測顯示可自由繞行至主體背面而不失真，即推翻 —— ★ 但這句話是工具自己講的，推翻它等於推翻工具對自己的描述
+- claim_id: T01-C04
+  technique: T-01
+  claim: 在此層修改主體比例即可做出巨物壓迫與微縮世界
+  claim_type: author_claim
+  provenance: E6
+  verification: V0
+  verified_by: []
+  falsifier: 依步驟修改比例後畫面未呈現預期的尺度錯置，即推翻
+- claim_id: T02-C01
+  technique: T-02
+  claim: 可在保持面部結構不變的情況下重新更換妝容
+  claim_type: author_claim
+  provenance: E6
+  verification: V0
+  verified_by: []
+  falsifier: 換妝後五官位置或臉型改變，即推翻
+- claim_id: T02-C02
+  technique: T-02
+  claim: 皮膚更清晰，五官、衣服褶皺、手勢刻畫更有感覺
+  claim_type: author_claim
+  provenance: E6
+  verification: V0
+  verified_by: []
+  falsifier: ⚠️ 這條 claim 本身接近不可否證（「更有感覺」無判準）。 要驗必須先把它改寫成可量測的形式，否則不該被當成效果宣稱使用
+- claim_id: T02-C03
+  technique: T-02
+  claim: 片中此段使用 NanoBanana 2（通道 2，5:9 · 2K）
+  claim_type: observed
+  provenance: E1
+  verification: V0
+  verified_by: []
+  falsifier: 回看影片該段未見該標示，即推翻
+- claim_id: T02-C04
+  technique: T-02
+  claim: 法線圖鎖的是「這一格裡他的臉朝哪、褶子在哪」，LoRA 鎖的是「這個人長什麼樣」
+  claim_type: inference
+  provenance: E1
+  verification: V0
+  verified_by: []
+  falsifier: ★ 這是我方推論不是影片內容。若實測顯示法線圖也能維持跨鏡頭身份一致性， 即推翻此區分（缺口 CM-G4）
+- claim_id: T03-C01
+  technique: T-03
+  claim: 直接用提示詞要求 Logo 變產品，AI 通常只會做一個簡單的溶解效果
+  claim_type: author_claim
+  provenance: E6
+  verification: V0
+  verified_by: []
+  falsifier: 直接提示詞即可得到結構正確的形變，即推翻
+- claim_id: T03-C02
+  technique: T-03
+  claim: 片中提取線稿的提示詞為「提取這兩個圖的線稿，背景為白色」
+  claim_type: observed
+  provenance: E1
+  verification: V0
+  verified_by: []
+  falsifier: 回看該幀文字不同，即推翻
+- claim_id: T03-C03
+  technique: T-03
+  claim: 用輪廓序列驅動後，產品可在整段形變中保持一致
+  claim_type: author_claim
+  provenance: E6
+  verification: V0
+  verified_by: []
+  falsifier: 依步驟產出的序列中產品外觀漂移，即推翻
+- claim_id: T03-C04
+  technique: T-03
+  claim: 一致性被解掉是因為一致性根本沒有交給模型決定 —— 模型從「決定會發生什麼」被降級為「決定看起來像什麼」
+  claim_type: inference
+  provenance: E1
+  verification: V0
+  verified_by: []
+  falsifier: ★ 我方推論。若實測顯示即使給定完整輪廓序列，模型仍會自行改變產品外觀， 即推翻 —— 那代表「降級」並未真的發生
+- claim_id: T03-C05
+  technique: T-03
+  claim: ControlNet 支援 depth／normal／edge 作為空間條件
+  claim_type: official_doc
+  provenance: E2
+  verification: V0
+  verified_by: []
+  falsifier: 原文摘要未列這些條件，即推翻
+pending_verifications: []
+drift: []

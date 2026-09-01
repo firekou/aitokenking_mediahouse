@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Record camera moves in Blender, save credits with a timeline, add effects last. Solves: you want to reproduce the camera move in your head, save generation credits, and stop effects from destabilising the shot. Use this skill when the user asks about problems like these, or mentions “three advanced plays for video models”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Graba los movimientos de cámara en Blender, ahorra créditos con una línea de tiempo y añade los efectos al final. Resuelve: quieres reproducir el movimiento de cámara que tienes en la cabeza, ahorrar créditos y que los efectos no desestabilicen el plano. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «tres usos avanzados de los modelos de vídeo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "Blender 录运镜、时间轴省额度、特效后置。解决：想复刻脑子里的运镜、想省生成额度、加了特效画面就不稳。 当用户问到这类问题、或提到「视频模型三个高端玩法」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 影片模型三個進階玩法 — Blender 錄運鏡、時間軸省額度、特效後置

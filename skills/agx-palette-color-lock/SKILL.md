@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Move colour out of post and into generation time. Solves: you grade every AI image one by one and the set still does not match. Use this skill when the user asks about problems like these, or mentions “AgX palette grading”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Mover el color de la posproducción al momento de generar. Resuelve: corriges el color de cada imagen una a una y el conjunto sigue sin coincidir. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «gradación con paleta AgX». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "把颜色从后期提前到生成前。解决：每张 AI 图生完都要一张一张调色，整组画面的色彩还是不统一。 当用户问到这类问题、或提到「AgX 色板调色」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # AgX 色板調色 — 把顏色從後期提前到生成前

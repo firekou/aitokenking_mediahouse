@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Study the aesthetics first, then write them as a code structure. Solves: you want a stable cinematic look and plain text prompts cannot deliver it. Use this skill when the user asks about problems like these, or mentions “JSON prompt architecture”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Estudia primero la estética y después escríbela como una estructura de código. Resuelve: quieres un aspecto cinematográfico estable y los prompts de texto plano no lo consiguen. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «arquitectura de prompts en JSON». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "先研究美学，再写成代码结构。解决：想要稳定的电影感画面，文本提示词做不出来。 当用户问到这类问题、或提到「JSON 提示词架构」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # JSON 提示詞架構 — 先研究美學，再寫成程式碼結構

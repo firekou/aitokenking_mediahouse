@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Turn something complicated into a simple choice. Solves: you want a cinematic look but you keep rewriting prompts and rerolling, and every result is different. Use this skill when the user asks about problems like these, or mentions “cinematic presets”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Convertir algo complicado en una elección sencilla. Resuelve: quieres un aspecto cinematográfico pero reescribes prompts y repites tiradas, y cada resultado es distinto. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «presets cinematográficos». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "把复杂的东西变成简单的选择。解决：想要电影感，但一直在写提示词、一直在抽卡，每次结果都不一样。 当用户问到这类问题、或提到「电影感缺省」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 電影感預設 — 把複雜的東西變成簡單的選擇

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Let the product decide the story instead of stuffing the product into a story. Solves: your AI ad looks like a short film with a product bolted on, and viewers spot the sales pitch immediately. Use this skill when the user asks about problems like these, or mentions “broadcast-grade AI TVC”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Deja que el producto decida la historia en vez de encajar el producto en una historia. Resuelve: tu anuncio de IA parece un cortometraje con un producto pegado y el espectador detecta la venta al instante. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «spot de IA con acabado de televisión». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "从产品决定故事，不是从故事塞产品。解决：做出来的 AI 广告像短片配了个产品，观众一眼看出在打广告。 当用户问到这类问题、或提到「影视级 AI TVC」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 影視級 AI TVC — 從產品決定故事，不是從故事塞產品

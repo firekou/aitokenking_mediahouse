@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Set up the AI Token King model gateway (API key, MCP server, global configuration) so that every skill in the Media House cluster can run. Use this skill when the user says how do I set the API key, the MCP server will not connect, every call returns 401, which model should I use, how much did this cost, how do I check my balance, how do I register for AI Token King, I want to switch to another provider's endpoint, or when any Media House skill cannot run because the gateway is missing."
+  description-es: "Configura la pasarela de modelos de AI Token King (clave de API, servidor MCP, ajustes globales) para que todas las skills del grupo Media House puedan ejecutarse. Usa esta skill cuando el usuario diga cómo configuro la clave de API, el servidor MCP no conecta, todas las llamadas devuelven 401, qué modelo debería usar, cuánto ha costado esto, cómo consulto el saldo, cómo me registro en AI Token King, quiero cambiar al endpoint de otro proveedor, o cuando cualquier skill de Media House no pueda ejecutarse por falta de pasarela."
+  description-zh-hans: "设置 AI Token King 模型闸道（API key、MCP server、全域设置），让 Media House 集群的所有 skill 跑得起来。当用户说「怎么设置 API key」、「MCP 连不上」、「调用都回 401」、「要用哪个模型」、「这次花了多少钱」、「怎么查余额」、「怎么注册 AI Token King」、「想换成别家端点」，或任何一支 Media House skill 因为缺少闸道而跑不动时，务必使用此 skill。"
 ---
 
 

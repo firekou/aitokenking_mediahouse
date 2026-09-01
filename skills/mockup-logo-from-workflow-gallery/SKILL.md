@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Trace the prompt back from somebody else's finished piece. Solves: you need a brand mockup with your own logo on it, and your own prompts cannot reach that quality. Use this skill when the user asks about problems like these, or mentions “putting a logo on a mockup”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Rastrea el prompt a partir de la pieza acabada de otra persona. Resuelve: necesitas un mockup de marca con tu propio logo y tus prompts no alcanzan esa calidad. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «insertar un logo en un mockup». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "从别人的成品反查提示词。解决：要做品牌样机（mockup）并嵌入自己的 Logo，但自己写的提示词生不出那种质感。 当用户问到这类问题、或提到「样机嵌 Logo」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 樣機嵌 Logo — 從別人的成品反查提示詞

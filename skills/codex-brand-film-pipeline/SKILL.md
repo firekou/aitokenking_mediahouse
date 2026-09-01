@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Lock the style first, then the concept. Solves: using an agent for a brand film, the concept and the visuals never line up and the prompts are hard to write. Use this skill when the user asks about problems like these, or mentions “brand films with a coding agent”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Fija primero el estilo y después el concepto. Resuelve: al usar un agente para un spot de marca, el concepto y la imagen nunca encajan y los prompts cuestan mucho. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «spots de marca con un agente de programación». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "先定风格，再定创意。解决：用 agent 做品牌广告片，创意与画面对不上、提示词很难写。 当用户问到这类问题、或提到「用 coding agent 做品牌广告片」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 用 coding agent 做品牌廣告片 — 先定風格，再定創意

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "One product image, then multiple angles, then a first-and-last-frame cut. Solves: you want one of those ads where the product comes apart and is shown from every angle. Use this skill when the user asks about problems like these, or mentions “exploded-view product ads”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Una imagen de producto, luego varios ángulos y por último un montaje con fotograma inicial y final. Resuelve: quieres uno de esos anuncios en los que el producto se despieza y se muestra desde todos los ángulos. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «anuncio de producto despiezado». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "单张产品图 → 多角度 → 首尾帧成片。解决：想做那种产品被拆解、多角度展示的广告视频。 当用户问到这类问题、或提到「产品解构广告」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 產品解構廣告 — 單張產品圖 → 多角度 → 首尾幀成片

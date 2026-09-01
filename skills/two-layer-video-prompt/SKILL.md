@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "A global setup plus per-shot instructions. Solves: the video reads as fake at a glance, and the problem is not the wording but the structure of the prompt. Use this skill when the user asks about problems like these, or mentions “the two layers of a video prompt”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Una configuración global más instrucciones por plano. Resuelve: el vídeo se nota falso a primera vista y el problema no está en las palabras sino en la estructura del prompt. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «las dos capas de un prompt de vídeo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "全局设置 ＋ 单镜头指令。解决：视频一眼假，而问题不在遣词，在提示词的结构错了。 当用户问到这类问题、或提到「视频提示词的两层结构」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 影片提示詞的兩層結構 — 全局設定 ＋ 單鏡頭指令

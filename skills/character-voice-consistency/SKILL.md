@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Reference audio, separate voice recording, and an emotion voice library. Solves: the picture is convincing until the character speaks; the same character sounds different every take. Use this skill when the user asks about problems like these, or mentions “character voice consistency”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Audio de referencia, grabación de voz por separado y una biblioteca de voces por emoción. Resuelve: la imagen convence hasta que el personaje habla; el mismo personaje suena distinto en cada toma. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «consistencia de voz del personaje». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "参考、独立配音、情绪声音库。解决：画面已经很真实，人物一开口就露馅；同一个角色每次配音都不一样。 当用户问到这类问题、或提到「角色声音一致性」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 角色聲音一致性 — 參考、獨立配音、情緒聲音庫

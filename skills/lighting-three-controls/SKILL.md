@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Volumetric light, reflections, and fill-light layering. Solves: the AI image just looks fake and you cannot say where. Use this skill when the user asks about problems like these, or mentions “the three lighting controls”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Luz volumétrica, reflejos y capas de relleno. Resuelve: la imagen de IA simplemente se ve falsa y no sabes decir dónde. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «los tres controles de luz». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "体积光、反光、补光层次。解决：AI 图就是假，说不出哪里假。 当用户问到这类问题、或提到「光线三控」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 光線三控 — 體積光、反光、補光層次

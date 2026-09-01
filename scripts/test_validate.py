@@ -29,6 +29,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "A demo skill. Use it when the user asks for a demo."
+  description-es: "Una skill de demostración. Úsala cuando el usuario pida una demo."
+  description-zh-hans: "一支示范用的 skill，触发条件写满。"
 ---
 """
 GOOD_BODY = """
@@ -318,6 +321,27 @@ def _():
     assert len(skills) > 0, ("掃到 0 支 skill。這不是通過 —— "
                              "一個掃不到檔案的檢核器，畫面上跟全部通過長得一模一樣。")
     assert V.main(["--all"]) == 0, "repo 內既有 skill 未全數通過"
+
+
+
+@t("I18N-1：缺任何一種語言的描述 → BLOCK（描述只有一種語言＝只有一種語言的人找得到它）")
+def _():
+    for k in ("description-en", "description-es", "description-zh-hans"):
+        fm = "\n".join(l for l in GOOD_FM.splitlines() if not l.strip().startswith(k + ":"))
+        b, _w = run(fm, GOOD_BODY)
+        assert "I18N-1" in b, (k, b)
+
+
+@t("★ I18N-1：譯文與 description 逐字相同 → BLOCK（複製不是翻譯，而它會讓檢核看起來通過）")
+def _():
+    # 三個鍵都在，所以唯一會觸發 I18N-1 的只剩「逐字複製」這條
+    fm = GOOD_FM.replace(
+        '  description-en: "A demo skill. Use it when the user asks for a demo."',
+        '  description-en: "一支示範用的 skill，觸發條件寫滿。"')
+    b, _w = run(fm, GOOD_BODY)
+    assert "I18N-1" in b, b
+    # 反向：正常譯文不得被誤擋
+    assert "I18N-1" not in run(GOOD_FM, GOOD_BODY)[0]
 
 
 def main():

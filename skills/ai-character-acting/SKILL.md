@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Micro-expressions, body language, ambient sound. Solves: AI characters act like NPCs — either the expression is wrong or it is wildly overdone, with no real emotion. Use this skill when the user asks about problems like these, or mentions “AI character acting”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Microexpresiones, lenguaje corporal y sonido ambiente. Resuelve: los personajes de IA parecen NPC: o la expresión está mal o resulta exagerada, y no transmiten emoción. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «actuación de personajes de IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "微表情、肢体、环境音。解决：AI 角色像 NPC，不是表情错乱就是用力过猛，完全没有情感。 当用户问到这类问题、或提到「AI 角色演技」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # AI 角色演技 — 微表情、肢體、環境音

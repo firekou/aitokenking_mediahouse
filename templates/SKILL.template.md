@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "<English description — same job as `description`: what it solves and when to invoke it. Not a machine translation of the Chinese; write it for an English reader.>"
+  description-es: "<Descripción en español, con el mismo cometido que `description`: qué resuelve y cuándo invocarla. No es una traducción automática; escríbela para quien lee en español.>"
+  description-zh-hans: "<简体中文描述。可由繁体版转换，但词汇要按大陆用法核对（影片→视频、网路→网络、使用者→用户），转换不等于本地化。>"
 
 ---
 

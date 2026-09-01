@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Diagnose a failing connection to the AI Token King gateway — 401 responses, MCP not connecting, an environment variable that was never expanded, the wrong header name, and Claude Code versus Codex configuration. Use this skill when the user says every call returns 401, MCP will not connect, the tools are listed but do not work, I set the key and it still fails, I put it in .env and nothing happened, how do I connect Codex, what should the header be, how do I confirm the key is good, or when any skill cannot run because of a gateway problem. It rules out five known causes in order and gives you the next step."
+  description-es: "Diagnostica los fallos de conexión con la pasarela de AI Token King: respuestas 401, MCP que no conecta, una variable de entorno que nunca se expandió, un nombre de cabecera incorrecto y la configuración de Claude Code frente a Codex. Usa esta skill cuando el usuario diga todas las llamadas devuelven 401, MCP no conecta, las herramientas aparecen pero no funcionan, he puesto la clave y sigue fallando, lo escribí en .env y no surtió efecto, cómo conecto Codex, qué cabecera debo usar, cómo compruebo que la clave es válida, o cuando cualquier skill no pueda ejecutarse por un problema de pasarela. Descarta cinco causas conocidas en orden y te da el paso siguiente."
+  description-zh-hans: "诊断 AI Token King 闸道接不上的问题——401、MCP 连不上、环境变量没展开、header 名称不对、Claude Code 与 Codex 设置。当用户说「调用都回 401」、「MCP 连不上」、「工具列得出来却不能用」、「密钥设了还是不行」、「.env 有写为什么没效」、「Codex 怎么接」、「header 要写什么」、「怎么确认密钥是好的」，或任何一支 skill 因为闸道问题跑不动时，务必使用此 skill。它会依序排除五个已知原因并给出下一步。"
 ---
 
 # MCP Doctor — 401 有五個原因，而它們的症狀一模一樣

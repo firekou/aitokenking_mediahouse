@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Turn every short video on a creator's account into a queryable catalogue — URLs, captions, transcripts and metrics — and emit it as SQL. Use this skill when the user says put this Instagram account's videos into a list, pull every reel from that account, which technique videos has this creator posted, build me a video database, Instagram is blocking me what now, scan this account with Apify, turn the list into SQL, which ones are worth turning into skills, or whenever you need to know which videos exist before running video-to-skill."
+  description-es: "Convierte todos los vídeos cortos de la cuenta de un creador en un catálogo consultable (URL, textos, transcripciones y métricas) y lo exporta como SQL. Usa esta skill cuando el usuario diga pon los vídeos de esta cuenta de Instagram en una lista, descarga todos los reels de esa cuenta, qué vídeos de técnica ha publicado este creador, créame una base de datos de vídeos, Instagram me bloquea qué hago, escanea esta cuenta con Apify, convierte la lista en SQL, cuáles merecen convertirse en skills, o siempre que necesites saber qué vídeos existen antes de ejecutar video-to-skill."
+  description-zh-hans: "把一个创作者帐号的「全部短影音」盘成一份可查找的目录（网址、文案、逐字稿、指针），输出 SQL。当用户说「把这个 IG 帐号的视频整理成清单」、「抓某某帐号所有 reels」、「这个创作者发过哪些技巧视频」、「帮我建一个视频数据库」、「IG 抓不到怎么办」、「用 Apify 扫这个帐号」、「把清单变成 SQL」、「哪几支值得做成 skill」，或需要在跑 video-to-skill 之前先知道「有哪些片可以做」时，务必使用此 skill。"
 ---
 
 

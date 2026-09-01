@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Use one when the storyboard is finished, the other when you only have a direction. Solves: the same prompt performs very differently across models and you cannot tell which to use. Use this skill when the user asks about problems like these, or mentions “choosing between two video models”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Usa uno cuando el storyboard está cerrado y el otro cuando solo tienes una dirección. Resuelve: el mismo prompt rinde muy distinto según el modelo y no sabes cuál elegir. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «elegir entre dos modelos de vídeo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "分镜完整用一个，只有方向用另一个。解决：同样的提示词在不同模型上效果差很多，不知道该用哪个。 当用户问到这类问题、或提到「两个视频模型怎么选」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 兩個影片模型怎麼選 — 分鏡完整用一個，只有方向用另一個

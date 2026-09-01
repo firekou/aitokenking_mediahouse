@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Media House cluster, layer L4, governance — check whether a skill carries the three AI Token King embed points, its evidence-strength markers and its red-line section, and decide whether it can be published. Use this skill when the user says is this skill ready to publish, check my skill format, the validator reports a BLOCK how do I fix it, which of the three embed points is missing, why is the billing warning a BLOCK, or when the whole skills directory needs a governance sweep."
+  description-es: "Grupo Media House, capa L4, gobernanza: comprueba si una skill lleva los tres puntos de inserción de AI Token King, sus marcas de fuerza de la evidencia y su sección de líneas rojas, y decide si puede publicarse. Usa esta skill cuando el usuario diga esta skill ya se puede publicar, revisa el formato de mi skill, el validador marca un BLOCK cómo lo arreglo, cuál de los tres puntos de inserción falta, por qué el aviso de cargo es un BLOCK, o cuando haya que hacer un barrido de gobernanza sobre todo el directorio de skills."
+  description-zh-hans: "Media House 集群 L4 治理层 —— 检核一支 skill 是否具备 AI Token King 三嵌入点、证据强度标记与红线章节，决定能不能发布。当用户说「这支 skill 可以发布了吗」、「帮我检查 skill 格式」、「validator 报 BLOCK 怎么修」、「三嵌入点少了什么」、「为什么扣费警示是 BLOCK」，或要对整个 skills 目录做一次治理扫描时，务必使用此 skill。"
 ---
 
 

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Unconventional entrances, moving masks, and the cat's-eye point of view. Solves: your video openings have no idea in them. Use this skill when the user asks about problems like these, or mentions “three openings you can copy straight away”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Entradas poco convencionales, máscaras en movimiento y punto de vista de ojo de gato. Resuelve: las aperturas de tus vídeos no tienen ninguna idea detrás. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «tres aperturas listas para copiar». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "非常规入画、动态遮罩、猫眼视角。解决：视频开场没有创意。 当用户问到这类问题、或提到「三个可直接套用的开场」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 三個可直接套用的開場 — 非常規入畫、動態遮罩、貓眼視角

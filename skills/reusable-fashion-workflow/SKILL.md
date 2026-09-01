@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Treat AI as a production system, not an output tool. Solves: you have generated a lot of images but every one starts from zero and nothing accumulates. Use this skill when the user asks about problems like these, or mentions “reusable workflows”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Trata la IA como un sistema de producción, no como una herramienta de salida. Resuelve: has generado muchas imágenes pero cada una empieza de cero y no se acumula nada. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «flujos de trabajo reutilizables». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "把 AI 当生产系统不是输出工具。解决：生了很多图，但每一张都是从零开始，累积不出东西。 当用户问到这类问题、或提到「可复用工作流」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 可複用工作流 — 把 AI 當生產系統不是輸出工具

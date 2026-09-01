@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Get the thinking straight first — the prompt is only one module. Solves: the workflow gets longer and longer while the results get less and less stable. Use this skill when the user asks about problems like these, or mentions “building a workflow”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Aclara primero el razonamiento: el prompt es solo un módulo. Resuelve: el flujo de trabajo se alarga cada vez más y los resultados son cada vez menos estables. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «construir un flujo de trabajo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "先理清思路，提示词只是一个模块。解决：工作流越搭越长，效果却一次比一次不稳定。 当用户问到这类问题、或提到「工作流搭建」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 工作流搭建 — 先理清思路，提示詞只是一個模組

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Constrain all three parts: the face, the setting and the props. Solves: your people look AI-generated rather than alive, and once there are several the model mixes them up. Use this skill when the user asks about problems like these, or mentions “prompts that produce living people”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Restringe las tres partes: la cara, el entorno y el atrezo. Resuelve: tus personas parecen generadas y no vivas, y en cuanto hay varias el modelo las mezcla. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «prompts que producen personas vivas». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "脸、场景、道具三个部分都要限定。解决：生成的人物有 AI 感、不像活人；人一多就把不同角色混在一起。 当用户问到这类问题、或提到「活人感提示词」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 活人感提示詞 — 臉、場景、道具三個部分都要限定

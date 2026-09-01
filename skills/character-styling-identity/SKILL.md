@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Identity sets the direction, state sets the detail. Solves: the AI character has beautiful features but no sense of being a person — it looks like a template. Use this skill when the user asks about problems like these, or mentions “character hair, make-up and wardrobe”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "La identidad marca la dirección; el estado marca el detalle. Resuelve: el personaje de IA tiene facciones bonitas pero no parece una persona: parece una plantilla. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «caracterización del personaje». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "身分决定方向，状态决定细节。解决：生出来的 AI 角色五官很精致，但就是没有人物感、看起来像模板。 当用户问到这类问题、或提到「角色妆造」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 角色妝造 — 身分決定方向，狀態決定細節

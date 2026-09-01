@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Wrap the action inside the camera move, and think of yourself as the camera. Solves: the motion and the camera feel bolted together, and characters keep walking the wrong way. Use this skill when the user asks about problems like these, or mentions “put the camera first”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Envuelve la acción dentro del movimiento de cámara y piensa como si tú fueras la cámara. Resuelve: el movimiento y la cámara parecen pegados a la fuerza y los personajes caminan en la dirección equivocada. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «escribir primero la cámara». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "用镜头包裹动作，把自己当成摄影机。解决：视频生出来动作和镜头有割裂感，像拼出来的；而且人物常常走错方向。 当用户问到这类问题、或提到「镜头先写」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 鏡頭先寫 — 用鏡頭包裹動作，把自己當成攝影機

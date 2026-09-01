@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Handle background music and sound effects as two separate jobs. Solves: once the video is cut, picking the music and hunting down every sound effect is painfully slow. Use this skill when the user asks about problems like these, or mentions “designing a whole film's sound with an agent”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Tratar la música de fondo y los efectos como dos trabajos distintos. Resuelve: una vez montado el vídeo, elegir la música y buscar cada efecto uno por uno es lentísimo. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «diseño de sonido de todo un vídeo con un agente». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "BGM 与音效两块分开处理。解决：做好视频后，选背景音乐与逐一找音效非常麻烦。 当用户问到这类问题、或提到「用 agent 做整支视频的声音设计」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 用 agent 做整支影片的聲音設計 — BGM 與音效兩塊分開處理

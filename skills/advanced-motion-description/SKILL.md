@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Gait, body chain reaction, emotion — then linked into a motion chain. Solves: character movement looks stiff and cheap; crowd shots turn into chaos. Use this skill when the user asks about problems like these, or mentions “premium-feeling motion”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Marcha, encadenamiento corporal y emoción, unidos en una cadena de movimiento. Resuelve: el movimiento de los personajes se ve rígido y barato; en planos con varias personas todo se descontrola. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «movimiento con acabado premium». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "步态、身体联动、情绪，再串成动作链。解决：人物动作僵硬、没有高级感；多人画面动作会乱。 当用户问到这类问题、或提到「动作高级感」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 動作高級感 — 步態、身體聯動、情緒，再串成動作鏈

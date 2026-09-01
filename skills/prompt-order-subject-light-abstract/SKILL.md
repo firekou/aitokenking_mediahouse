@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Subject first, lighting in the middle, abstract words last. Solves: the shot is wrong so you keep adding words to the end of the prompt, and it only gets faker. Use this skill when the user asks about problems like these, or mentions “prompt word order”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "El sujeto primero, la luz en medio, las palabras abstractas al final. Resuelve: el plano está mal, así que sigues añadiendo palabras al final del prompt y cada vez se ve más falso. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «orden de las palabras en el prompt». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "主体前、光影中、抽象词末。解决：画面不对，于是一直往提示词后面加东西，结果越加越假。 当用户问到这类问题、或提到「提示词语序」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 提示詞語序 — 主體前、光影中、抽象詞末

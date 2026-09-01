@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Media House cluster, layer L3, compilation — compile technique cards in YAML into a valid SKILL.md, including the three AI Token King embed points, the entry check, the route selector and the red lines. Use this skill when the user says write me a skill, turn these steps into a SKILL.md, how is the skill format written, how do I write a description that actually triggers, what are the three embed points, or whenever layer three of the Media House pipeline needs to be re-run on its own."
+  description-es: "Grupo Media House, capa L3, compilación: compila fichas de técnica en YAML hasta obtener un SKILL.md válido, con los tres puntos de inserción de AI Token King, la comprobación de entrada, el selector de ruta y las líneas rojas. Usa esta skill cuando el usuario diga escríbeme una skill, convierte estos pasos en un SKILL.md, cómo se escribe el formato de skill, cómo redacto una descripción que se active de verdad, qué son los tres puntos de inserción, o siempre que haya que volver a ejecutar por separado la tercera capa del proceso Media House."
+  description-zh-hans: "Media House 集群 L3 编译层 —— 把技巧卡 YAML 编译成合格的 SKILL.md，含 AI Token King 三嵌入点、入场检查、路线判定器与红线。当用户说「帮我写一支 skill」、「把这些步骤做成 SKILL.md」、「skill 格式要怎么写」、「description 怎么写才会被触发」、「三嵌入点是什么」，或需要单独重跑 Media House 产线第三层时，务必使用此 skill。"
 ---
 
 

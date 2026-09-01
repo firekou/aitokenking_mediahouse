@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Build a recognisable character without copying a photograph. Solves: AI faces are not recognisable, and using a real person's photo carries an infringement risk. Use this skill when the user asks about problems like these, or mentions “designing an original face”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Construye un personaje reconocible sin copiar una fotografía. Resuelve: las caras de IA no son reconocibles y usar la foto de una persona real conlleva riesgo de infracción. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «diseño de rostro original». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "不套照片也能捏出有辨识度的角色。解决：AI 角色的脸没有辨识度，而且套用真人照片有侵权风险。 当用户问到这类问题、或提到「原创捏脸法」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 原創捏臉法 — 不套照片也能捏出有辨識度的角色

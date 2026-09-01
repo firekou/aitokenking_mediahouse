@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Three questions that create tension, plus five kinds of reversal. Solves: AI short films ramble, the shots do not follow any logic, and you burn generations rerolling. Use this skill when the user asks about problems like these, or mentions “AI scriptwriting”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Tres preguntas que generan tensión y cinco tipos de giro. Resuelve: los cortos de IA se dispersan, los planos no siguen ninguna lógica y gastas generaciones repitiendo. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «guion para IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "让故事有张力的三问与五种反转。解决：AI 短片剧情松散、画面没逻辑、抽卡次数多。 当用户问到这类问题、或提到「AI 剧本」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # AI 劇本 — 讓故事有張力的三問與五種反轉

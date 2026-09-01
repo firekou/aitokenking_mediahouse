@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Turn a social-media technique video (Instagram Reel, TikTok, YouTube Shorts, Bilibili) into a SKILL.md you can run straight away. Use this skill when the user says turn this video's technique into a skill, make this tutorial into a process I can use, how do I reproduce the method in this reel, organise the steps in this video for me, turn the techniques in my saved folder into tools, video to skill, or whenever someone drops a technique video link and wants an executable result. It runs all four layers — ingest, extraction, compilation, governance — and produces a skill file carrying evidence strength and red lines."
+  description-es: "Convierte un vídeo de técnica de redes sociales (Instagram Reel, TikTok, YouTube Shorts, Bilibili) en un SKILL.md listo para ejecutar. Usa esta skill cuando el usuario diga convierte la técnica de este vídeo en una skill, haz de este tutorial un proceso que pueda usar, cómo reproduzco el método de este reel, ordéname los pasos de este vídeo, convierte en herramientas las técnicas que tengo guardadas, video to skill, o siempre que alguien comparta el enlace de un vídeo de técnica y espere un resultado ejecutable. Recorre las cuatro capas (captación, extracción, compilación y gobernanza) y produce un archivo de skill con fuerza de la evidencia y líneas rojas."
+  description-zh-hans: "把一支社交媒体技巧视频（IG Reel／TikTok／YouTube Shorts／B 站）变成一份可直接运行的 SKILL.md。当用户说「这支视频的技巧帮我变成 skill」、「把这个教学变成我能用的流程」、「这个 reel 讲的方法怎么复现」、「帮我整理这支视频的步骤」、「把收藏夹里的技巧变成工具」、「video to skill」，或丢出任何一支技巧视频链接并希望得到可运行产物时，务必使用此 skill。它会跑完采集→萃取→编译→治理四层，产出带证据强度与红线的 skill 文件。"
 ---
 
 

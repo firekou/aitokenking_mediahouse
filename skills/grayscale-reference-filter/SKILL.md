@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Make one reference image control exactly one variable. Solves: you only wanted to borrow the camera angle or the composition, but the output keeps looking more and more like the original. Use this skill when the user asks about problems like these, or mentions “the grayscale reference method”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Haz que una imagen de referencia controle una sola variable. Resuelve: solo querías tomar prestado el ángulo o la composición, pero el resultado se parece cada vez más al original. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «método de referencia en escala de grises». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "让一张参考图只控制一个变量。解决：明明只想参考机位或构图，生成结果却越来越像原图。 当用户问到这类问题、或提到「灰模参考法」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 灰模參考法 — 讓一張參考圖只控制一個變數

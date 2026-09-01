@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Substitute a geometric shape for the product and swap it in at the very end. Solves: the product in your AI video is different in every frame when you look closely, and a newer model does not fix it. Use this skill when the user asks about problems like these, or mentions “product consistency in video”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Sustituye el producto por una forma geométrica y cámbialo al final. Resuelve: el producto de tu vídeo de IA es distinto en cada fotograma si miras de cerca, y cambiar a un modelo más nuevo no lo arregla. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «consistencia de producto en vídeo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "先用几何形状代替产品，最后才换上去。解决：AI 视频里的产品放大看每一帧都不一样，换再新的模型也没用。 当用户问到这类问题、或提到「视频产品一致性」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 影片產品一致性 — 先用幾何形狀代替產品，最後才換上去

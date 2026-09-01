@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Choose the camera move, then retime three seconds. Solves: you want a slick montage transition and you do not know how to make one. Use this skill when the user asks about problems like these, or mentions “fast montage transitions”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Elige el movimiento de cámara y luego cambia la velocidad de tres segundos. Resuelve: quieres una transición de montaje vistosa y no sabes cómo hacerla. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «transiciones de montaje rápidas». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "选运镜、变速三秒。解决：想做酷炫的蒙太奇转场但不会做。 当用户问到这类问题、或提到「蒙太奇快速转场」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 蒙太奇快速轉場 — 選運鏡、變速三秒

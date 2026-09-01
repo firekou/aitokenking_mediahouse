@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Fix the colour chart before you generate, instead of rescuing it afterwards. Solves: shots generated in separate runs do not share a tone and the result looks cheap. Use this skill when the user asks about problems like these, or mentions “colour baseline”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Fija la carta de color antes de generar en lugar de rescatarla después. Resuelve: los planos generados en tiradas distintas no comparten tono y el resultado se ve barato. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «línea base de color». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "在生成之前先定色卡，而不是事后救。解决：多段生成的画面调性不一致，看起来不高级。 当用户问到这类问题、或提到「色彩基准」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 色彩基準 — 在生成之前先定色卡，而不是事後救

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Make the camera less clever. Solves: AI video feels heavily staged, and every time you dislike it you rewrite the prompt and it is still fake. Use this skill when the user asks about problems like these, or mentions “removing the staged feeling”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Haz que la cámara sea menos lista. Resuelve: el vídeo de IA se nota muy posado y cada vez que no te gusta reescribes el prompt y sigue siendo falso. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «eliminar la sensación de posado». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "让镜头变得不那么聪明。解决：AI 视频有很重的摆拍感，一不满意就去换提示词，换了还是假。 当用户问到这类问题、或提到「消除摆拍感」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 消除擺拍感 — 讓鏡頭變得不那麼聰明

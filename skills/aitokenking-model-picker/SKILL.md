@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Pick two or three candidate models from those actually available on the account right now, based on purpose, modality, cost and context needs, and explain the trade-offs. Use this skill when the user says which model should I use, is there a cheaper one, which one can read images, which one do I use for a very long context, is this model id still live, what do I do now the model is retired, what is the mwf alias, or before any skill hard-codes a model id. It always calls list_models first and never answers from memory."
+  description-es: "Selecciona dos o tres modelos candidatos entre los realmente disponibles en la cuenta en este momento, según el propósito, la modalidad, el coste y las necesidades de contexto, y explica las contrapartidas. Usa esta skill cuando el usuario diga qué modelo debería usar, hay alguno más barato, cuál puede leer imágenes, cuál uso para un contexto muy largo, sigue vigente este identificador de modelo, qué hago si retiran el modelo, qué es el alias mwf, o antes de que cualquier skill fije un identificador de modelo en el código. Siempre llama primero a list_models y nunca responde de memoria."
+  description-zh-hans: "依用途、模态、成本与上下文需求，从帐户当下真正可用的模型里挑出 2–3 个候选并说明取舍。当用户说「该用哪个模型」、「有没有便宜一点的」、「哪个支持看图」、「上下文要很长用哪个」、「这个 model id 还在吗」、「模型下架了怎么办」、「mwf 别名是什么」，或任何一支 skill 要写死 model id 之前，务必使用此 skill。它一律先调用 list_models，不凭记忆回答。"
 ---
 
 # Model Picker — 先查再答，永遠不要憑記憶寫 model id

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "What you control is the range of change, not the content. Solves: you want to swap one element in a video, and changing the prompt changes the style, the motion and the whole set as well. Use this skill when the user asks about problems like these, or mentions “replacing elements in video”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Lo que controlas es el rango de cambio, no el contenido. Resuelve: quieres cambiar un elemento del vídeo y al tocar el prompt cambian también el estilo, el movimiento y todo el escenario. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «sustituir elementos en vídeo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "控制的是变化范围，不是内容。解决：想换掉视频里的某个元素，一改提示词连风格、动作、整个场景都跟着变掉。 当用户问到这类问题、或提到「视频元素替换」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 影片元素替換 — 控制的是變化範圍，不是內容

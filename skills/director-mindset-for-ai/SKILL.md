@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Blocking before storyboard, story before image, and the pickup-shot mindset. Solves: your shots keep looking better but you cannot say why they work or what is wrong with them. Use this skill when the user asks about problems like these, or mentions “directorial thinking”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "La puesta en escena antes que el storyboard, la narración antes que la imagen y la mentalidad de replano. Resuelve: tus planos se ven cada vez mejor pero no sabes decir por qué funcionan ni qué falla. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «mentalidad de dirección». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "调度优先、叙事优先、补拍思维。解决：视频画面越来越有质感，但自己其实不知道为什么好、也说不出哪里不对。 当用户问到这类问题、或提到「导演思维」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 導演思維 — 調度優先、敘事優先、補拍思維

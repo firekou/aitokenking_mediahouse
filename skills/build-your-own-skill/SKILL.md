@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "If you can type, you can build one. Solves: you want to lock in your own style instead of rewriting the same prompt every time. Use this skill when the user asks about problems like these, or mentions “building your own skill”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Si sabes escribir, puedes construirla. Resuelve: quieres fijar tu propio estilo en vez de reescribir el mismo prompt cada vez. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «crear tu propia skill». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "只要会打字就能做。解决：想把自己的风格固定下来，不必每次重写提示词。 当用户问到这类问题、或提到「做一个自己的 Skill」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 做一個自己的 Skill — 只要會打字就能做

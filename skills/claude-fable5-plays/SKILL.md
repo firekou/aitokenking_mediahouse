@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Games, web pages, and better prompts. Solves: you want to build a game, a web page or stronger video prompts, but you cannot code. Use this skill when the user asks about problems like these, or mentions “three things a coding model can do for you”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Juegos, páginas web y mejores prompts. Resuelve: quieres crear un juego, una web o prompts de vídeo más potentes, pero no sabes programar. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «tres cosas que un modelo de programación puede hacer por ti». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "游戏、网页、优化提示词。解决：想做游戏／网页／更好的视频提示词，但不会写程序。 当用户问到这类问题、或提到「用编程大模型做三件事」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 用編程大模型做三件事 — 遊戲、網頁、優化提示詞

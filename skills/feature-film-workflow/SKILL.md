@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Four techniques for holding character, voice and scene consistency. Solves: in a long AI film the character, the voice and the set all drift. Use this skill when the user asks about problems like these, or mentions “breaking down a feature-length workflow”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Cuatro técnicas para sostener la consistencia de personaje, voz y escenario. Resuelve: en una pieza larga de IA el personaje, la voz y el escenario se descontrolan. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «flujo de trabajo para pieza larga». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "人物、声音、场景一致性的四个做法。解决：AI 长片的人物、声音、场景一致性守不住。 当用户问到这类问题、或提到「长片工作流拆解」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 長片工作流拆解 — 人物、聲音、場景一致性的四個做法

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Cut the emotion words, the repetitions, and the human sentence structure. Solves: your prompt is very long and the image still looks AI-generated. Use this skill when the user asks about problems like these, or mentions “prompt subtraction”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Elimina las palabras de emoción, las repeticiones y la sintaxis humana. Resuelve: tu prompt es larguísimo y la imagen sigue pareciendo generada por IA. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «resta en el prompt». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "剪掉情绪词、重复词、人类句式。解决：提示词写很长，画面还是像 AI。 当用户问到这类问题、或提到「提示词减法」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 提示詞減法 — 剪掉情緒詞、重複詞、人類句式

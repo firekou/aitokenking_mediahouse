@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Force the model to simulate one specific physical medium. Solves: you want brand visuals with that handmade, someone-was-really-here feel instead of template output. Use this skill when the user asks about problems like these, or mentions “imperfect, handmade brand visuals”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Obliga al modelo a simular un medio físico concreto. Resuelve: quieres una identidad visual con ese aire hecho a mano, de que alguien estuvo ahí de verdad, y no un producto de plantilla. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «identidad visual imperfecta y artesanal». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "强制指定一种仿真的实体媒介。解决：品牌视觉想要那种「有人真的参与过创作」的手工感，而不是模板产物。 当用户问到这类问题、或提到「不完美的手工感品牌视觉」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 不完美的手工感品牌視覺 — 強制指定一種模擬的實體媒介

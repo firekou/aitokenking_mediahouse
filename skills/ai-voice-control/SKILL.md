@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Timbre, tone, pace. Solves: the image already looks real, but the moment the character speaks the illusion breaks. Use this skill when the user asks about problems like these, or mentions “controlling an AI character's voice”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Timbre, tono y ritmo. Resuelve: la imagen ya parece real, pero en cuanto el personaje habla se rompe la ilusión. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «controlar la voz de un personaje de IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "音色、语气、语速。解决：画面已经很真实，但人物一开口立刻显得很假。 当用户问到这类问题、或提到「控制 AI 角色的声音」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 控制 AI 角色的聲音 — 音色、語氣、語速

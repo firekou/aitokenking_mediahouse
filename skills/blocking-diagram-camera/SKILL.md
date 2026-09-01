@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "One overhead diagram controls both actor blocking and camera position. Solves: scene continuity breaks across clips, the camera moves awkwardly, and complex blocking gets away from you. Use this skill when the user asks about problems like these, or mentions “overhead blocking diagram”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Un solo diagrama cenital controla a la vez la puesta en escena y la posición de cámara. Resuelve: la continuidad se rompe entre clips, la cámara se mueve mal y la puesta en escena compleja se te escapa. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «diagrama cenital de puesta en escena». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "用一张图同时控走位与机位。解决：多段视频的场景一致性不稳，运镜不流畅，复杂走位控制不住。 当用户问到这类问题、或提到「俯视调度图」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 俯視調度圖 — 用一張圖同時控走位與機位

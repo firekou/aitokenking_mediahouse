@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "But do not ask it to write one straight away. Solves: copying prompts by hand works badly and wastes credits; letting the model write them freely misses what you actually wanted. Use this skill when the user asks about problems like these, or mentions “letting a coding agent write your prompts”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Pero no le pidas que escriba uno de entrada. Resuelve: copiar prompts a mano funciona mal y gasta créditos; dejar que el modelo los escriba solo no da con lo que buscabas. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «que un agente de programación escriba tus prompts». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "但不要一上来就叫它写。解决：自己手抄提示词效果差又浪费额度；让 AI 直接写又写不到想要的效果。 当用户问到这类问题、或提到「让 coding agent 帮你写提示词」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 讓 coding agent 幫你寫提示詞 — 但不要一上來就叫它寫

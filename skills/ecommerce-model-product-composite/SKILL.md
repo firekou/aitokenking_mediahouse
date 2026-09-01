@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Reverse-engineer the prompt from a finished image and lock the product with a mask. Solves: you need e-commerce model shots, your own prompts cannot reach that quality, and the product in the model's hand deforms every time. Use this skill when the user asks about problems like these, or mentions “compositing e-commerce model shots”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Deduce el prompt a partir de una imagen acabada y fija el producto con una máscara. Resuelve: necesitas fotos de modelo para e-commerce, tus prompts no alcanzan esa calidad y el producto en la mano de la modelo se deforma cada vez. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «composición de foto de modelo para e-commerce». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "提示词从成品反推，产品由蒙版锁住。解决：要做电商产品的模特图，但自己写的提示词生不出那种质感，而且模特手上的产品每次都变形。 当用户问到这类问题、或提到「电商模特图合成」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 電商模特圖合成 — 提示詞從成品反推，產品由蒙版鎖住

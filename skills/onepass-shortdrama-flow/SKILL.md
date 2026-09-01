@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Characters first — write the script around the characters. Solves: you want to make a decent period short drama from nothing and do not know which step comes first. Use this skill when the user asks about problems like these, or mentions “period short drama end to end”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Primero los personajes: escribe el guion alrededor de ellos. Resuelve: quieres hacer desde cero una serie corta de época decente y no sabes por dónde empezar. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «serie corta de época de principio a fin». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "人物先行，剧本跟着人物写。解决：想从零做出一支像样的古风短剧，但不知道从哪一步开始。 当用户问到这类问题、或提到「古风短剧一条龙」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 古風短劇一條龍 — 人物先行，劇本跟著人物寫

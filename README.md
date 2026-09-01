@@ -119,6 +119,32 @@ DUP-1 與 DUP-2 兩組重複（一組同主題、一組是同一支影片的二�
 `skills/` 的 80 支 ＝ CASE-002 的 69 ＋ CASE-001 的 1 ＋ 產線與工具 10 支。
 
 
+## 語言 · Languages · Idiomas
+
+每一支 skill 的 frontmatter 都帶四種語言的描述，**不只有繁體中文**：
+
+| 欄位 | 語言 | 誰寫的 |
+|---|---|---|
+| `description` | 繁體中文（canonical） | 人工撰寫 |
+| `description-en` | English | 人工翻譯 |
+| `description-es` | Español | 人工翻譯 |
+| `description-zh-hans` | 简体中文 | OpenCC `tw2sp` 轉換 ＋ 人工覆寫三個詞 |
+
+**為什麼是 `description` 而不是 README：** 因為 `description` 決定「Claude 什麼時候該用這支
+skill」。只有繁中一版，就只有讀繁中的人問得出能觸發它的那句話——
+**翻不翻譯 README 是能不能讀懂的問題，翻不翻譯 description 是找不找得到的問題。**
+
+由 `I18N-1` 檢核（**BLOCK 級**）鎖住兩件事：三個欄位缺一不可，
+以及**譯文不得與 `description` 逐字相同**——複製會讓檢核看起來通過。
+
+**⚠️ 誠實標記（缺口 MH-G7）：** 三種譯文**都沒有經過母語者覆核**。
+簡中是字形＋詞彙轉換（影片→视频、網路→网络、使用者→用户）**再人工覆寫三個詞**
+（社群媒體→社交媒体、L1 擷取層→采集层、擷取→采集），
+**但轉換不等於在地化**——大陸讀者慣用的說法可能還有沒被換到的。
+英西為我方翻譯，可讀但未經專業校對。**發現錯譯請開 issue，這比它一直錯著更有價值。**
+
+---
+
 管理介面：**https://skill-dashboard-production.up.railway.app** （[`skill-dashboard/`](skill-dashboard/)，無資料庫無登入）
 ——首頁會比對「registry 說的數字」與「磁碟上真的有幾個 `SKILL.md`」，不一致就印紅字。
 ｜清單：[`registry/skills.json`](registry/skills.json)（產物，`scripts/build_registry.py` 產生）

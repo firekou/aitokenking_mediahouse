@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "A five-block structure, concrete wording, professional vocabulary. Solves: the prompt looks fine but you are never happy with what comes out. Use this skill when the user asks about problems like these, or mentions “prompting is a visual language”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Una estructura de cinco bloques, redacción concreta y vocabulario profesional. Resuelve: el prompt parece correcto pero nunca te satisface lo que sale. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «el prompt es un lenguaje visual». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "五板块结构、具体、专业词汇。解决：提示词看起来没什么问题，但生成的东西就是不满意。 当用户问到这类问题、或提到「提示词是一门视觉语言」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 提示詞是一門視覺語言 — 五板塊結構、具體、專業詞彙

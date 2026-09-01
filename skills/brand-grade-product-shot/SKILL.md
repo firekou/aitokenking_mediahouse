@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Shoot real reference photos from several angles; get macro by screenshotting and re-uploading. Solves: you want brand-campaign-grade product shots, but text-only generation never produces your actual product. Use this skill when the user asks about problems like these, or mentions “brand-grade product shots”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Fotografía referencias reales desde varios ángulos; consigue el macro recortando y volviendo a subir. Resuelve: quieres imágenes de producto a nivel de campaña, pero generar solo con texto nunca da tu producto real. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «imagen de producto de nivel marca». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "多角度实拍当参考，微距靠截屏再上传。解决：想要那种品牌广告等级的产品画面，但纯文本生成出来的产品永远不是自己的那个产品。 当用户问到这类问题、或提到「品牌级产品画面」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 品牌級產品畫面 — 多角度實拍當參考，微距靠截圖再上傳

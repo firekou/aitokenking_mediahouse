@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Three control points: elements, composition and colour. Solves: you are making a pet-product film where each shot looks fine alone but together they do not read as one campaign. Use this skill when the user asks about problems like these, or mentions “pet product advertising”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Tres puntos de control: elementos, composición y color. Resuelve: haces un vídeo de producto para mascotas donde cada plano por separado está bien pero juntos no parecen la misma campaña. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «publicidad de productos para mascotas». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "元素、构图、色彩三个关键点。解决：要做宠物类产品的宣传视频，每张画面分开看都不错，放在一起却不像同一支广告。 当用户问到这类问题、或提到「宠物品类产品广告」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 寵物品類產品廣告 — 元素、構圖、色彩三個關鍵點

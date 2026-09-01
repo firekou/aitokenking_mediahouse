@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Media House cluster, layer L2, extraction — turn a transcript and OCR text into structured technique cards in YAML, complete with evidence strength, boundaries and gaps. Use this skill when the user says pull the techniques out of this transcript, how many techniques does this tutorial actually contain, structure these steps for me, which parts are the author's claims and which are facts, cross-review with two models, or whenever layer two of the Media House pipeline needs to be re-run on its own."
+  description-es: "Grupo Media House, capa L2, extracción: convierte una transcripción y el texto OCR en fichas de técnica estructuradas en YAML, con fuerza de la evidencia, límites y lagunas. Usa esta skill cuando el usuario diga extrae las técnicas de esta transcripción, cuántas técnicas contiene realmente este tutorial, estructúrame estos pasos, qué es afirmación del autor y qué es hecho comprobado, revisión cruzada con dos modelos, o siempre que haya que volver a ejecutar por separado la segunda capa del proceso Media House."
+  description-zh-hans: "Media House 集群 L2 萃取层 —— 把逐字稿与 OCR 原文变成结构化技巧卡 YAML，含证据强度、边界与缺口。当用户说「从这份逐字稿抽出技巧」、「这篇教学到底讲了几招」、「帮我把步骤结构化」、「哪些是作者宣称哪些是事实」、「双模型互审」，或需要单独重跑 Media House 产线第二层时，务必使用此 skill。"
 ---
 
 

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Use a meaningless word to redistribute the model's attention. Solves: writing premium texture, clean image makes the subject go hard and noisy; writing dreamlike makes the model pile on flares and filters. Use this skill when the user asks about problems like these, or mentions “perturbation words”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Usa una palabra sin significado para redistribuir la atención del modelo. Resuelve: escribir textura premium, imagen limpia endurece al sujeto y añade ruido; escribir onírico hace que el modelo llene todo de destellos y filtros. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «palabras de perturbación». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "用一个没有意义的词改变模型的注意力分配。解决：写「质感高级、画面干净」反而让主体发硬、噪点多；写「梦幻」模型就乱加光斑滤镜。 当用户问到这类问题、或提到「扰动词」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 擾動詞 — 用一個沒有意義的詞改變模型的注意力分配

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Movement, blocking, post-production. Solves: your AI short drama looks beautiful but lifeless. Use this skill when the user asks about problems like these, or mentions “three things that give AI short drama life”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Movimiento, puesta en escena y posproducción. Resuelve: tu serie corta de IA se ve preciosa pero sin vida. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «tres cosas que dan vida a una serie corta de IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "动作、调度、后期。解决：AI 短剧的画面很漂亮，但看起来没有生命力。 当用户问到这类问题、或提到「让 AI 短剧有生命力的三件事」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 讓 AI 短劇有生命力的三件事 — 動作、調度、後期

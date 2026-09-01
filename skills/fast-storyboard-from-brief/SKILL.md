@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Start from a storyboard and blend the real product photo back in. Solves: you need an ad storyboard you can show a client, and you need it very fast. Use this skill when the user asks about problems like these, or mentions “fast ad storyboards”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Empieza por el storyboard y reincorpora la foto real del producto. Resuelve: necesitas un storyboard publicitario presentable para un cliente y lo necesitas muy rápido. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «storyboard publicitario rápido». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "故事板起手，实拍图回融。解决：要在很短的时间内生出一份能给客户看的广告分镜脚本。 当用户问到这类问题、或提到「快速分镜脚本」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 快速分鏡腳本 — 故事板起手，實拍圖回融

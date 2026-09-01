@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "It is not scenery — it is an insert shot that tells the character's story for them. Solves: the pacing is rushed, the emotion never builds, and the cuts between scenes land hard. Use this skill when the user asks about problems like these, or mentions “cutaway shots”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "No es paisaje: es un plano inserto que cuenta la historia del personaje por él. Resuelve: el ritmo va acelerado, la emoción no se acumula y los saltos entre escenas resultan bruscos. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «planos de recurso». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "它不是风景，是替人物讲故事的插入镜头。解决：视频节奏太赶、情绪堆不起来、场景之间跳得很硬。 当用户问到这类问题、或提到「空镜」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 空鏡 — 它不是風景，是替人物講故事的插入鏡頭

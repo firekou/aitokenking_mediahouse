@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Look at what does not change, look at what recurs, then build it into a system. Solves: you try to extract a style by handing the model an image, and what you get does not transfer to different content. Use this skill when the user asks about problems like these, or mentions “style extraction”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Mira lo que no cambia, mira lo que se repite y después conviértelo en un sistema. Resuelve: intentas extraer un estilo pasándole la imagen al modelo y lo que obtienes no funciona con otro contenido. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «extracción de estilo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "看不变的，看共性，然后搭成体系。解决：想提取某张图的风格，把图丢给模型让它反推，拿到的东西套到别的内容上就不像了。 当用户问到这类问题、或提到「风格提取」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 風格提取 — 看不變的，看共性，然後搭成體系

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "What got better, what did not, and the fact that it got more expensive. Solves: a new model version is out and you need to decide whether and when to switch. Use this skill when the user asks about problems like these, or mentions “hands-on test of a video model update”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Qué mejoró, qué no y el hecho de que subió de precio. Resuelve: sale una nueva versión del modelo y tienes que decidir si cambiar y en qué casos. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «prueba real de una actualización de modelo de vídeo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "升级了什么、没升级什么、以及它变贵了。解决：新版模型出了，该不该换、什么情况下换。 当用户问到这类问题、或提到「视频模型改版实测」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 影片模型改版實測 — 升級了什麼、沒升級什麼、以及它變貴了

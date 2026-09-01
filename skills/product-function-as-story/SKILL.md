@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Turn the product's core function into the story itself. Solves: the brand film comes out as a product demo with no idea behind it. Use this skill when the user asks about problems like these, or mentions “brand film concepts”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Convierte la función principal del producto en la propia historia. Resuelve: el vídeo de marca acaba siendo una demostración de producto sin ninguna idea detrás. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «concepto para vídeo de marca». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "把产品的内核功能变成故事本身。解决：品牌短片拍出来就是产品演示，没有创意感。 当用户问到这类问题、或提到「品牌短片创意」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 品牌短片創意 — 把產品的核心功能變成故事本身

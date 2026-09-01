@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Light and shadow, warm and cool, sharp and soft. Solves: you want the shot warmer, heavier or lonelier, and telling the model to add a warm atmosphere does nothing. Use this skill when the user asks about problems like these, or mentions “the three layers of atmosphere”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Luz y sombra, cálido y frío, nítido y difuso. Resuelve: quieres un plano más cálido, más opresivo o más solitario, y pedirle al modelo que añada ambiente cálido no sirve de nada. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «las tres capas del ambiente». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "明暗、冷暖、虚实。解决：想让画面更温暖／更压抑／更孤独，直接叫模型「加温暖氛围」却完全没用。 当用户问到这类问题、或提到「氛围感三层」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 氛圍感三層 — 明暗、冷暖、虛實

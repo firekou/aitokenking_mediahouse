@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Four ways to keep a long cut coherent — first-and-last-frame is not one of them. Solves: the generator caps out at 15 seconds per run, so how do you build a coherent long video. Use this skill when the user asks about problems like these, or mentions “breaking the 15-second limit”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Cuatro formas de mantener la coherencia en una pieza larga (el fotograma inicial y final no es una de ellas). Resuelve: el generador solo produce 15 segundos por tirada: cómo montar un vídeo largo y coherente. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «romper el límite de 15 segundos». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "四个让长片连贯的方法（首尾帧不是其中之一）。解决：生成工具单次最长只有 15 秒，怎么做出连贯的长视频。 当用户问到这类问题、或提到「打破 15 秒」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 打破 15 秒 — 四個讓長片連貫的方法（首尾幀不是其中之一）

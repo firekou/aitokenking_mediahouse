@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Short drama, editing, and building games. Solves: the hard part of AI drama is not generating images, it is the script and the prompts; the hard part of editing is finding the usable shots in a pile of footage. Use this skill when the user asks about problems like these, or mentions “running a creative pipeline with a coding agent”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Series cortas, montaje y creación de juegos. Resuelve: lo difícil de una serie con IA no es generar imágenes, es el guion y los prompts; lo difícil del montaje no es cortar, es encontrar los planos útiles entre todo el material. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «flujo creativo con un agente de programación». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "短剧、剪辑、做游戏。解决：AI 短剧最难的不是生图，是做剧本与写提示词；剪辑最麻烦的不是剪，是从大量素材里找到能用的画面。 当用户问到这类问题、或提到「用 coding agent 跑创作流程」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 用 coding agent 跑創作流程 — 短劇、剪輯、做遊戲

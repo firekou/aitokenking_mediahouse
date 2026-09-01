@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Write the camera parameters first and the style last. Solves: you pile on style words like cinematic and film and the shot still has no cinematic quality. Use this skill when the user asks about problems like these, or mentions “cinematic look is a photographic constraint”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Escribe primero los parámetros de cámara y el estilo al final. Resuelve: acumulas palabras de estilo como cinematic o film y el plano sigue sin parecer cine. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «lo cinematográfico es una restricción fotográfica». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "先写镜头参数，最后才写风格。解决：加了一堆风格词（cinematic、film、电影感），画面就是没有电影感。 当用户问到这类问题、或提到「电影感是摄影约束」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 電影感是攝影約束 — 先寫鏡頭參數，最後才寫風格

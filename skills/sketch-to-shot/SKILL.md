@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Even stick figures can reproduce a blockbuster shot. Solves: you can see the shot in your head but cannot turn it into words. Use this skill when the user asks about problems like these, or mentions “generating from a rough sketch”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Hasta unos monigotes pueden reproducir un plano de gran presupuesto. Resuelve: ves el plano en tu cabeza pero no sabes convertirlo en palabras. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «generar a partir de un boceto». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "火柴人也能复刻大片。解决：脑子里有画面，但不知道怎么写成文本。 当用户问到这类问题、或提到「抽象草图生成法」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 抽象草圖生成法 — 火柴人也能複刻大片

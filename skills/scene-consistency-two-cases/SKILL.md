@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Crop from one master for small sets; weaken the detail for large ones. Solves: regenerating the same location from a new angle changes the location; image-to-image and rerolling are both exhausting. Use this skill when the user asks about problems like these, or mentions “scene consistency”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Recorta de una imagen maestra en escenarios pequeños; debilita el detalle en los grandes. Resuelve: regenerar el mismo lugar desde otro ángulo cambia el lugar; ni imagen a imagen ni repetir tiradas compensan. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «consistencia de escenario». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "小场景切图，大场景弱化细节。解决：换角度生成同一个场景，场景就变了；图生图跟抽卡都很累。 当用户问到这类问题、或提到「场景一致性」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 場景一致性 — 小場景切圖，大場景弱化細節

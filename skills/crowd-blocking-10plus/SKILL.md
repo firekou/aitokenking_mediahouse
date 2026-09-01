@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "A visual blocking chart is not enough — add a second, textual layer of control. Solves: in crowd shots people swap places and the blocking changes between cuts. Use this skill when the user asks about problems like these, or mentions “blocking crowds of ten or more”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "El esquema visual de posiciones no basta: añade una segunda capa de control en texto. Resuelve: en planos de grupo los personajes intercambian sitios y la posición cambia entre cortes. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «posicionar grupos de diez o más». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "视觉站位图不够，要加第二层文本控制。解决：多人镜头连续切换时人物串位、站位改变。 当用户问到这类问题、或提到「十人以上群像站位」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 十人以上群像站位 — 視覺站位圖不夠，要加第二層文字控制

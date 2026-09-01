@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Three methods, and the one step nine out of ten people get wrong. Solves: the character's face drifts across an AI video. Use this skill when the user asks about problems like these, or mentions “character consistency in AI video”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Tres métodos y el paso que nueve de cada diez personas hacen mal. Resuelve: la cara del personaje se descontrola a lo largo del vídeo de IA. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «consistencia de personaje en vídeo de IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "三个方法，以及九成人做错的那一步。解决：AI 视频里人物长相会跑掉。 当用户问到这类问题、或提到「AI 视频人物一致性」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # AI 影片人物一致性 — 三個方法，以及九成人做錯的那一步

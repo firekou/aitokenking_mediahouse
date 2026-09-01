@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Named martial-arts moves plus an action-game camera angle. Solves: AI fight scenes have no impact and the movement does not flow. Use this skill when the user asks about problems like these, or mentions “AI fight scenes”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Nombres concretos de golpes más un ángulo de cámara de videojuego de acción. Resuelve: las escenas de pelea generadas no tienen fuerza y el movimiento no encadena. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «escenas de pelea con IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "招式名称 ＋ 动作游戏视角。解决：AI 打斗画面没有力量感、动作不连贯。 当用户问到这类问题、或提到「AI 打戏」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # AI 打戲 — 招式名稱 ＋ 動作遊戲視角

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Lock the invariant, extract the structural skeleton, and let the model check its own work. Solves: you hand the model an image and ask for the prompt; what comes back is not usable and the output is still down to luck. Use this skill when the user asks about problems like these, or mentions “reverse-engineering a still-image prompt”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Fija lo invariable, extrae el esqueleto estructural y deja que el modelo corrija su propio trabajo. Resuelve: le pasas la imagen al modelo y le pides el prompt; lo que devuelve no sirve y el resultado sigue dependiendo de la suerte. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «ingeniería inversa de prompts de imagen». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "锁不变项、抓结构骨架、让模型自己纠错。解决：把图丢给模型要提示词，拿到的东西不好用，生出来还是靠运气。 当用户问到这类问题、或提到「静态图提示词反推」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 靜態圖提示詞反推 — 鎖不變項、抓結構骨架、讓模型自己糾錯

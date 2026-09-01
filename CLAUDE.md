@@ -40,7 +40,10 @@ L4 skill-audit         三嵌入點檢核 → 能不能發布
    **原樣複製，不要手打，不要改寫成宣傳語。**
 2. **改 `validate_skill.py` 之前先跑 `test_validate.py`，改完再跑一次。**
    一把壞掉的尺，量什麼都會過。
-3. **`author_claims` 與 `pitfalls` 永遠是兩件事。**
+3. **三語描述是 BLOCK 級（`I18N-1`）。** `description-en`／`-es`／`-zh-hans` 缺一即擋，
+   且不得與 `description` 逐字相同。理由與三嵌入點同一條：
+   **一個可以安靜省略的欄位，下一支新 skill 就會沒有。**
+4. **`author_claims` 與 `pitfalls` 永遠是兩件事。**
    「作者宣稱能 X」可以寫；「本 skill 能 X」不可以。
 
 ---
@@ -106,4 +109,5 @@ python3 scripts/build_registry.py           # 更新清單（產物）
 | ~~MH-G3~~ | 回填引擎已落地。**新的死法：引擎有了但沒有人用——13 條 claim 仍全是 V0** |
 | MH-G4 | 來源授權邊界未由法務定調 |
 | MH-G6 | CASE-002 逐字稿品質已測（結構可用／專有名詞不可用），但 n=5 且僅單一帳號單一內容類型 |
+| **MH-G7** | **三語描述未經母語者覆核**——簡中為 OpenCC `tw2sp` ＋ 三個人工覆寫，英西為我方翻譯。`I18N-1` 擋得住「缺欄位」與「逐字複製」，擋不住「翻錯」 |
 | **MH-G5** | **外部來源注入／skill 供應鏈風險**——閘已裝（SEC-1／`security_findings`），但 CASE-001 的掃描是回溯的、未重新抽幀 |

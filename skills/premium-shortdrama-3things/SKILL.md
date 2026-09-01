@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Characters, lighting, story. Solves: AI short drama looks cheap and obviously fake at a glance. Use this skill when the user asks about problems like these, or mentions “the three things behind premium AI short drama”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Personajes, iluminación y trama. Resuelve: las series cortas de IA se ven baratas y falsas a primera vista. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «las tres claves de una serie corta de IA con acabado premium». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "人物、光效、剧情。解决：AI 短剧看起来廉价、一眼假。 当用户问到这类问题、或提到「高质感 AI 短剧的三件事」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 高質感 AI 短劇的三件事 — 人物、光效、劇情

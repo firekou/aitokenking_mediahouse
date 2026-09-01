@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "A three-step tool chain. Solves: you want to blend a product naturally into a classical-painting style and make it move. Use this skill when the user asks about problems like these, or mentions “putting a product inside a classical painting”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Una cadena de herramientas en tres pasos. Resuelve: quieres integrar un producto de forma natural en un estilo de pintura clásica y ponerlo en movimiento. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «integrar un producto en una pintura clásica». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "三步工具链。解决：想把产品自然融进古画风格的画面里并让它动起来。 当用户问到这类问题、或提到「产品融入古画」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 產品融入古畫 — 三步工具鏈

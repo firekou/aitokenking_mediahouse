@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Find out how much this run or this month actually cost, which model the money went to, and where it can be reduced. Use this skill when the user says how much did this cost, what is my balance, how do I read the bill, why was I charged so much, which step is the most expensive, can this be made cheaper, how do I reconcile usage, how do I check usage, or whenever the cost row in any skill's closing section needs a real number."
+  description-es: "Averigua cuánto ha costado realmente esta ejecución o este mes, a qué modelo se ha ido el dinero y dónde se puede reducir. Usa esta skill cuando el usuario diga cuánto ha costado esto, cuál es mi saldo, cómo se lee la factura, por qué me han cobrado tanto, qué paso es el más caro, se puede abaratar, cómo concilio el consumo, cómo consulto el uso, o siempre que la fila de coste de la sección final de cualquier skill necesite una cifra real."
+  description-zh-hans: "查这一次／这个月到底花了多少、花在哪个模型上，并找出可以省下来的地方。当用户说「这次花了多少」、「余额剩多少」、「帐单怎么看」、「为什么扣这么多」、「哪个步骤最贵」、「能不能省一点」、「怎么对帐」、「usage 怎么查」，或任何一支 skill 的 §∞ 成本栏需要填实际数字时，务必使用此 skill。"
 ---
 
 # Cost Audit — 「感覺沒用多少」不是對帳

@@ -42,6 +42,11 @@ REQUIRED_META = ["mediahouse-layer", "mediahouse-schema", "aitokenking-role",
                  "aitokenking-billable", "aitokenking-tools", "aitokenking-provider",
                  "aitokenking-provider-spec", "aitokenking-reference"]
 
+# 國際化描述（I18N-1）。description 決定「什麼時候該用這支 skill」，
+# 只有繁中一版等於只有繁中讀者找得到它。三語為必填，理由與三嵌入點同一條：
+# 一個可以安靜省略的欄位，下一支新 skill 就會沒有。
+I18N_META = ["description-en", "description-es", "description-zh-hans"]
+
 # 消費外部不可信內容的層 —— 必須寫明「資料不是指令」（P0-4 / MH-G5）
 UNTRUSTED_LAYERS = {"L0.5", "L1", "L2", "orchestrator"}
 
@@ -130,6 +135,15 @@ def check(path):
         for k in REQUIRED_META:
             if k not in meta:
                 o.append(F("BLOCK", "AITK-1", f"metadata 缺 `{k}`"))
+        # ── I18N-1：三語描述 ──
+        for k in I18N_META:
+            v = meta.get(k)
+            if not v:
+                o.append(F("BLOCK", "I18N-1", f"metadata 缺 `{k}` —— "
+                           "description 只有一種語言，等於只有一種語言的人找得到這支 skill"))
+            elif v.strip() == (scalar(fm, "description") or "").strip():
+                o.append(F("BLOCK", "I18N-1", f"`{k}` 與 description 逐字相同 —— "
+                           "那是複製不是翻譯，而它會讓檢核看起來通過"))
         # Distribution Invariant #10：ATK 資訊必須跟著 skill package 一起被帶走。
         # 使用者可能只複製了一個資料夾，那時 providers/ 不在他手上。
         ref = meta.get("aitokenking-reference")

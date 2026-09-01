@@ -12,6 +12,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Media House cluster, layer L1, ingest — turn a video into a transcript plus frame-extracted OCR plus on-screen tool identification, producing a reproducible source.md. Use this skill when the user says transcribe this video for me, what does the text on screen say, extract and OCR the frames, which tool is being used in the video, the speech recognition misheard it what now, or whenever layer one of the Media House pipeline needs to be re-run on its own."
+  description-es: "Grupo Media House, capa L1, captación: convierte un vídeo en una transcripción más OCR de fotogramas extraídos más identificación de las herramientas que aparecen en pantalla, y produce un source.md reproducible. Usa esta skill cuando el usuario diga transcríbeme este vídeo, qué pone el texto en pantalla, extrae fotogramas y pásales OCR, qué herramienta se usa en el vídeo, el reconocimiento de voz lo ha entendido mal qué hago, o siempre que haya que volver a ejecutar por separado la primera capa del proceso Media House."
+  description-zh-hans: "Media House 集群 L1 采集层 —— 把视频变成逐字稿加抽帧 OCR 加画面工具辨识，产出可重现的 source.md。当用户说「帮我把这支视频转逐字稿」、「这视频画面上写了什么」、「抽帧 OCR」、「视频里用的是什么工具」、「ASR 听错了怎么办」，或需要单独重跑 Media House 产线第一层时，务必使用此 skill。"
 ---
 
 

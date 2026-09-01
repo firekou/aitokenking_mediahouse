@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "What you reverse-engineer is the process, not the picture. Solves: you screenshot an AI video you want to copy and reverse the prompt; the frame looks close but the motion is completely wrong. Use this skill when the user asks about problems like these, or mentions “reverse-engineering a video prompt”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Lo que reconstruyes es el proceso, no la imagen. Resuelve: capturas un vídeo de IA que quieres copiar y deduces el prompt; el fotograma se parece pero el movimiento está completamente mal. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «ingeniería inversa de prompts de vídeo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "反推的是过程，不是画面。解决：看到一支想拷贝的 AI 视频，截屏去反推提示词，结果画面很像但动起来完全不对。 当用户问到这类问题、或提到「视频提示词反推」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 影片提示詞反推 — 反推的是過程，不是畫面

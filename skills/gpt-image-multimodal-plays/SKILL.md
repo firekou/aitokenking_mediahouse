@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Short drama, brand collateral, product prototypes, and photoreal assets. Solves: you do not know what a strong image model can do beyond making pictures. Use this skill when the user asks about problems like these, or mentions “four ways to use an image model”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Series cortas, materiales de marca, prototipos de producto y recursos fotorrealistas. Resuelve: no sabes qué más puede hacer un modelo de imagen potente aparte de generar imágenes. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «cuatro usos de un modelo de imagen». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "短剧、品牌物料、产品原型、拟真素材。解决：不知道一个强图像模型除了生图还能做什么。 当用户问到这类问题、或提到「图像模型的四种玩法」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 圖像模型的四種玩法 — 短劇、品牌物料、產品原型、擬真素材

@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Use local edits for a little text and planar tracking for a lot. Solves: text generated inside AI video comes out wrong and flickers between frames. Use this skill when the user asks about problems like these, or mentions “fixing broken text in AI video”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Edición local si hay poco texto, seguimiento planar si hay mucho. Resuelve: el texto generado dentro del vídeo de IA sale mal y parpadea entre fotogramas. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «corregir texto roto en vídeo de IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "文本少用局部编辑，文本多用平面跟踪。解决：AI 生成的视频文本不正确、会跳帧。 当用户问到这类问题、或提到「修 AI 视频里的错字」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 修 AI 影片裡的錯字 — 文字少用局部編輯，文字多用平面跟蹤

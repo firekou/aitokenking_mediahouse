@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Turn one photograph into a set of shots. Solves: you only have a single product photo and you want a multi-angle transition video. Use this skill when the user asks about problems like these, or mentions “multi-angle product transitions”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Convierte una sola fotografía en un conjunto de planos. Resuelve: solo tienes una foto del producto y quieres un vídeo de transiciones desde varios ángulos. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «transiciones de producto multiángulo». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "一张照片拆成一组镜头。解决：只有一张产品照，想做出多角度的转场视频。 当用户问到这类问题、或提到「产品多角度转场」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # 產品多角度轉場 — 一張照片拆成一組鏡頭

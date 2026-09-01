@@ -15,6 +15,9 @@ metadata:
   aitokenking-reference: "references/aitokenking.md"
   aitokenking-provider: "providers/aitokenking.yaml"
   aitokenking-provider-spec: "2026-08-29"
+  description-en: "Three asset classes: characters and sets, props, and colour palettes. Solves: you need stable output without leaning on reference images; character identity drifts; fight scenes fall flat. Use this skill when the user asks about problems like these, or mentions “AI asset system”. ⚠️ The technique is the video author's own account (E6); we have not verified it and it must not be used as the basis for any performance claim."
+  description-es: "Tres clases de activos: personajes y escenarios, atrezo y paletas de color. Resuelve: necesitas resultados estables sin depender de imágenes de referencia; la identidad del personaje se pierde; las peleas quedan sosas. Usa esta skill cuando el usuario pregunte por problemas de este tipo o mencione «sistema de activos de IA». ⚠️ La técnica es lo que afirma el autor del vídeo (E6); no la hemos verificado y no debe usarse como base para prometer resultados."
+  description-zh-hans: "角色场景／道具／色板三大类。解决：不靠参考图也要能稳定生成；人物一致性守不住；打斗画面不够精彩。 当用户问到这类问题、或提到「AI 资产系统」时使用此 skill。⚠️ 技巧内容为视频作者自述（E6），我方未实测，不得作为效果承诺依据。"
 ---
 
 # AI 資產系統 — 角色場景／道具／色板三大類

@@ -34,8 +34,11 @@ jobs:
       - name: 證據帳本漂移檢查（已核可的回填必須寫回技巧卡）
         run: python3 scripts/evidence_ledger.py --all --check
 
-      - name: 草稿三嵌入點檢核（drafts/）
-        run: python3 scripts/validate_skill.py --drafts
+      - name: 草稿 CI 分流回歸測試
+        run: python3 scripts/test_ci_drafts.py
+
+      - name: 草稿三嵌入點檢核（空佇列明示不適用）
+        run: python3 scripts/check_ci_drafts.py
 
       - name: Registry ＋ Dashboard 回歸測試
         run: python3 scripts/test_registry.py

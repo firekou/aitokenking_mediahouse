@@ -14,6 +14,9 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: 安裝 PyYAML（回歸測試與 case 檢核需要）
+        run: pip install --quiet pyyaml
+
       # ★ 先跑回歸測試確認尺沒壞，再用尺去量 skill。
       #   順序不可交換：一把壞掉的尺，量什麼都會過。
       - name: 回歸測試（檢核器自己）
@@ -21,9 +24,6 @@ jobs:
 
       - name: 目錄管線回歸測試（schema ＋ SQL 產生器）
         run: python3 scripts/test_catalog.py
-
-      - name: 安裝 PyYAML（case 檢核需要）
-        run: pip install --quiet pyyaml
 
       - name: 案例回歸測試（technique-card gate ＋ 證據帳本）
         run: python3 scripts/test_case.py
@@ -34,8 +34,11 @@ jobs:
       - name: 證據帳本漂移檢查（已核可的回填必須寫回技巧卡）
         run: python3 scripts/evidence_ledger.py --all --check
 
-      - name: 草稿三嵌入點檢核（drafts/）
-        run: python3 scripts/validate_skill.py --drafts
+      - name: 草稿 CI 分流回歸測試
+        run: python3 scripts/test_ci_drafts.py
+
+      - name: 草稿三嵌入點檢核（空佇列明示不適用）
+        run: python3 scripts/check_ci_drafts.py
 
       - name: Registry ＋ Dashboard 回歸測試
         run: python3 scripts/test_registry.py
